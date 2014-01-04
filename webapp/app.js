@@ -7,7 +7,8 @@ var express = require('express'),
   routes = require('./routes'),
   api = require('./routes/api'),
   http = require('http'),
-  path = require('path');
+  path = require('path'),
+  mongoose = require('mongoose');
 
 var app = module.exports = express();
 var server = require('http').createServer(app);
@@ -26,6 +27,15 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
+
+
+// connect to the db
+var mongoUri = process.env.MONGO_URL ||
+    'mongodb://localhost/holly-webapp-db';
+
+mongoose.connect(mongoUri);
+var db = mongoose.connection;
+
 
 // development only
 if (app.get('env') === 'development') {
