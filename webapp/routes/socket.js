@@ -20,6 +20,6 @@ module.exports = function ( socket ) {
 			socket.emit( 'send:environmental:indoor', data );
 		} );
 
-	}, 1000 );
+	}, 60000 );
 
 };
