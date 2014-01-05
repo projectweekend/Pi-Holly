@@ -16,7 +16,7 @@ cMod.controller( 'AppCtrl', function ( $scope, socket ) {
 cMod.controller( 'HomeCtrl', function ( $scope, socket ) {
 	
 	socket.on( 'send:time', function ( data ) {
-		$scope.time = data.time;
+		$scope.environmentalData = data;
 	} );
 
 } );
