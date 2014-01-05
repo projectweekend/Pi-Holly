@@ -13,11 +13,13 @@ module.exports = function ( socket ) {
 	CRUDSocket( socket, handleError, {route: 'environmental:indoor', model: IndoorEnvironmentalData} );
 
 	setInterval( function () {
-		
-		socket.emit( 'send:environmental:indoor', {
-			time: ( new Date() ).toString()
+
+		var query = IndoorEnvironmentalData.findOne( ).sort( '-date' );
+
+		query.exec( function ( err, data ) {
+			socket.emti( 'send:environmental:indoor', data );
 		} );
 
-	}, 60000 );
+	}, 1000 );
 
 };
