@@ -17,7 +17,7 @@ module.exports = function ( socket ) {
 		var query = IndoorEnvironmentalData.findOne( ).sort( '-date' );
 
 		query.exec( function ( err, data ) {
-			socket.emti( 'send:environmental:indoor', data );
+			socket.emit( 'send:environmental:indoor', data );
 		} );
 
 	}, 1000 );
