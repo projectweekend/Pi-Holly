@@ -2,14 +2,22 @@
  * Serve content over a socket
  */
 
-module.exports = function (socket) {
-  socket.emit('send:name', {
-    name: 'Bob'
-  });
+ var appModels = require( '../models' ),
+	ERRORSocket = require( '../helpers/ERRORSocket' ),
+	CRUDSocket = require( '../helpers/CRUDSocket' );
 
-  setInterval(function () {
-    socket.emit('send:time', {
-      time: (new Date()).toString()
-    });
-  }, 1000);
+module.exports = function ( socket ) {
+
+	var handleError = ERRORSocket( socket, {route: 'app:error'} );
+
+	CRUDSocket( socket, handleError, {route: 'environmental:indoor', model: IndoorEnvironmentalData} );
+
+	setInterval( function () {
+		
+		socket.emit( 'send:environmental:indoor', {
+			time: ( new Date() ).toString()
+		} );
+
+	}, 60000 );
+
 };
