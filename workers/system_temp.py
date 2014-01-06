@@ -1,6 +1,6 @@
 import subprocess
 import json
-import httplib
+import requests
 
 import utils
 
@@ -16,14 +16,18 @@ def get_system_temp():
 
 
 def post_temp_data(temp_data):
-    url = "/api/system-temperature-data"
-    headers = {'Content-Type': 'application/json'}
-    post_data = json.dumps(temp_data)
-
-    connection = httplib.HTTPConnection("holly.local:80")
-    connection.request("POST", url, post_data, headers)
-    response = connection.getresponse()
+    url = "http://holly.local/api/system-temperature-data"
+    post_data = json(temp_data)
+    headers = {'content-type': 'application/json'}
+    response = requests.post(url, data=post_data, headers=headers)
+    return response.status_code
 
 
+# TODO: schedule a call to this in CRONTAB
 def system_temp_worker():
-    return get_system_temp()
+    temp_data = get_system_temp()
+    post_status = post_temp_data(temp_data)
+    if post_status != 201:
+        # TODO: Add some logging when POST fails
+        pass
+    return
