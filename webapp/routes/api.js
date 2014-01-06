@@ -51,3 +51,50 @@ exports.indoorEnvironmentalData = function ( req, res ) {
 	}
 
 };
+
+
+exports.systemTemperatureData = function ( req, res ) {
+
+    if ( req.method == 'POST' ) {
+
+        if ( !req.body.celsius || !req.body.fahrenheit ) {
+            res.send( 400, "Required fields: celsius, fahrenheit" );
+            return;
+        }
+
+        var newSystemTemp = {
+            date: new Date(),
+            celsius: req.body.celsius,
+            fahrenheit: req.body.fahrenheit
+        };
+
+        SystemTemperatureData.create( newSystemTemp, function ( err, tempData ) {
+
+            if ( err ) {
+                console.log( err );
+                res.send( 500 );
+                return;
+            }
+            res.send( 201 );
+
+        } );
+
+    } else {
+
+        var query = SystemTemperatureData.findOne( ).sort( '-date' );
+
+        query.exec( function ( err, data ) {
+            
+            if ( err ) {
+                console.log( err );
+                res.send( 500 );
+                return;
+            }
+
+            res.json( data );
+
+        } );
+
+    }
+
+};
