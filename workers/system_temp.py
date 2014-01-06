@@ -17,7 +17,7 @@ def get_system_temp():
 
 def post_temp_data(temp_data):
     url = "http://holly.local/api/system-temperature-data"
-    post_data = json(temp_data)
+    post_data = json.dumps(temp_data)
     headers = {'content-type': 'application/json'}
     response = requests.post(url, data=post_data, headers=headers)
     return response.status_code
