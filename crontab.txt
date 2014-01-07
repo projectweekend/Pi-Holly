@@ -1,0 +1,1 @@
+*/10 * * * * /home/pi/system_temperature_worker.sh
