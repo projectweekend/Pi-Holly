@@ -31,3 +31,6 @@ def system_temp_worker():
         # TODO: Add some logging when POST fails
         pass
     return
+
+if __name__ == "__main__":
+    system_temp_worker()
