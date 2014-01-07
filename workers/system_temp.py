@@ -24,7 +24,7 @@ def post_temp_data(temp_data):
 
 
 # TODO: schedule a call to this in CRONTAB
-def system_temp_worker():
+def worker():
     temp_data = get_system_temp()
     post_status = post_temp_data(temp_data)
     if post_status != 201:
@@ -33,4 +33,4 @@ def system_temp_worker():
     return
 
 if __name__ == "__main__":
-    system_temp_worker()
+    worker()
