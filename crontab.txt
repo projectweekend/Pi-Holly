@@ -1,1 +1,1 @@
-*/10 * * * * /home/pi/system_temperature_worker.sh
+*/10 * * * * /home/pi/cron_system_temperature.sh
