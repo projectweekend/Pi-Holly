@@ -1,2 +1,4 @@
 #!/bin/bash
-python ../workers/system_temp.py
+
+cd ../workers
+python system_temp.py
