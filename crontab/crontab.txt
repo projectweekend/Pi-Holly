@@ -1,1 +1,1 @@
-0,15,30,45 * * * * /Pi-Holly/crontab/system_temperature_worker.sh
+*/10 * * * * /Pi-Holly/crontab/system_temperature_worker.sh
