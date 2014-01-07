@@ -10,4 +10,9 @@ html(ng-app="myApp")
         script(type="text/javascript", src="/js/jquery-2.0.3.min.js")
         script(type="text/javascript", src="/js/bootstrap.min.js")
     body
-        block body
+        div(id="wrap")
+            block body
+
+        div(id="footer")
+            div(class="container")
+                p(class="text-muted") Put something here
