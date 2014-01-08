@@ -7,5 +7,5 @@ A home server project for my Raspberry Pi.
 
 `/api/system-temperature-data`
 
-**GET**: Gets the latest system temperature reading
-**POST**: Record a system temperature reading
+* **GET**: Gets the latest system temperature reading
+* **POST**: Record a system temperature reading
