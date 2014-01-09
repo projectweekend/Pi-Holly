@@ -34,6 +34,7 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
+                    console.log( recentTempChart );
                     data.forEach( function ( element, index, array ) {
 
                         var d = new Date( element.date );
