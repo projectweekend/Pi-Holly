@@ -63,6 +63,8 @@ app.post('/api/indoor-environmental-data', api.indoorEnvironmentalData);
 app.get('/api/system-temperature-data', api.systemTemperatureData);
 app.post('/api/system-temperature-data', api.systemTemperatureData);
 
+app.get('/api/reporting/system-temperature-data/all', api.systemTemperatureDataReportingAll);
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

@@ -4,6 +4,11 @@
 
  var appModels = require( '../models' );
 
+var errorHandler = function ( err, res ) {
+    console.log( err );
+    res.send( 500 );
+};
+
 
 exports.indoorEnvironmentalData = function ( req, res ) {
 
@@ -24,9 +29,7 @@ exports.indoorEnvironmentalData = function ( req, res ) {
         IndoorEnvironmentalData.create( newIndoorData, function ( err, indoorData ) {
             
             if ( err ) {
-                console.log( err );
-                res.send( 500 );
-                return;
+                return errorHandler( err, res);
             }
             res.send( 201 );
             
@@ -39,9 +42,7 @@ exports.indoorEnvironmentalData = function ( req, res ) {
         query.exec( function ( err, data ) {
 
             if ( err ) {
-                console.log( err );
-                res.send( 500 );
-                return;
+                return errorHandler( err, res);
             }
 
             res.json( data );
@@ -71,9 +72,7 @@ exports.systemTemperatureData = function ( req, res ) {
         SystemTemperatureData.create( newSystemTemp, function ( err, tempData ) {
 
             if ( err ) {
-                console.log( err );
-                res.send( 500 );
-                return;
+                return errorHandler( err, res);
             }
             res.send( 201 );
 
@@ -86,12 +85,34 @@ exports.systemTemperatureData = function ( req, res ) {
         query.exec( function ( err, data ) {
             
             if ( err ) {
-                console.log( err );
-                res.send( 500 );
-                return;
+                return errorHandler( err, res);
             }
 
             res.json( data );
+
+        } );
+
+    }
+
+};
+
+
+exports.systemTemperatureDataReportingAll = function ( req, res ) {
+
+    if ( req.method == 'GET' ) {
+
+        console.log( 'QUERY PARAMS' );
+        console.log( req.query );
+
+        var query = SystemTemperatureData.find().sort( '-date' );
+
+        query.exec( function ( err, data ) {
+
+            if ( err ) {
+                return errorHandler( err, res);
+            }
+
+            return res.json( data );
 
         } );
 
