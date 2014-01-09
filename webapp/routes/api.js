@@ -99,23 +99,32 @@ exports.systemTemperatureData = function ( req, res ) {
 
 exports.systemTemperatureDataReportingAll = function ( req, res ) {
 
-    if ( req.method == 'GET' ) {
+    var query = SystemTemperatureData.find().sort( '-date' );
 
-        console.log( 'QUERY PARAMS' );
-        console.log( req.query );
+    query.exec( function ( err, data ) {
 
-        var query = SystemTemperatureData.find().sort( '-date' );
+        if ( err ) {
+            return errorHandler( err, res);
+        }
 
-        query.exec( function ( err, data ) {
+        return res.json( data );
 
-            if ( err ) {
-                return errorHandler( err, res);
-            }
+    } );
 
-            return res.json( data );
+};
 
-        } );
+exports.systemTemperatureDataReportingRecent = function ( req, res ) {
 
-    }
+    var query = SystemTemperatureData.find().sort( '-date' ).limit(18);
+
+    query.exec( function ( err, data ) {
+
+        if ( err ) {
+            return errorHandler( err, res);
+        }
+
+        return res.json( data );
+
+    } );
 
 };

@@ -64,6 +64,7 @@ app.get('/api/system-temperature-data', api.systemTemperatureData);
 app.post('/api/system-temperature-data', api.systemTemperatureData);
 
 app.get('/api/reporting/system-temperature-data/all', api.systemTemperatureDataReportingAll);
+app.get('/api/reporting/system-temperature-data/recent', api.systemTemperatureDataReportingRecent);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
