@@ -14,6 +14,15 @@ cMod.controller( 'AppCtrl', function ( $scope, socket ) {
 
 
 cMod.controller( 'HomeCtrl', function ( $scope, socket ) {
+	
+	socket.on( 'send:time', function ( data ) {
+		$scope.environmentalData = data;
+	} );
+
+} );
+
+
+cMod.controller( 'SystemCtrl', function ( $scope, socket ) {
 
     $scope.systemTempChart = {
         options: {},
@@ -37,10 +46,6 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket ) {
             ],
         }
     };
-	
-	socket.on( 'send:time', function ( data ) {
-		$scope.environmentalData = data;
-	} );
 
 } );
 

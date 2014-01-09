@@ -19,6 +19,10 @@ config( function ( $routeProvider, $locationProvider ) {
         templateUrl: 'partials/home',
         controller: 'HomeCtrl'
     }).
+    when('/system', {
+        templateUrl: 'partials/system',
+        controller: 'SystemCtrl'
+    }).
     otherwise({
         redirectTo: '/home'
     });
