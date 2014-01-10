@@ -78,6 +78,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http ) {
 
     return {
         values: {
+            date: null,
             fahrenheit: null,
             celsius: null
         },
@@ -87,6 +88,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http ) {
 
             $http.get( apiUrl ).
                 success( function ( data, status) {
+                    values.date = data.date;
                     values.fahrenheit = data.fahrenheit;
                     values.celsius = data.celsius;
                 } ).
