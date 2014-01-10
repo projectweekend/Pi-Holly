@@ -38,6 +38,6 @@ module.exports = function ( socket ) {
 			}
 		} );
 
-	}, 50000 );
+	}, 30000 );
 
 };
