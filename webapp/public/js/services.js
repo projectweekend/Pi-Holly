@@ -38,7 +38,12 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
                     data.forEach( function ( element, index, array ) {
 
                         var d = new Date( element.date );
-                        recentTempChart.data.labels.push( d.getHours() + ":" + d.getMinutes() );
+                        var h = d.getHours();
+                        var m = d.getMinutes();
+                        if ( m.length == 1 ) {
+                            m = "00";
+                        }
+                        recentTempChart.data.labels.push( h + ":" + m );
 
                         recentTempChart.data.datasets[0].data.push( element.fahrenheit );
 
