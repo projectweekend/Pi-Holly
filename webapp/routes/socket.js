@@ -16,11 +16,28 @@ module.exports = function ( socket ) {
 		var query = IndoorEnvironmentalData.findOne( ).sort( '-date' );
 
 		query.exec( function ( err, data ) {
-			socket.emit( 'send:environmental:indoor', data );
+			if ( err ) {
+				console.log( err );
+			} else {
+				socket.emit( 'send:environmental:indoor', data );
+			}
 		} );
 
 	}, 60000 );
 
 	CRUDSocket( socket, handleError, {route: 'system:temp', model: SystemTemperatureData} );
+	setInterval( function () {
+
+		var query = SystemTemperatureData.findOne( ).sort( '-date' );
+
+		query.exec( function ( err, data ) {
+			if ( err ) {
+				console.log( err );
+			} else {
+				socket.emit( 'update:system:temp', data );
+			}
+		} );
+
+	}, 5000 );
 
 };
