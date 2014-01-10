@@ -1,6 +1,11 @@
 div(class="row")
 
-  div(class="col-md-9")
+  div(class="col-md-8")
     canvas(chart, id="systemTempChart", type="Line", options="systemTempReporting.recentTempChart.options", data="systemTempReporting.recentTempChart.data", width="700", height="350")
 
-  div(class="col-md-3")
+  div(class="col-md-4")
+    div(class="panel panel-default")
+      div(class="panel-heading")
+        h3(class="panel-title") Current Temperature
+      div(class="panel-body") 
+        span(ng-if="systemCurrentTemp.values.fahrenheit", class="text-primary current-temp-value") {{systemCurrentTemp.values.fahrenheit}}&deg; Fahrenheit
