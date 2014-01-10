@@ -80,18 +80,18 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                 var m = parsedTime[1];
                 
                 var newLabel = h + ":" + m;
-                var latestLabel = recentTempChart.data.labels[recentTempChart.data.labels.length - 1];
+                var latestLabel = recentTempChart.data.labels[0];
 
                 if ( newLabel != latestLabel ) {
                     // remove oldest one
-                    recentTempChart.data.labels.splice( 0, 1 );
-                    recentTempChart.data.datasets[0].data.splice( 0, 1 );
+                    recentTempChart.data.labels.pop();
+                    recentTempChart.data.datasets[0].data.pop();
                     // add new one
                     recentTempChart.data.labels.push( newLabel );
                     if ( display_units == 'F' ) {
-                        recentTempChart.data.datasets[0].data.push( data.fahrenheit );
+                        recentTempChart.data.datasets[0].data.unshift( data.fahrenheit );
                     } else {
-                        recentTempChart.data.datasets[0].data.push( data.celsius );
+                        recentTempChart.data.datasets[0].data.unshift( data.celsius );
                     }
 
                 }
