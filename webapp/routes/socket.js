@@ -10,8 +10,7 @@ module.exports = function ( socket ) {
 
 	var handleError = ERRORSocket( socket, {route: 'app:error'} );
 
-	CRUDSocket( socket, handleError, {route: 'environmental:indoor', model: IndoorEnvironmentalData} );
-
+	CRUDSocket( socket, handleError, {route: 'environmental:indoor', model: IndoorEnvironmentalData} );	
 	setInterval( function () {
 
 		var query = IndoorEnvironmentalData.findOne( ).sort( '-date' );
@@ -21,5 +20,7 @@ module.exports = function ( socket ) {
 		} );
 
 	}, 60000 );
+
+	CRUDSocket( socket, handleError, {route: 'system:temp', model: SystemTemperatureData} );
 
 };
