@@ -28,7 +28,7 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
                 ]
             }
         },
-        buildRecentTempChart: function () {
+        buildRecentTempChart: function ( display_units ) {
             var recentTempChart = this.recentTempChart;
             var apiUrl = "/api/reporting/system-temperature-data/recent";
 
@@ -44,13 +44,29 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
                         }
                         recentTempChart.data.labels.push( h + ":" + m );
 
-                        recentTempChart.data.datasets[0].data.push( element.fahrenheit );
+                        if ( display_units == 'F' ) {
+                            recentTempChart.data.datasets[0].data.push( element.fahrenheit );
+                        } else {
+                            recentTempChart.data.datasets[0].data.push( element.celsius );
+                        }
 
                     } );
                 }).
                 error( function ( data, status ) {
                     console.log( data );
                 });
+        },
+        clearRecentTempChart: function () {
+            var recentTempChart = this.recentTempChart;
+            recentTempChart.data.labels = [];
+            recentTempChart.data.datasets[0].data = [];
+        },
+        init: function ( display_units ) {
+            var SystemTempReporting = this;
+            var currentData = SystemTempReporting.recentTempChart.data.datasets[0].data;
+            if ( currentData.length === 0 ) {
+                SystemTempReporting.buildRecentTempChart( display_units );
+            }
         }
 
     };
@@ -82,7 +98,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http ) {
             var SystemTempCurrent = this;
             var currentFarenheit = SystemTempCurrent.values.fahrenheit;
             var currentCelsius = SystemTempCurrent.values.celsius;
-            if ( currentFarenheit === null && currentCelsius == null ) {
+            if ( currentFarenheit === null && currentCelsius === null ) {
                 SystemTempCurrent.getValues();
             }
         }
