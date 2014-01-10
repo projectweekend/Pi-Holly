@@ -11,19 +11,19 @@ module.exports = function ( socket ) {
 	var handleError = ERRORSocket( socket, {route: 'app:error'} );
 
 	CRUDSocket( socket, handleError, {route: 'environmental:indoor', model: IndoorEnvironmentalData} );	
-	setInterval( function () {
+	// setInterval( function () {
 
-		var query = IndoorEnvironmentalData.findOne( ).sort( '-date' );
+	// 	var query = IndoorEnvironmentalData.findOne( ).sort( '-date' );
 
-		query.exec( function ( err, data ) {
-			if ( err ) {
-				console.log( err );
-			} else {
-				socket.emit( 'send:environmental:indoor', data );
-			}
-		} );
+	// 	query.exec( function ( err, data ) {
+	// 		if ( err ) {
+	// 			console.log( err );
+	// 		} else {
+	// 			socket.emit( 'send:environmental:indoor', data );
+	// 		}
+	// 	} );
 
-	}, 60000 );
+	// }, 60000 );
 
 	CRUDSocket( socket, handleError, {route: 'system:temp', model: SystemTemperatureData} );
 	setInterval( function () {
@@ -38,6 +38,6 @@ module.exports = function ( socket ) {
 			}
 		} );
 
-	}, 5000 );
+	}, 50000 );
 
 };
