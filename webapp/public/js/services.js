@@ -5,12 +5,20 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
+var parseHoursMinutesFromString = function ( dateString ) {
+    var d = new Date( dateString );
+    var h = d.getHours();
+    var m = d.getMinutes();
+    return [ h, m ];
+};
+
+
 var svcMod = angular.module('myApp.services', []);
 
 
 svcMod.value('version', '0.1');
 
-svcMod.factory( "SystemTempReporting", function ( $http ) {
+svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
 
     return {
         recentTempChart: {
@@ -36,9 +44,9 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
                 success( function ( data, status ) {
                     data.forEach( function ( element, index, array ) {
 
-                        var d = new Date( element.date );
-                        var h = d.getHours();
-                        var m = d.getMinutes();
+                        var parsedTime = parseHoursMinutesFromString( element.date );
+                        var h = parsedTime[0];
+                        var m = parsedTime[1];
                         if ( m === 0 ) {
                             m = "00";
                         }
@@ -61,6 +69,35 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
             recentTempChart.data.labels = [];
             recentTempChart.data.datasets[0].data = [];
         },
+        listenForUpdates: function ( display_units ) {
+            
+            var recentTempChart = this.recentTempChart;
+            
+            socket.on( 'update:system:temp', function ( data ) {
+            
+                var parsedTime = parseHoursMinutesFromString( data.date );
+                var h = parsedTime[0];
+                var m = parsedTime[1];
+                
+                var newLabel = h + ":" + m;
+                var latestLabel = recentTempChart.data.labels[recentTempChart.data.labels.length - 1];
+
+                if ( newLabel != latestLabel ) {
+                    // remove oldest one
+                    recentTempChart.data.labels.splice( 0, 1 );
+                    recentTempChart.data.datasets[0].data.splice( 0, 1 );
+                    // add new one
+                    recentTempChart.data.labels.push( newLabel );
+                    if ( display_units == 'F' ) {
+                        recentTempChart.data.datasets[0].data.push( data.fahrenheit );
+                    } else {
+                        recentTempChart.data.datasets[0].data.push( data.celsius );
+                    }
+
+                }
+
+            } );
+        },
         init: function ( display_units ) {
             var SystemTempReporting = this;
             var currentData = SystemTempReporting.recentTempChart.data.datasets[0].data;
@@ -74,7 +111,7 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
 } );
 
 
-svcMod.factory( "SystemTempCurrent", function ( $http ) {
+svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
 
     return {
         values: {
@@ -95,6 +132,16 @@ svcMod.factory( "SystemTempCurrent", function ( $http ) {
                 error( function ( data, status ) {
                     console.log( data );
                 } );
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+            socket.on( 'update:system:temp', function ( data ) {
+                if ( values.date != data.date ) {
+                    values.date = data.date;
+                    values.fahrenheit = data.fahrenheit;
+                    values.celsius = data.celsius;
+                }
+            } );
         },
         init: function () {
             var SystemTempCurrent = this;

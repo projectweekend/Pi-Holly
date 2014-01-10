@@ -26,9 +26,11 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
 
     $scope.systemTempReporting = SystemTempReporting;
     $scope.systemTempReporting.init('F');
+    $scope.systemTempReporting.listenForUpdates('F');
 
     $scope.systemCurrentTemp = SystemTempCurrent;
     $scope.systemCurrentTemp.init();
+    $scope.systemCurrentTemp.listenForUpdates();
 
 } );
 
