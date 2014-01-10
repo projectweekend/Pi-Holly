@@ -40,7 +40,7 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
                         var d = new Date( element.date );
                         var h = d.getHours();
                         var m = d.getMinutes();
-                        if ( m.length == 1 ) {
+                        if ( m == 0 ) {
                             m = "00";
                         }
                         recentTempChart.data.labels.push( h + ":" + m );
