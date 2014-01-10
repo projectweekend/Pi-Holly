@@ -34,13 +34,12 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    console.log( recentTempChart );
                     data.forEach( function ( element, index, array ) {
 
                         var d = new Date( element.date );
                         var h = d.getHours();
                         var m = d.getMinutes();
-                        if ( m == 0 ) {
+                        if ( m === 0 ) {
                             m = "00";
                         }
                         recentTempChart.data.labels.push( h + ":" + m );
@@ -54,6 +53,39 @@ svcMod.factory( "SystemTempReporting", function ( $http ) {
                 });
         }
 
+    };
+
+} );
+
+
+svcMod.factory( "SystemTempCurrent", function ( $http ) {
+
+    return {
+        values: {
+            fahrenheit: null,
+            celsius: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/system-temperature-data";
+
+            $http.get( apiUrl ).
+                success( function ( data, status) {
+                    values.fahrenheit = data.fahrenheit;
+                    values.celsius = data.celsius;
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
+        },
+        init: function () {
+            var SystemTempCurrent = this;
+            var currentFarenheit = SystemTempCurrent.values.fahrenheit;
+            var currentCelsius = SystemTempCurrent.values.celsius;
+            if ( currentFarenheit === null && currentCelsius == null ) {
+                SystemTempCurrent.getValues();
+            }
+        }
     };
 
 } );

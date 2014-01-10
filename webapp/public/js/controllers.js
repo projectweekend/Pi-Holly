@@ -22,11 +22,14 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket ) {
 } );
 
 
-cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting ) {
+cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, SystemTempCurrent ) {
 
     $scope.systemTempReporting = SystemTempReporting;
 
     $scope.systemTempReporting.buildRecentTempChart();
+
+    $scope.systemCurrentTemp = SystemTempCurrent;
+    $scope.systemCurrentTemp.init();
 
 } );
 
