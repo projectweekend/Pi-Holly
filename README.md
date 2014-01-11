@@ -61,3 +61,29 @@ Right now, this returns the last 18 temperature readings. That limit will be mov
      }
  ]
 ```
+
+## Get system temperature stats
+This returns an object with the current, average, min, and max temperatures.
+
+**GET:** `/api/reporting/system-temperature-data/stats`
+
+**Response:**
+```
+ {
+     average: 
+     {
+         celsius: 43,
+         fahrenheit: 109.39999999999999
+     },
+     min: 
+     {
+         celsius: 40,
+         fahrenheit: 104
+     },
+     max: 
+     {
+         celsius: 47,
+         fahrenheit: 116.6
+     }
+ }
+```
