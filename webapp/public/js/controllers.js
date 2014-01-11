@@ -4,11 +4,16 @@
 var cMod = angular.module( 'myApp.controllers', [] );
 
 
-cMod.controller( 'AppCtrl', function ( $scope, socket ) {
+cMod.controller( 'AppCtrl', function ( $scope, $location ) {
 
-	socket.on( 'send:name', function ( data ) {
-		$scope.name = data.name;
-	} );
+	$scope.navActiveElement = function ( routeName ) {
+
+		var currentRoute = $location.path();
+		if ( currentRoute == routeName ) {
+			return "active";
+		}
+
+	};
 
 } );
 

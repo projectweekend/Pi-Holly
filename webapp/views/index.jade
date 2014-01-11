@@ -14,9 +14,9 @@ block body
                     a(class="navbar-brand", href="/home") Holly
                 div(class="navbar-collapse collapse", style="height: 1px;")
                     ul(class="nav navbar-nav navbar-right")
-                        li(class="active")
+                        li(ng-class="navActiveElement('/home')")
                             a(href="/home") Home
-                        li
+                        li(ng-class="navActiveElement('/system')")
                             a(href="/system") System
 
         div(ng-view, class="container")
