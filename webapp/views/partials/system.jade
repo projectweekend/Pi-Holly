@@ -11,16 +11,16 @@ div(class="row")
         dl
           dt Current:
           dd
-            span(ng-if="systemCurrentTemp.values.fahrenheit", class="text-primary temp-stat-value") {{systemCurrentTemp.values.fahrenheit}}&deg; F
+            span(ng-if="systemCurrentTemp.values.fahrenheit", class="text-primary temp-stat-value") {{systemCurrentTemp.values.fahrenheit | number:2}}&deg; F
           dt Average:
           dd
             div(ng-if="systemTempStats.values.average")
-              span(class="text-primary temp-stat-value") {{systemTempStats.values.average.fahrenheit}}&deg; F
+              span(class="text-primary temp-stat-value") {{systemTempStats.values.average.fahrenheit | number:2}}&deg; F
           dt Max:
           dd 
             div(ng-if="systemTempStats.values.max")
-              span(class="text-primary temp-stat-value") {{systemTempStats.values.max.fahrenheit}}&deg; F
+              span(class="text-primary temp-stat-value") {{systemTempStats.values.max.fahrenheit | number:2}}&deg; F
           dt Min:
           dd
             div(ng-if="systemTempStats.values.min")
-              span(class="text-primary temp-stat-value") {{systemTempStats.values.min.fahrenheit}}&deg; F
+              span(class="text-primary temp-stat-value") {{systemTempStats.values.min.fahrenheit | number:2}}&deg; F
