@@ -1,7 +1,7 @@
 Pi-Holly
 ========
 
-A home server project for my Raspberry Pi.
+A home server project for my Raspberry Pi. The `webapp` portion of this project uses [Node.js](http://nodejs.org/) and [MongoDB](http://www.mongodb.org/). In addition will be a collection of worker processes written in [Python](http://www.python.org/). Right now there is only one worker that collects the CPU temperature and reports it back to Mongo.
 
 ## Get latest system temperature
 
