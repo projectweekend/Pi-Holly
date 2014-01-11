@@ -29,3 +29,35 @@ A home server project for my Raspberry Pi.
      fahrenheit: 104
  }     
 ```
+
+## Get recent system temperatures
+Right now, this returns the last 18 temperature readings. That limit will be moved into a URL parameter for more flexibility very soon.
+
+**GET:** `/api/reporting/system-temperature-data/recent`
+
+**Response:**
+```
+ [
+     {
+         date: "2014-01-10T23:22:24.150Z",
+         celsius: 40,
+         fahrenheit: 104,
+         _id: "52d080b03a62e79fbf000003",
+         __v: 0
+     },
+     {
+         date: "2014-01-10T23:20:46.229Z",
+         celsius: 47,
+         fahrenheit: 116.6,
+         _id: "52d0804e3a62e79fbf000002",
+         __v: 0
+     },
+     {
+         date: "2014-01-10T23:05:34.437Z",
+         celsius: 46,
+         fahrenheit: 114.8,
+         _id: "52d07cbe3a62e79fbf000001",
+         __v: 0
+     }
+ ]
+```
