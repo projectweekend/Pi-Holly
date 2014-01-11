@@ -5,11 +5,17 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-var parseHoursMinutesFromString = function ( dateString ) {
+var makeHoursMinutesTimeString = function ( dateString ) {
+
     var d = new Date( dateString );
     var h = d.getHours();
     var m = d.getMinutes();
-    return [ h, m ];
+
+    if ( m === 0 ) {
+        m = "00";
+    }
+
+    return h + ":" + m;
 };
 
 
@@ -44,13 +50,8 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                 success( function ( data, status ) {
                     data.forEach( function ( element, index, array ) {
 
-                        var parsedTime = parseHoursMinutesFromString( element.date );
-                        var h = parsedTime[0];
-                        var m = parsedTime[1];
-                        if ( m === 0 ) {
-                            m = "00";
-                        }
-                        recentTempChart.data.labels.push( h + ":" + m );
+                        var parsedTime = makeHoursMinutesTimeString( element.date );
+                        recentTempChart.data.labels.push( parsedTime );
 
                         if ( display_units == 'F' ) {
                             recentTempChart.data.datasets[0].data.push( element.fahrenheit );
@@ -75,11 +76,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
             
             socket.on( 'update:system:temp', function ( data ) {
             
-                var parsedTime = parseHoursMinutesFromString( data.date );
-                var h = parsedTime[0];
-                var m = parsedTime[1];
-                
-                var newLabel = h + ":" + m;
+                var newLabel = makeHoursMinutesTimeString( data.date );
                 var latestLabel = recentTempChart.data.labels[0];
 
                 console.log("New Label: " + newLabel);
@@ -96,7 +93,6 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                     } else {
                         recentTempChart.data.datasets[0].data.unshift( data.celsius );
                     }
-                    latestLabel = newLabel;
 
                 }
 
