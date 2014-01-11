@@ -3,7 +3,7 @@ Pi-Holly
 
 A home server project for my Raspberry Pi.
 
-## Get latest system temperature reading
+## Get latest system temperature
 
 **GET:** `/api/system-temperature-data`
 
@@ -16,4 +16,16 @@ A home server project for my Raspberry Pi.
      _id: "52d080b03a62e79fbf000003",
      __v: 0
  }
+```
+
+## Add new system temperature
+
+**POST:** `/api/system-temperature-data`
+
+**Payload:**
+```
+ {
+     celsius: 40,
+     fahrenheit: 104
+ }     
 ```
