@@ -284,7 +284,7 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
         fahrenheitMinMax,
         celsiusMinMax
     ],
-    // callback function for functions ran as async
+    // callback function for processes running async
     function( err ){
         if ( err ) {
             return next( errorHandler( err, res ) );
