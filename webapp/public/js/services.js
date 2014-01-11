@@ -87,7 +87,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                     recentTempChart.data.labels.pop();
                     recentTempChart.data.datasets[0].data.pop();
                     // add new one
-                    recentTempChart.data.labels.push( newLabel );
+                    recentTempChart.data.labels.unshift( newLabel );
                     if ( display_units == 'F' ) {
                         recentTempChart.data.datasets[0].data.unshift( data.fahrenheit );
                     } else {
