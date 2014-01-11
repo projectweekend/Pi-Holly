@@ -1,12 +1,15 @@
 div(class="row")
 
+  div(class="page-header")
+    h1 System Temperature  
+
   div(class="col-md-8")
     canvas(chart, id="systemTempChart", type="Line", options="systemTempReporting.recentTempChart.options", data="systemTempReporting.recentTempChart.data", width="700", height="350")
 
   div(class="col-md-4")
     div(class="panel panel-default")
       div(class="panel-heading")
-        h3(class="panel-title") Temperature Data
+        h3(class="panel-title") Stats
       div(class="panel-body")
         dl
           dt Current:
@@ -25,3 +28,8 @@ div(class="row")
           dd
             div(ng-if="systemTempStats.values.min", class="temp-stat-wrapper")
               span(class="text-primary temp-stat-value") {{systemTempStats.values.min.fahrenheit | number:2}}&deg; F
+
+div(class="row")
+
+  div(class="page-header")
+    h1 System Information
