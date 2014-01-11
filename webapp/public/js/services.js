@@ -82,6 +82,9 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                 var newLabel = h + ":" + m;
                 var latestLabel = recentTempChart.data.labels[0];
 
+                console.log("New Label: " + newLabel);
+                console.log("Latest Label: " + latestLabel);
+
                 if ( newLabel != latestLabel ) {
                     // remove oldest one
                     recentTempChart.data.labels.pop();
@@ -93,6 +96,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                     } else {
                         recentTempChart.data.datasets[0].data.unshift( data.celsius );
                     }
+                    latestLabel = newLabel;
 
                 }
 
