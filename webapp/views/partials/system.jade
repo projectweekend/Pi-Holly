@@ -6,6 +6,21 @@ div(class="row")
   div(class="col-md-4")
     div(class="panel panel-default")
       div(class="panel-heading")
-        h3(class="panel-title") Current Temperature
-      div(class="panel-body") 
-        span(ng-if="systemCurrentTemp.values.fahrenheit", class="text-primary current-temp-value") {{systemCurrentTemp.values.fahrenheit}}&deg; Fahrenheit
+        h3(class="panel-title") Temperature Data
+      div(class="panel-body")
+        dl
+          dt Current:
+          dd
+            span(ng-if="systemCurrentTemp.values.fahrenheit", class="text-primary temp-stat-value") {{systemCurrentTemp.values.fahrenheit}}&deg; F
+          dt Average:
+          dd
+            div(ng-if="systemTempStats.values.average")
+              span(class="text-primary temp-stat-value") {{systemTempStats.values.average.fahrenheit}}&deg; F
+          dt Max:
+          dd 
+            div(ng-if="systemTempStats.values.max")
+              span(class="text-primary temp-stat-value") {{systemTempStats.values.max.fahrenheit}}&deg; F
+          dt Min:
+          dd
+            div(ng-if="systemTempStats.values.min")
+              span(class="text-primary temp-stat-value") {{systemTempStats.values.min.fahrenheit}}&deg; F
