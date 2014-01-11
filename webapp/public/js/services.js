@@ -154,3 +154,41 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
     };
 
 } );
+
+
+svcMod.factory( "SystemTempStats", function ( $http, socket ) {
+
+    return {
+        values: {
+            average: null,
+            min: null,
+            max: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/reporting/system-temperature-data/stats";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.average = data.average;
+                    values.min = data.min;
+                    values.max = data.max;
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
+
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+        },
+        init: function () {
+            var SystemTempStats = this;
+            var values = this.values;
+            if ( values.average === null || values.min === null || values.max === null ) {
+                SystemTempStats.getValues();
+            }
+        }
+    };
+
+} );
