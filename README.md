@@ -3,9 +3,7 @@ Pi-Holly
 
 A home server project for my Raspberry Pi.
 
-## API End Points
-
-#### Get latest system temperature reading
+## Get latest system temperature reading
 
 **GET:** `/api/system-temperature-data`
 
