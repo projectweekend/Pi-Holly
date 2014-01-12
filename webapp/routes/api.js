@@ -293,3 +293,40 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
     } );
 
 };
+
+
+exports.systemMemoryData = function ( req, res ) {
+
+    if ( req.method == 'POST' ) {
+
+        if ( !req.body.total || !req.body.used || !req.body.free || !req.body.shared || !req.body.buffers || !req.body.cached ) {
+            res.send( 400, "Required fields: total, used, free, shared, buffers, cached" );
+        }
+
+        var newSystemMemory = {
+            date: new Date(),
+            total: req.body.total,
+            used: req.body.used,
+            free: req.body.free,
+            shared: req.body.shared,
+            buffers: req.body.buffers,
+            cached: req.body.cached
+        };
+
+    } else {
+
+        var query = SystemMemoryData.findOne( ).sort( '-date' );
+
+        query.exec( function ( err, data ) {
+
+            if ( err ) {
+                return errorHandler( err, res);
+            }
+
+            res.json( data );            
+
+        } );
+
+    }
+
+};
