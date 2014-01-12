@@ -14,7 +14,6 @@ def get_system_temp():
     return {'celsius':celsius_temp, 'fahrenheit': fahrenheit_temp}
 
 
-# TODO: schedule a call to this in CRONTAB
 def worker():
     temp_data = get_system_temp()
     post_status = utils.make_json_post(POST_URL, temp_data)
