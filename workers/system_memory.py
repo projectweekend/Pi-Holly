@@ -15,11 +15,12 @@ def get_system_memory():
 
 def worker():
     memory_data = get_system_memory()
-    post_status = utils.make_json_post(POST_URL, memory_data)
-    if post_status != 201:
-        # TODO: Add some logging when POST fails
-        pass
-    return
+    print(memory_data)
+    # post_status = utils.make_json_post(POST_URL, memory_data)
+    # if post_status != 201:
+    #     # TODO: Add some logging when POST fails
+    #     pass
+    # return
 
 
 if __name__ == "__main__":
