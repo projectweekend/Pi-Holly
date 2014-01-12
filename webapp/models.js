@@ -21,3 +21,16 @@ SystemTemperatureDataSchema = Schema( {
 	fahrenheit: Number
 } );
 SystemTemperatureData = mongoose.model( 'SystemTemperatureData', SystemTemperatureDataSchema );
+
+
+SystemMemoryDataSchema = Schema( {
+	id: ObjectId,
+	date: Date,
+    total: Number,
+    used: Number,
+    free: Number,
+    shared: Number,
+    buffers: Number,
+    cached: Number
+} );
+SystemMemoryData = mongoose.model( 'SystemMemoryData', SystemMemoryDataSchema );
