@@ -1,6 +1,4 @@
 import subprocess
-import json
-import requests
 
 import utils
 
