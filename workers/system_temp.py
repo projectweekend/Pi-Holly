@@ -4,7 +4,7 @@ import utils
 
 
 SHELL_COMMAND = ["/opt/vc/bin/vcgencmd", "measure_temp"]
-POST_URL = "http://holly.local/api/system-temperature-data"
+POST_URL = "http://127.0.0.1/api/system-temperature-data"
 
 
 def get_system_temp():
