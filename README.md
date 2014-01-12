@@ -1,7 +1,9 @@
 Pi-Holly
 ========
 
-A home server project for my Raspberry Pi. The *web app* portion of this project uses [Node.js](http://nodejs.org/) and [MongoDB](http://www.mongodb.org/). In addition will be a collection of worker processes written in [Python](http://www.python.org/). Right now there is only one worker that collects the CPU temperature and reports it back to Mongo.
+A home server project for my Raspberry Pi. The *web app* portion of this project uses [Node.js](http://nodejs.org/)/[MongoDB](http://www.mongodb.org/). It's based on [btford's](https://github.com/btford) awesome [Angular Socket IO Seed](https://github.com/btford/angular-socket-io-seed). The *system dashboard* page shown below uses websockets to receive updates from the server as new data is collected. 
+
+In addition to the web app, there will be a collection of worker processes to perform decoupled tasks. My plan is to write these in [Python](http://www.python.org/). Right now there is only one and it collects CPU temperature data, then reports it back to Mongo through a JSON API. If it wasn't already obvious, this is definitely a work in progress. :) 
 
 ![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
 
