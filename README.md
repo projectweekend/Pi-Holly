@@ -5,9 +5,6 @@ A home server project for my Raspberry Pi. The `webapp` portion of this project 
 
 ![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
 
-API Routes
-==========
-
 ## Get latest system temperature
 
 **GET:** `/api/system-temperature-data`
