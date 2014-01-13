@@ -299,8 +299,18 @@ exports.systemMemoryData = function ( req, res ) {
 
     if ( req.method == 'POST' ) {
 
-        if ( !req.body.total || !req.body.used || !req.body.free || !req.body.shared || !req.body.buffers || !req.body.cached ) {
+        var requiredFields = ['total', 'used', 'free', 'shared', 'buffers', 'cached'];
+        var fieldCount = 0;
+        
+        requiredFields.forEach( function ( field ) {
+            if ( field in req.body ) {
+                fieldCount += 1;
+            }
+        } );
+
+        if ( fieldCount != 6 ) {
             res.send( 400, "Required fields: total, used, free, shared, buffers, cached" );
+            return;
         }
 
         var newSystemMemory = {
@@ -312,6 +322,15 @@ exports.systemMemoryData = function ( req, res ) {
             buffers: req.body.buffers,
             cached: req.body.cached
         };
+
+        SystemMemoryData.create( newSystemMemory, function ( err, memData ) {
+
+            if ( err ) {
+                return errorHandler( err, res);
+            }
+            res.send( 201 );
+
+        } );
 
     } else {
 
