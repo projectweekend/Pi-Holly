@@ -34,3 +34,13 @@ SystemMemoryDataSchema = Schema( {
     cached: Number
 } );
 SystemMemoryData = mongoose.model( 'SystemMemoryData', SystemMemoryDataSchema );
+
+
+SystemStorageDataSchema = Schema( {
+	id: ObjectId,
+	date: Date,
+    available: Number,
+    used: Number,
+    percent: Number
+} );
+SystemStorageData = mongoose.model( 'SystemStorageData', SystemStorageDataSchema );
