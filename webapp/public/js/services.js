@@ -224,7 +224,7 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
                 },
                 {
                     value: values.shared,
-                    color: "#E2EAE9"
+                    color: "#7EC5BC"
                 },
                 {
                     value: values.buffers,
