@@ -70,6 +70,9 @@ app.get('/api/reporting/system-temperature-data/stats', api.systemTemperatureDat
 app.get('/api/system-memory-data', api.systemMemoryData);
 app.post('/api/system-memory-data', api.systemMemoryData);
 
+app.get('/api/system-storage-data', api.systemStorageData);
+app.post('/api/system-storage-data', api.systemStorageData);
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
