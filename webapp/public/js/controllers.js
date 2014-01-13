@@ -27,7 +27,7 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket ) {
 } );
 
 
-cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, SystemTempCurrent, SystemTempStats ) {
+cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, SystemTempCurrent, SystemTempStats, SystemMemoryCurrent ) {
 
     $scope.systemTempReporting = SystemTempReporting;
     $scope.systemTempReporting.init('F');
@@ -39,6 +39,11 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
 
     $scope.systemTempStats = SystemTempStats;
     $scope.systemTempStats.init();
+
+    $scope.systemCurrentMemory = SystemMemoryCurrent;
+    $scope.systemCurrentMemory.init();
+
+    console.log( $scope.systemCurrentMemory.currentMemoryChart );
 
 } );
 

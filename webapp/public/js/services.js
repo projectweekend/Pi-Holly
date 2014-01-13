@@ -192,3 +192,85 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
     };
 
 } );
+
+
+svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
+
+    return {
+        values: {
+            date: null,
+            total: null,
+            used: null,
+            free: null,
+            shared: null,
+            buffers: null,
+            cached: null
+        },
+        currentMemoryChart: {
+            options: {},
+            data: []
+        },
+        buildCurrentMemoryChart: function () {
+            var values = this.values;
+            var currentMemoryChart = this.currentMemoryChart;
+            currentMemoryChart.data = [
+                {
+                    value: values.used,
+                    color: "#F7464A"
+                },
+                {
+                    value: values.free,
+                    color : "#E2EAE9"
+                },
+                {
+                    value: values.shared,
+                    color : "#D4CCC5"
+                },
+                {
+                    value: values.buffers,
+                    color : "#949FB1"
+                },
+                {
+                    value: values.cached,
+                    color : "#4D5360"
+                }
+            ];
+        },
+        getValues: function () {
+            var SystemMemoryCurrent = this;
+            var values = this.values;
+            var apiUrl = "/api/system-memory-data";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.date = data.date;
+                    values.total = data.total;
+                    values.used = data.used;
+                    values.free = data.free;
+                    values.shared = data.shared;
+                    values.buffers = data.buffers;
+                    values.cached = data.cached;
+                    SystemMemoryCurrent.buildCurrentMemoryChart();
+                }).
+                error( function ( data, status ) {
+                    console.log( data );
+                });
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+            // TOOD: Make a socket and hook this up
+        },
+        init: function () {
+            
+            var SystemMemoryCurrent = this;
+            
+            var values = this.values;
+            if ( values.date === null || values.total === null || values.used === null || values.free === null || values.shared === null || values.buffers === null || values.cached === null ) {
+                SystemMemoryCurrent.getValues();
+            }
+
+        }
+
+    };
+
+} );
