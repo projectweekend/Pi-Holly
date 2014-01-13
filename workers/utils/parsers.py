@@ -1,3 +1,9 @@
+def strip_values(target_string, values_to_strip):
+    for i in values_to_strip:
+        target_string = target_string.replace(i, "")
+    return target_string
+
+
 def parse_temp_value(system_result):
     return float(system_result.split("=")[1].split("'")[0])
 
@@ -5,8 +11,14 @@ def parse_temp_value(system_result):
 def parse_memory_values(system_result):
     result_lines = system_result.splitlines()
     header_list = result_lines[0].strip().split()
-    data_line = result_lines[1]    
-    for i in ["Mem:", "M", "B"]:
-        data_line = data_line.replace(i, "")
+    data_line = strip_values(result_lines[1], ["Mem:", "M", "B"])
+    data_list = [int(x) for x in data_line.strip().split()]
+    return zip(header_list, data_list)
+
+
+def parse_storage_values(system_result):
+    result_lines = system_result.splitlines()
+    header_list = ['used', 'available', 'percent']
+    data_line = strip_values(result_lines[1], ["rootfs", "M", "B", "%", "/"])
     data_list = [int(x) for x in data_line.strip().split()]
     return zip(header_list, data_list)
