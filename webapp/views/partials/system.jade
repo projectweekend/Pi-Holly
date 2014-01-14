@@ -34,8 +34,9 @@ div(class="row")
   div(class="page-header")
     h1 System Information
 
-  div(class="col-md-6")
-    h3() Memory
+  div(class="col-md-4")
+    h3 Memory 
+      small as of {{ systemCurrentMemory.values.date | date:'medium' }}
     ul(class="list-inline")
       li(style="color: #F7464A;") 
         strong Used
@@ -48,4 +49,15 @@ div(class="row")
       li(style="color: #D4CCC5;")
         strong Cached
 
-    canvas(chart, id="systemMemoryChart", type="Pie", options="systemCurrentMemory.currentMemoryChart.options", data="systemCurrentMemory.currentMemoryChart.data", width="525", height="300")
+    canvas(chart, id="systemMemoryChart", type="Pie", options="systemCurrentMemory.currentMemoryChart.options", data="systemCurrentMemory.currentMemoryChart.data", width="370", height="300")
+
+  div(class="col-md-4")
+    h3 Storage 
+      small as of {{ systemCurrentStorage.values.date | date:'medium' }}
+    ul(class="list-inline")
+      li(style="color: #F7464A;")
+        strong Used
+      li(style="color: #4D5360;")
+        strong Available
+
+    canvas(chart, id="systemMemoryChart", type="Pie", options="systemCurrentStorage.currentStorageChart.options", data="systemCurrentStorage.currentStorageChart.data", width="370", height="300")

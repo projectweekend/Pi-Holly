@@ -279,7 +279,59 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
 svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
 
     return {
-        
+        values: {
+            date: null,
+            available: null,
+            used: null
+        },
+        currentStorageChart: {
+            options: {},
+            data: []
+        },
+        buildCurrentStorageChart: function () {
+            var values = this.values;
+            var currentStorageChart = this.currentStorageChart;
+            currentStorageChart.data = [
+                {
+                    value: values.available,
+                    color: "#4D5360"
+                },
+                {
+                    value: values.used,
+                    color: "#F7464A"
+                }
+            ];
+
+        },
+        getValues: function () {
+            var SystemStorageCurrent = this;
+            var values = this.values;
+            var apiUrl = "/api/system-storage-data";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.date = data.date;
+                    values.available = data.available;
+                    values.used = data.used;
+                    SystemStorageCurrent.buildCurrentStorageChart();
+                }).
+                error( function ( data, status ) {
+                    console.log( data );
+                });
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+            // TOOD: Make a socket and hook this up
+        },
+        init: function () {
+
+            var SystemStorageCurrent = this;
+
+            var values = this.values;
+            if ( values.available === null || values.used === null ) {
+                SystemStorageCurrent.getValues();
+            }
+        }
     };
 
 } );
