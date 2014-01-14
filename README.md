@@ -101,3 +101,67 @@ This returns an object with the current, average, min, and max temperatures.
      }
  }
 ```
+
+## Get latest memory usage
+
+**GET:** `/api/system-memory-data`
+
+**Response:**
+```
+ {
+     date: "2014-01-14T02:00:06.058Z",
+     total: 485,
+     used: 170,
+     free: 315,
+     shared: 0,
+     buffers: 15,
+     cached: 74,
+     _id: "52d49a26163cb90b06000001",
+     __v: 0
+}
+```
+
+## Add new memory usage
+
+**POST:** `/api/system-memory-data`
+
+**Payload:**
+```
+ {
+     total: 485,
+     used: 170,
+     free: 315,
+     shared: 0,
+     buffers: 15,
+     cached: 74
+ }     
+```
+
+## Get latest storage data
+
+**GET:** `/api/system-storage-data`
+
+**Response:**
+```
+ {
+     date: "2014-01-14T02:00:06.455Z",
+     available: 3531,
+     used: 2238,
+     percent: 39,
+     _id: "52d49a26163cb90b06000003",
+     __v: 0
+ }
+```
+
+## Add new storage data
+
+**POST:** `/api/system-storage-data`
+
+**Payload:**
+```
+ {
+     available: 3531,
+     used: 2238,
+     percent: 39
+ }     
+```
