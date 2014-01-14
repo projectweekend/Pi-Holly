@@ -11,11 +11,12 @@ In addition to the web app, there is a collection of worker processes, written i
 
 Each of these workers is scheduled using `crontab` and reports the data colelcted data back to Mongo through a JSON API. If it wasn't already obvious, this is definitely a work in progress. :) 
 
-![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
-(System temperature line chart)
 
+### System Temperature Chart
+![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
+
+### System Info Charts
 ![System Info Page Screen Shot](http://i.imgur.com/hXajsLC.png)
-(System info pie charts...with room for one more!)
 
 ## Get latest system temperature
 
