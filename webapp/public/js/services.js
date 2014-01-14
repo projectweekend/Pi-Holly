@@ -274,3 +274,12 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
     };
 
 } );
+
+
+svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
+
+    return {
+        
+    };
+
+} );
