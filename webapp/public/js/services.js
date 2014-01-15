@@ -74,7 +74,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
             
             var recentTempChart = this.recentTempChart;
             
-            socket.on( 'update:system:temp', function ( data ) {
+            socket.on( 'updates:system:temp', function ( data ) {
             
                 var newLabel = makeHoursMinutesTimeString( data.date );
                 var latestLabel = recentTempChart.data.labels[0];
@@ -135,7 +135,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
         },
         listenForUpdates: function () {
             var values = this.values;
-            socket.on( 'update:system:temp', function ( data ) {
+            socket.on( 'updates:system:temp', function ( data ) {
                 if ( values.date != data.date ) {
                     values.date = data.date;
                     values.fahrenheit = data.fahrenheit;
@@ -180,6 +180,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
 
         },
         listenForUpdates: function () {
+            // TOOD: Make a socket and hook this up
             var values = this.values;
         },
         init: function () {
@@ -257,8 +258,8 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
                 });
         },
         listenForUpdates: function () {
-            var values = this.values;
             // TOOD: Make a socket and hook this up
+            var values = this.values;
         },
         init: function () {
             
@@ -320,8 +321,8 @@ svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
                 });
         },
         listenForUpdates: function () {
-            var values = this.values;
             // TOOD: Make a socket and hook this up
+            var values = this.values;
         },
         init: function () {
 
