@@ -6,12 +6,16 @@
 	ERRORSocket = require( '../helpers/ERRORSocket' ),
 	CRUDSocket = require( '../helpers/CRUDSocket' );
 
+
 module.exports = function ( socket ) {
 
 	var handleError = ERRORSocket( socket, {route: 'app:error'} );
 
+	
 	// System Temperature CRUD operations can be performed on the 'system:temp' channel
 	CRUDSocket( socket, handleError, {route: 'system:temp', model: SystemTemperatureData} );
+	
+
 	// The latest System Temperature reading is broadcast on 
 	setInterval( function () {
 
