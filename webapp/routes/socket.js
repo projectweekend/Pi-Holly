@@ -4,7 +4,8 @@
 
  var appModels = require( '../models' ),
 	ERRORSocket = require( '../helpers/ERRORSocket' ),
-	CRUDSocket = require( '../helpers/CRUDSocket' );
+	CRUDSocket = require( '../helpers/CRUDSocket' ),
+	RepeatOneSocket = require( '../helpers/RepeatOneSocket' );
 
 
 module.exports = function ( socket ) {
@@ -14,21 +15,14 @@ module.exports = function ( socket ) {
 	
 	// System Temperature CRUD operations can be performed on the 'system:temp' channel
 	CRUDSocket( socket, handleError, {route: 'system:temp', model: SystemTemperatureData} );
-	
 
-	// The latest System Temperature reading is broadcast on 
-	setInterval( function () {
-
-		var query = SystemTemperatureData.findOne( ).sort( '-date' );
-
-		query.exec( function ( err, data ) {
-			if ( err ) {
-				console.log( err );
-			} else {
-				socket.emit( 'updates:system:temp', data );
-			}
-		} );
-
-	}, 120000 );
+	// The latest System Temperature reading is broadcast on a set interval
+	RepeatOneSocket( socket, handleError, {
+		route: 'updates:system:temp',
+		model: SystemTemperatureData,
+		query: {},
+		sort: '-date',
+		interval: 120000
+	} );
 
 };
