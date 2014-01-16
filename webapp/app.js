@@ -73,6 +73,9 @@ app.post('/api/system-memory-data', api.systemMemoryData);
 app.get('/api/system-storage-data', api.systemStorageData);
 app.post('/api/system-storage-data', api.systemStorageData);
 
+app.get('/api/system-config-data', api.systemConfigData);
+app.post('/api/system-config-data', api.systemConfigData);
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
