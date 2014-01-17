@@ -207,6 +207,8 @@ This returns an object with the current, average, min, and max temperatures.
 ## Add new config data
 
 **POST:** `/api/system-config-data`
+
+**Payload:**
 ```
  {
      arm_freq: 800,
