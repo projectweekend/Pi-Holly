@@ -1,9 +1,11 @@
 /* app css stylesheet */
 
+.system-config-value,
 .temp-stat-value {
   font-size: 1.75em;
 }
 
+.system-config-wrapper,
 .temp-stat-wrapper {
     margin-bottom: 10px;
 }
