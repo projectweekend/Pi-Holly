@@ -24,6 +24,7 @@ var svcMod = angular.module('myApp.services', []);
 
 svcMod.value('version', '0.1');
 
+// System Reporting
 svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
 
     return {
@@ -110,7 +111,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
 
 } );
 
-
+// Current System Temp
 svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
 
     return {
@@ -155,7 +156,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
 
 } );
 
-
+// System Temp Stats
 svcMod.factory( "SystemTempStats", function ( $http, socket ) {
 
     return {
@@ -194,7 +195,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
 
 } );
 
-
+// Current System Memory
 svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
 
     return {
@@ -276,7 +277,7 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
 
 } );
 
-
+// Current System Storage
 svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
 
     return {
