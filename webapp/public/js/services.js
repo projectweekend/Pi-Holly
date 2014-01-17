@@ -365,7 +365,7 @@ svcMod.factory( "SystemConfigCurrent", function ( $http, socket ) {
                     console.log( data );
                 } );
         },
-        ini: function () {
+        init: function () {
 
             var SystemConfigCurrent = this;
 
