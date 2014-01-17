@@ -337,3 +337,44 @@ svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
     };
 
 } );
+
+// Current System Config
+svcMod.factory( "SystemConfigCurrent", function ( $http, socket ) {
+
+    return {
+        values: {
+            date: null,
+            arm_freq: null,
+            core_freq: null,
+            sdram_freq: null,
+            temp_limit: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/system-config-data";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.date = data.date;
+                    values.arm_freq = data.arm_freq;
+                    values.core_freq = data.core_freq;
+                    values.sdram_freq = data.sdram_freq;
+                    values.temp_limit = data.temp_limit;
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
+        },
+        ini: function () {
+
+            var SystemConfigCurrent = this;
+
+            var values = this.values;
+            if ( values.arm_freq === null || values.core_freq === null || values.sdram_freq === null || values.temp_limit === null ) {
+                SystemConfigCurrent.getValues();
+            }
+
+        }
+    };
+
+} );
