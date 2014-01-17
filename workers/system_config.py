@@ -10,7 +10,9 @@ POST_URL = "http://127.0.0.1/api/system-config-data"
 def get_system_config():
     system_result = subprocess.check_output(SHELL_COMMAND)
     system_config = utils.parse_config_values(system_result)
-    return dict(system_config)
+    config_dict = dict(system_config)
+    config_dict['temp_limit'] = utils.celsius_to_fahrenheit(config_dict['temp_limit'])
+    return config_dict
 
 
 def worker():
