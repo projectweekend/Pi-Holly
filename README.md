@@ -16,7 +16,10 @@ Each of these workers is scheduled using `crontab` and reports the data colelcte
 ![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
 
 ### System Info Charts
-![System Info Page Screen Shot](http://i.imgur.com/hXajsLC.png)
+![System Info Page Screen Shot](http://i.imgur.com/X24o0e7.png)
+
+# API Routes
+The following routes are used add/retreive data from the web server exposed on the local network. The user facing **dashboard** pages retrieve the all information they display through these endpoints. Likewise, the **worker** processes that gather info use the same routes to send data back to MongoDB.
 
 ## Get latest system temperature
 
@@ -166,3 +169,67 @@ This returns an object with the current, average, min, and max temperatures.
      percent: 39
  }     
 ```
+
+## Get latest config data
+
+**GET:** `/api/system-config-data`
+
+**Respoonse:**
+```
+ {
+     date: "2014-01-17T01:07:41.655Z",
+     arm_freq: 800,
+     core_freq: 250,
+     sdram_freq: 400,
+     emmc_pll_core: 1,
+     force_pwm_open: 1,
+     config_hdmi_boost: 4,
+     hdmi_force_hotplug: 1,
+     hdmi_group: 2,
+     hdmi_ignore_edid: "0xa5000080",
+     hdmi_mode: 4,
+     hdmi_safe: 1,
+     disable_splash: 1,    
+     disable_overscan: 1,
+     overscan_bottom: 16,
+     overscan_left: 24,
+     overscan_right: 24,
+     overscan_top: 16,
+     pause_burst_frames: 1,
+     program_serial_random: 1,
+     second_boot: 1,
+     temp_limit: 185,
+     _id: "52d8825d858ee93205000004",
+     __v: 0
+ }
+```
+
+## Add new config data
+
+**POST:** `/api/system-config-data`
+```
+ {
+     arm_freq: 800,
+     core_freq: 250,
+     sdram_freq: 400,
+     emmc_pll_core: 1,
+     force_pwm_open: 1,
+     config_hdmi_boost: 4,
+     hdmi_force_hotplug: 1,
+     hdmi_group: 2,
+     hdmi_ignore_edid: "0xa5000080",
+     hdmi_mode: 4,
+     hdmi_safe: 1,
+     disable_splash: 1,    
+     disable_overscan: 1,
+     overscan_bottom: 16,
+     overscan_left: 24,
+     overscan_right: 24,
+     overscan_top: 16,
+     pause_burst_frames: 1,
+     program_serial_random: 1,
+     second_boot: 1,
+     temp_limit: 185
+ }
+```
+
