@@ -9,7 +9,9 @@ In addition to the web app, there is a collection of worker processes, written i
 * One to check memory usage
 * One to check disk storage
 
-Each of these workers is scheduled using `crontab` and reports the data colelcted data back to Mongo through a JSON API. If it wasn't already obvious, this is definitely a work in progress. :) 
+Each of these workers is scheduled using `crontab` and reports the data colelcted data back to Mongo through a JSON API. 
+
+Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf)). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :) 
 
 
 ### System Temp Chart
