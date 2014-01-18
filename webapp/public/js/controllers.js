@@ -19,10 +19,6 @@ cMod.controller( 'AppCtrl', function ( $scope, $location ) {
 
 
 cMod.controller( 'HomeCtrl', function ( $scope, socket ) {
-	
-	socket.on( 'send:time', function ( data ) {
-		$scope.environmentalData = data;
-	} );
 
 } );
 
@@ -49,6 +45,11 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
     $scope.systemCurrentConfig = SystemConfigCurrent;
     $scope.systemCurrentConfig.init();
 
+} );
+
+
+cMod.controller( 'NewsCtrl', function ( $scope ) {
+    // write Ctrl here
 } );
 
 

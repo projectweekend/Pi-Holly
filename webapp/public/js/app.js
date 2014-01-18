@@ -15,17 +15,21 @@ angular.module('myApp', [
 config( function ( $routeProvider, $locationProvider ) {
     
     $routeProvider.
-    when('/home', {
+    when( '/home', {
         templateUrl: 'partials/home',
         controller: 'HomeCtrl'
-    }).
-    when('/system', {
+    } ).
+    when( '/system', {
         templateUrl: 'partials/system',
         controller: 'SystemCtrl'
-    }).
-    otherwise({
+    } ).
+    when( '/news', {
+        templateUrl: 'partials/news',
+        controller: 'NewsCtrl'
+    } ).
+    otherwise( {
         redirectTo: '/home'
-    });
+    } );
 
     $locationProvider.html5Mode( true );
 
