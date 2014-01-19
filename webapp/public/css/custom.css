@@ -1,4 +1,7 @@
 /* app css stylesheet */
+.clickable {
+    cursor: pointer;
+}
 
 .system-config-value,
 .temp-stat-value {
