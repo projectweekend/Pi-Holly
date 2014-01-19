@@ -516,7 +516,7 @@ exports.newsSourceConfig = function ( req, res ) {
 
         };
 
-        NewsSourceConfig.findByIdAndUpdate( req.body.id, update, callback );
+        NewsSourceConfig.findByIdAndUpdate( req.body._id, update, callback );
 
     }
 
