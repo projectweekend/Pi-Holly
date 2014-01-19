@@ -24,3 +24,10 @@ def process_articles_from_paper(paper):
         except:
             pass
     return articles
+
+
+def process_articles_from_all_papers(list_of_papers):
+    articles = []
+    for paper in list_of_papers:
+        articles += process_articles_from_paper(paper)
+    return articles
