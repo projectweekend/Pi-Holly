@@ -523,7 +523,7 @@ exports.newsSourceConfig = function ( req, res ) {
     if ( req.method == 'DELETE' ) {
 
         var lookup = {
-            _id: req.body.id
+            _id: req.query.id
         };
 
         NewsSourceConfig.findOne( lookup, function ( err, itemToDelete ) {
