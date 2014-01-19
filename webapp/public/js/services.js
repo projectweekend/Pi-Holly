@@ -378,3 +378,65 @@ svcMod.factory( "SystemConfigCurrent", function ( $http, socket ) {
     };
 
 } );
+
+// News Source Config
+svcMod.factory( "NewsSourceConfig", function ( $http ) {
+
+    return {
+        editing: {
+            id: "",
+            url: "",
+            category:"",
+            save: function () {
+                var editing = this;
+                var apiUrl = "/api/news-source/config";
+
+                if ( !editing.id ) {
+                    $http.post( apiUrl, editing ).
+                        success( function ( data, status ) {
+                            console.log( "SUCCESS" );
+                            console.log( data );
+                        } ).
+                        error( function ( data, status ) {
+                            console.log( data );
+                        } );
+                } else {
+                    $http.put( apiUrl, editing ).
+                        success( function ( data, status ) {
+                            console.log( "SUCCESS" );
+                            console.log( data );
+                        } ).
+                        error( function ( data, status ) {
+                            console.log( data );
+                        } );
+                }
+                
+            },
+            cancel: function () {
+                var editing = this;
+                editing.url = "";
+                editing.category = "";
+            }
+        },
+        sources: [],
+        getSources: function () {
+            var sources = this.sources;
+            var apiUrl = "/api/news-source/config";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    sources = data;
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
+        },
+        init: function () {
+            var NewsSourceConfig = this;
+            if ( NewsSourceConfig.sources == [] ) {
+                NewsSourceConfig.getSources();
+            }
+        }
+    };
+
+} );
