@@ -391,6 +391,13 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
                 var editing = this;
                 editing.url = "";
                 editing.category = "";
+            },
+            begin: function ( itemToEdit ) {
+                var editing = this;
+                editing.clearForm();
+                editing._id = itemToEdit._id;
+                editing.url = itemToEdit.url;
+                editing.category = itemToEdit.category;
             }
         },
         save: function () {
@@ -421,6 +428,10 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
         cancel: function () {
             var NewsSourceConfig = this;
             NewsSourceConfig.editing.clearForm();
+        },
+        edit: function ( itemToEdit ) {
+            var NewsSourceConfig = this;
+            NewsSourceConfig.editing.begin( itemToEdit );
         },
         remove: function ( id ) {
             var NewsSourceConfig = this;

@@ -34,6 +34,6 @@ div(class="row")
           td {{ s.category }}
           td {{ s.date | date }}
           td
-            span(class="glyphicon glyphicon-pencil text-primary clickable")
+            span(ng-click="newsSourceConfig.edit(s)", class="glyphicon glyphicon-pencil text-primary clickable")
           td
             span(ng-click="newsSourceConfig.remove(s._id)", class="glyphicon glyphicon-remove text-danger clickable")
