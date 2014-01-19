@@ -14,8 +14,26 @@ div(class="row")
       div(class="btn-toolbar")
         button(ng-click="newsSourceConfig.save()", class="btn btn-primary") Save
         button(ng-click="newsSourceConfig.cancel()", class="btn btn-default") Cancel
+    br
 
 div(class="row")
   div(class="col-xs-12")
-    ul(class="list-unstyled")
-      li
+    h3 News Sources
+    table(class="table")
+      thead
+        tr
+          th URL
+          th Category
+          th Date Added
+          th Edit
+          th Delete
+      tbody
+        tr(ng-repeat="s in newsSourceConfig.sources")
+          td 
+            a(ng-href="{{ s.url }}", target="_blank") {{ s.url }}
+          td {{ s.category }}
+          td {{ s.date | date }}
+          td
+            span(class="glyphicon glyphicon-pencil text-primary clickable")
+          td
+            span(class="glyphicon glyphicon-remove text-danger clickable")
