@@ -522,19 +522,15 @@ exports.newsSourceConfig = function ( req, res ) {
 
     if ( req.method == 'DELETE' ) {
 
-        var lookup = {
-            _id: req.query.id
-        };
-
-        NewsSourceConfig.findOne( lookup, function ( err, itemToDelete ) {
-
+        NewsSourceConfig.findById( req.query.id, function ( err, itemToDelete ) {
+            
             if ( err ) {
                 return errorHandler( err, res );
             }
 
             itemToDelete.remove();
             res.send( 200 );
-
+            
         } );
 
     }
