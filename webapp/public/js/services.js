@@ -384,48 +384,52 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
 
     return {
         editing: {
-            id: "",
+            _id: "",
             url: "",
             category:"",
-            save: function () {
-                var editing = this;
-                var apiUrl = "/api/news-source/config";
-
-                if ( !editing.id ) {
-                    $http.post( apiUrl, editing ).
-                        success( function ( data, status ) {
-                            console.log( "SUCCESS" );
-                            console.log( data );
-                        } ).
-                        error( function ( data, status ) {
-                            console.log( data );
-                        } );
-                } else {
-                    $http.put( apiUrl, editing ).
-                        success( function ( data, status ) {
-                            console.log( "SUCCESS" );
-                            console.log( data );
-                        } ).
-                        error( function ( data, status ) {
-                            console.log( data );
-                        } );
-                }
-                
-            },
-            cancel: function () {
+            clearForm: function () {
                 var editing = this;
                 editing.url = "";
                 editing.category = "";
             }
         },
+        save: function () {
+            var NewsSourceConfig = this;
+            var apiUrl = "/api/news-source/config";
+
+            if ( !NewsSourceConfig.editing._id ) {
+                $http.post( apiUrl, NewsSourceConfig.editing ).
+                    success( function ( data, status ) {
+                        NewsSourceConfig.editing.clearForm();
+                        NewsSourceConfig.getSources();
+                    } ).
+                    error( function ( data, status ) {
+                        console.log( data );
+                    } );
+            } else {
+                $http.put( apiUrl, NewsSourceConfig.editing ).
+                    success( function ( data, status ) {
+                        console.log( "SUCCESS" );
+                        console.log( data );
+                    } ).
+                    error( function ( data, status ) {
+                        console.log( data );
+                    } );
+            }
+
+        },
+        cancel: function () {
+            var NewsSourceConfig = this;
+            NewsSourceConfig.editing.clearForm();
+        },
         sources: [],
         getSources: function () {
-            var sources = this.sources;
+            var NewsSourceConfig = this;
             var apiUrl = "/api/news-source/config";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    sources = data;
+                    NewsSourceConfig.sources = data;
                 } ).
                 error( function ( data, status ) {
                     console.log( data );
@@ -433,9 +437,7 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
         },
         init: function () {
             var NewsSourceConfig = this;
-            if ( NewsSourceConfig.sources == [] ) {
-                NewsSourceConfig.getSources();
-            }
+            NewsSourceConfig.getSources();
         }
     };
 

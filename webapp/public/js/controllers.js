@@ -56,7 +56,7 @@ cMod.controller( 'NewsCtrl', function ( $scope ) {
 cMod.controller( 'NewsConfigCtrl', function ( $scope, NewsSourceConfig ) {
     
     $scope.newsSourceConfig = NewsSourceConfig;
-    $scope.newsSourceConfig.init();
+    $scope.newsSourceConfig.getSources();
 
 } );
 
