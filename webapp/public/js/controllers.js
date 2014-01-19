@@ -53,6 +53,11 @@ cMod.controller( 'NewsCtrl', function ( $scope ) {
 } );
 
 
+cMod.controller( 'NewsConfigCtrl', function ( $scope ) {
+    // write Ctrl here
+} );
+
+
 cMod.controller( 'MyCtrl2', function ( $scope ) {
 	// write Ctrl here
 } );

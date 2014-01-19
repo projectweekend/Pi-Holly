@@ -27,6 +27,10 @@ config( function ( $routeProvider, $locationProvider ) {
         templateUrl: 'partials/news',
         controller: 'NewsCtrl'
     } ).
+    when( '/news/config', {
+        templateUrl: 'partials/news-config',
+        controller: 'NewsConfigCtrl'
+    } ).
     otherwise( {
         redirectTo: '/home'
     } );
