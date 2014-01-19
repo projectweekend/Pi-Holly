@@ -92,6 +92,7 @@ NewsArticleSchema = Schema( {
 	title: String,
 	summary: String,
 	url: String,
+	category: String,
 	keywords: [String]
 } );
 NewsArticle = mongoose.model( 'NewsArticle', NewsArticleSchema );
