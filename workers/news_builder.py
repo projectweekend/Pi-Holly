@@ -23,6 +23,7 @@ def worker():
         articles_collection.insert({
             'title': article.title,
             'summary': article.summary,
+            'image_url': article.top_image,
             'url': article.url,
             'keywords': article.keywords
         })

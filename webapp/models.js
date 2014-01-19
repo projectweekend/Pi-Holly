@@ -86,6 +86,7 @@ NewsArticleSchema = Schema( {
 	id: ObjectId,
 	title: String,
 	summary: String,
+	image_url: String,
 	url: String,
 	keywords: [String]
 } );
