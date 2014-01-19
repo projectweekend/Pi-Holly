@@ -96,7 +96,7 @@ NewsArticleSchema = Schema( {
 NewsArticle = mongoose.model( 'NewsArticle', NewsArticleSchema );
 
 
-NewsArticleKeywordSchema( {
+NewsArticleKeywordSchema = Schema( {
 	id: ObjectId,
 	date: {
 		type: Date,
