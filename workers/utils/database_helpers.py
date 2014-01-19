@@ -21,7 +21,7 @@ def empty_articles_collection():
     articles_collection.remove()
 
 
-def populate_articles_collection(articles_list):
+def fill_articles_collection(articles_list):
     articles_collection = get_collection('newsarticles')
     for a in articles_list:
         articles_collection.insert({
