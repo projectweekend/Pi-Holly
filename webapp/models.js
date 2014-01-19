@@ -77,8 +77,7 @@ SystemConfigData = mongoose.model( 'SystemConfigData', SystemConfigDataSchema );
 NewsSourceConfigSchema = Schema( {
 	id: ObjectId,
 	date: Date,
-	url: String,
-	category: String
+	url: String
 } );
 NewsSourceConfig = mongoose.model( 'NewsSourceConfig', NewsSourceConfigSchema );
 
@@ -92,7 +91,6 @@ NewsArticleSchema = Schema( {
 	title: String,
 	summary: String,
 	url: String,
-	category: String,
 	keywords: [String]
 } );
 NewsArticle = mongoose.model( 'NewsArticle', NewsArticleSchema );

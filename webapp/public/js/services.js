@@ -386,19 +386,16 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
         editing: {
             _id: "",
             url: "",
-            category:"",
             clearForm: function () {
                 var editing = this;
                 editing._id = "";
                 editing.url = "";
-                editing.category = "";
             },
             begin: function ( itemToEdit ) {
                 var editing = this;
                 editing.clearForm();
                 editing._id = itemToEdit._id;
                 editing.url = itemToEdit.url;
-                editing.category = itemToEdit.category;
             }
         },
         save: function () {
