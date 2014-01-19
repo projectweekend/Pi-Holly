@@ -81,3 +81,33 @@ NewsSourceConfigSchema = Schema( {
 	category: String
 } );
 NewsSourceConfig = mongoose.model( 'NewsSourceConfig', NewsSourceConfigSchema );
+
+
+NewsArticleSchema = Schema( {
+	id: ObjectId,
+	date: {
+		type: Date,
+		default: Date.now
+	},
+	title: String,
+	summary: String,
+	url: String,
+	keywords: [String]
+} );
+NewsArticle = mongoose.model( 'NewsArticle', NewsArticleSchema );
+
+
+NewsArticleKeywordSchema( {
+	id: ObjectId,
+	date: {
+		type: Date,
+		default: Date.now
+	},
+	word: {
+		type: String,
+		index: true,
+		unique: true
+	},
+	score: Number
+} );
+NewsArticleKeyword = mongoose.model( 'NewsArticleKeyword', NewsArticleKeywordSchema );
