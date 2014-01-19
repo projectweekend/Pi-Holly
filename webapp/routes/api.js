@@ -536,3 +536,34 @@ exports.newsSourceConfig = function ( req, res ) {
     }
 
 };
+
+
+exports.newsArticles = function ( req, res ) {
+
+    if (  req.query.id ) {
+        
+        NewsArticle.findById( req.query.id, function ( err, data ) {
+            
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.json( data );
+
+        } );
+
+    } else {
+        
+        var q = NewsArticle.find();
+        q.exec( function ( err, data ) {
+            
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.json( data );
+
+        } );
+    }
+
+};
