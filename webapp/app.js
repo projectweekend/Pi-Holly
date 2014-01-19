@@ -76,6 +76,11 @@ app.post('/api/system-storage-data', api.systemStorageData);
 app.get('/api/system-config-data', api.systemConfigData);
 app.post('/api/system-config-data', api.systemConfigData);
 
+app.get('/api/news-source/config', api.newsSourceConfig);
+app.post('/api/news-source/config', api.newsSourceConfig);
+app.put('/api/news-source/config', api.newsSourceConfig);
+app.delete('/api/news-source/config', api.newsSourceConfig);
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
