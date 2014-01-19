@@ -72,3 +72,12 @@ SystemConfigDataSchema = Schema( {
 	temp_limit: Number
 } );
 SystemConfigData = mongoose.model( 'SystemConfigData', SystemConfigDataSchema );
+
+
+NewsSourceConfigSchema = Schema( {
+	id: ObjectId,
+	date: Date,
+	url: String,
+	category: String
+} );
+NewsSourceConfig = mongoose.model( 'NewsSourceConfig', NewsSourceConfigSchema );
