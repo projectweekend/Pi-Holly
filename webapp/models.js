@@ -84,10 +84,6 @@ NewsSourceConfig = mongoose.model( 'NewsSourceConfig', NewsSourceConfigSchema );
 
 NewsArticleSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now
-	},
 	title: String,
 	summary: String,
 	url: String,
