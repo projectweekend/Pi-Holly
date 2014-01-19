@@ -389,6 +389,7 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
             category:"",
             clearForm: function () {
                 var editing = this;
+                editing._id = "";
                 editing.url = "";
                 editing.category = "";
             },
@@ -416,8 +417,8 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
             } else {
                 $http.put( apiUrl, NewsSourceConfig.editing ).
                     success( function ( data, status ) {
-                        console.log( "SUCCESS" );
-                        console.log( data );
+                        NewsSourceConfig.editing.clearForm();
+                        NewsSourceConfig.getSources();
                     } ).
                     error( function ( data, status ) {
                         console.log( data );
