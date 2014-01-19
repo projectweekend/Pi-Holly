@@ -3,7 +3,7 @@ import utils
 
 def get_source_urls():
     article_sources = utils.get_documents_for_collection('newssourceconfigs')
-    return [a.url for a in article_sources]
+    return [a['url'] for a in article_sources]
 
 
 def worker():
