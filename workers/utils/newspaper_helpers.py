@@ -12,7 +12,7 @@ def get_newspapers(source_urls):
     return papers
 
 
-def process_articles_from_paper(paper):
+def process_articles_for_paper(paper):
     articles = []
     for a in paper.articles:
         # using try/except here because of random "Parse lxml ERR". 
@@ -23,11 +23,4 @@ def process_articles_from_paper(paper):
             articles.append(a)
         except:
             pass
-    return articles
-
-
-def process_articles_from_all_papers(list_of_papers):
-    articles = []
-    for paper in list_of_papers:
-        articles += process_articles_from_paper(paper)
     return articles
