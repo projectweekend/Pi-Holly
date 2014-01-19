@@ -458,3 +458,85 @@ exports.systemConfigData = function ( req, res ) {
     }
 
 };
+
+
+exports.newsSourceConfig = function ( req, res ) {
+
+    if ( req.method == 'GET' ) {
+
+        var q = NewsSourceConfig.find( ).sort( {category: 1, url: 1} );
+
+        q.exec( function ( err, data ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.json( data );
+
+        } );
+
+    }
+
+    if ( req.method == 'POST' ) {
+
+        var newConfigItem = {
+            date: new Date(),
+            url: req.body.url,
+            category: req.body.category
+        };
+
+        NewsSourceConfig.create( newConfigItem, function ( err, configItemData) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.send( 201 );
+
+        } );
+
+    }
+
+    if ( req.method == 'PUT' ) {
+
+        var update = {
+            $set: {
+                url: req.body.url,
+                category: req.body.category
+            }
+        };
+        var callback = function ( err, updatedItem ) {
+            
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.json( updatedItem );
+
+        };
+
+        NewsSourceConfig.findByIdAndUpdate( req.body.id, update, callback );
+
+    }
+
+    if ( req.method == 'DELETE' ) {
+
+        var lookup = {
+            _id: req.body.id
+        };
+
+        NewsSourceConfig.findOne( lookup, function ( err, itemToDelete ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            itemToDelete.remove();
+            res.send( 200 );
+
+        } );
+
+    }
+
+};
