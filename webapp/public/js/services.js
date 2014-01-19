@@ -422,6 +422,18 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
             var NewsSourceConfig = this;
             NewsSourceConfig.editing.clearForm();
         },
+        remove: function ( id ) {
+            var NewsSourceConfig = this;
+            var apiUrl = "/api/news-source/config?id=" + id;
+
+            $http.delete( apiUrl ).
+                success( function ( data, status ) {
+                    NewsSourceConfig.getSources();
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
+        },
         sources: [],
         getSources: function () {
             var NewsSourceConfig = this;
