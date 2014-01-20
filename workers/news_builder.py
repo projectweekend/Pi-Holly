@@ -6,6 +6,16 @@ def get_source_urls():
     return [a['url'] for a in article_sources]
 
 
+def article_is_complete(article):
+    if not article.title:
+        return False
+    if not article.summary:
+        return False
+    if not article.image_url:
+        return False
+    return True
+
+
 def worker():
 
     source_urls = get_source_urls()
@@ -20,13 +30,15 @@ def worker():
     articles_collection.remove()
     # put new articles in the collection
     for article in processed_articles:
-        articles_collection.insert({
-            'title': article.title,
-            'summary': article.summary,
-            'image_url': article.top_image,
-            'url': article.url,
-            'keywords': article.keywords
-        })
+        # Only add an article if it is "complete"
+        if article_is_complete(article):
+            articles_collection.insert({
+                'title': article.title,
+                'summary': article.summary,
+                'image_url': article.top_image,
+                'url': article.url,
+                'keywords': article.keywords
+            })
 
 
 if __name__ == "__main__":
