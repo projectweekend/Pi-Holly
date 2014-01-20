@@ -466,8 +466,7 @@ svcMod.factory( "NewsArticles", function ( $http ) {
     return {
         articles: {
             col_1: [],
-            col_2: [],
-            col_3: []
+            col_2: []
         },
         getArticles: function () {
             var NewsArticles = this;
@@ -476,15 +475,12 @@ svcMod.factory( "NewsArticles", function ( $http ) {
             $http.get( apiUrl ).
                 success( function ( data, status ) {
                     data.forEach( function ( article, index, array ) {
-                        switch ( index % 3 ) {
+                        switch ( index % 2 ) {
                             case 0:
                                 NewsArticles.articles.col_1.push( article );
                                 break;
                             case 1:
                                 NewsArticles.articles.col_2.push( article );
-                                break;
-                            case 2:
-                                NewsArticles.articles.col_3.push( article );
                                 break;
                         }
                     } );

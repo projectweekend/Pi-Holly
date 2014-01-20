@@ -1,4 +1,19 @@
 div(class="row")
-
-  div(class="page-header")
-    h1 News
+  
+  div(class="col-md-6")
+    div(ng-repeat="a in newsArticles.articles.col_1")
+      h3 {{ a.title }}
+      div(class="article-img-wrapper")
+        img(ng-src="{{ a.image_url }}", class="img-rounded img-responsive")
+      div
+        p {{ a.summary }}
+      hr
+      
+  div(class="col-md-6")
+    div(ng-repeat="a in newsArticles.articles.col_2")
+      h3 {{ a.title }}
+      div(class="article-img-wrapper")
+        img(ng-src="{{ a.image_url }}", class="img-rounded img-responsive")
+      div
+        p {{ a.summary }}
+      hr
