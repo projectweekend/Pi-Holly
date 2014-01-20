@@ -11,7 +11,7 @@ def article_is_complete(article):
         return False
     if not article.summary:
         return False
-    if not article.image_url:
+    if not article.top_image:
         return False
     return True
 
