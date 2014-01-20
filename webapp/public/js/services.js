@@ -67,7 +67,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                     } );
                 }).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 });
         },
         clearRecentTempChart: function () {
@@ -83,9 +83,6 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
             
                 var newLabel = makeHoursMinutesTimeString( data.date );
                 var latestLabel = recentTempChart.data.labels[0];
-
-                console.log("New Label: " + newLabel);
-                console.log("Latest Label: " + latestLabel);
 
                 if ( newLabel != latestLabel ) {
                     // remove oldest one
@@ -135,7 +132,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
                     values.celsius = data.celsius;
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
         },
         listenForUpdates: function () {
@@ -180,7 +177,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
                     values.max = data.max;
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
 
         },
@@ -259,7 +256,7 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
                     SystemMemoryCurrent.buildCurrentMemoryChart();
                 }).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 });
         },
         listenForUpdates: function () {
@@ -322,7 +319,7 @@ svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
                     SystemStorageCurrent.buildCurrentStorageChart();
                 }).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 });
         },
         listenForUpdates: function () {
@@ -366,7 +363,7 @@ svcMod.factory( "SystemConfigCurrent", function ( $http, socket ) {
                     values.temp_limit = data.temp_limit;
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
         },
         init: function () {
@@ -413,7 +410,7 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
                         NewsSourceConfig.getSources();
                     } ).
                     error( function ( data, status ) {
-                        console.log( data );
+                        logError( data );
                     } );
             } else {
                 $http.put( apiUrl, NewsSourceConfig.editing ).
@@ -422,7 +419,7 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
                         NewsSourceConfig.getSources();
                     } ).
                     error( function ( data, status ) {
-                        console.log( data );
+                        logError( data );
                     } );
             }
 
@@ -444,7 +441,7 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
                     NewsSourceConfig.getSources();
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
         },
         sources: [],
@@ -457,7 +454,7 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
                     NewsSourceConfig.sources = data;
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
         },
         init: function () {
@@ -497,7 +494,7 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                     } );
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
         }
     };
