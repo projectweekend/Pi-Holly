@@ -18,6 +18,10 @@ var makeHoursMinutesTimeString = function ( dateString ) {
     return h + ":" + m;
 };
 
+var logError = function ( data ) {
+    console.log( data );
+};
+
 
 var svcMod = angular.module('myApp.services', []);
 
@@ -459,6 +463,42 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
         init: function () {
             var NewsSourceConfig = this;
             NewsSourceConfig.getSources();
+        }
+    };
+
+} );
+
+svcMod.factory( "NewsArticles", function ( $http ) {
+
+    return {
+        articles: {
+            col_1: [],
+            col_2: [],
+            col_3: []
+        },
+        getArticles: function () {
+            var NewsArticles = this;
+            var apiUrl = "/api/news-articles";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    data.forEach( function ( article, index, array ) {
+                        switch ( index % 3 ) {
+                            case 0:
+                                NewsArticles.articles.col_1.push( article );
+                                break;
+                            case 1:
+                                NewsArticles.articles.col_2.push( article );
+                                break;
+                            case 2:
+                                NewsArticles.articles.col_3.push( article );
+                                break;
+                        }
+                    } );
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
         }
     };
 
