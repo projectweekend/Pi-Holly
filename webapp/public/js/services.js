@@ -456,10 +456,6 @@ svcMod.factory( "NewsSourceConfig", function ( $http ) {
                 error( function ( data, status ) {
                     logError( data );
                 } );
-        },
-        init: function () {
-            var NewsSourceConfig = this;
-            NewsSourceConfig.getSources();
         }
     };
 

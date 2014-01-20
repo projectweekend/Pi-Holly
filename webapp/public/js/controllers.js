@@ -48,8 +48,13 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
 } );
 
 
-cMod.controller( 'NewsCtrl', function ( $scope ) {
-    // write Ctrl here
+cMod.controller( 'NewsCtrl', function ( $scope, NewsArticles ) {
+    
+    $scope.newsArticles = NewsArticles;
+    $scope.newsArticles.getArticles();
+
+    console.log( $scope.newsArticles );
+
 } );
 
 
