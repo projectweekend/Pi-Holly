@@ -593,6 +593,17 @@ var addNewKeyWord = function ( newKeyword, startingScore, callback ) {
     });
 };
 
+// Used in readArticle and ignoreArticle routes
+var removeArticle = function ( articleID ) {
+    NewsArticle.findById( articleID, function ( err, article ) {
+        if ( err ) {
+            return next( errorHandler( err, res ) );
+        } else {
+            article.remove();
+        }
+    } );
+};
+
 
 exports.readArticle = function ( req, res ) {
 
@@ -626,6 +637,7 @@ exports.readArticle = function ( req, res ) {
         if ( err ) {
             return next( errorHandler( err, res ) );
         }
+        removeArticle( req.body._id );
         return res.send( 200 );
     } );
 
@@ -664,6 +676,7 @@ exports.ignoreArticle = function ( req, res ) {
         if ( err ) {
             return next( errorHandler( err, res ) );
         }
+        removeArticle( req.body._id );
         return res.send( 200 );
     } );
 
