@@ -95,10 +95,6 @@ NewsArticle = mongoose.model( 'NewsArticle', NewsArticleSchema );
 
 NewsArticleKeywordSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now
-	},
 	word: {
 		type: String,
 		index: true,
