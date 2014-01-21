@@ -284,6 +284,7 @@ This returns an object with the current, average, min, and max temperatures.
 ## Update a news source
 
 **PUT:** `/api/news-source/config`
+
 **Payload:**
 ```
  {
