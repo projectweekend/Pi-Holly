@@ -489,11 +489,31 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                     logError( data );
                 } );
         },
-        readArticle: function ( article ) {
-            
+        readArticle: function ( article, articleList ) {
+            var apiUrl = "/api/news-articles/read";
+            $http.post( apiUrl, article ).
+                success( function ( data, status ) {
+                    var index = articleList.indexOf( article );
+                    if ( index > -1 ) {
+                        articleList.splice( index, 1 );
+                    }
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
         },
-        ignoreArticle: function ( article ) {
-            
+        ignoreArticle: function ( article, articleList ) {
+            var apiUrl = "/api/news-articles/ignore";
+            $http.post( apiUrl, article ).
+                success( function ( data, status ) {
+                    var index = articleList.indexOf( article );
+                    if ( index > -1 ) {
+                        articleList.splice( index, 1 );
+                    }
+                } ).
+                error( function ( data, status ) {
+                    console.log( data );
+                } );
         }
     };
 

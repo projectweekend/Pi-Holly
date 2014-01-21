@@ -8,8 +8,8 @@ div(class="row")
       div
         p {{ a.summary }}
       div(class="btn-group btn-group-justified")
-        a(ng-click="newsArticles.readArticle(a)", ng-href="{{ a.url }}", target="_blank", class="btn btn-sm btn-success") Read
-        a(ng-click="newsArticles.ignoreArticle(a)", class="btn btn-sm btn-danger") Ignore
+        a(ng-click="newsArticles.readArticle(a, newsArticles.articles.col_1)", ng-href="{{ a.url }}", target="_blank", class="btn btn-sm btn-success") Read
+        a(ng-click="newsArticles.ignoreArticle(a, newsArticles.articles.col_1)", class="btn btn-sm btn-danger") Ignore
       hr
       
   div(class="col-md-6")
@@ -20,6 +20,6 @@ div(class="row")
       div
         p {{ a.summary }}
       div(class="btn-group btn-group-justified")
-        a(ng-click="newsArticles.readArticle(a)", ng-href="{{ a.url }}", target="_blank", class="btn btn-sm btn-success") Read
-        a(ng-click="newsArticles.ignoreArticle(a)", class="btn btn-sm btn-danger") Ignore        
+        a(ng-click="newsArticles.readArticle(a, newsArticles.articles.col_2)", ng-href="{{ a.url }}", target="_blank", class="btn btn-sm btn-success") Read
+        a(ng-click="newsArticles.ignoreArticle(a, newsArticles.articles.col_2)", class="btn btn-sm btn-danger") Ignore        
       hr
