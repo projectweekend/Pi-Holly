@@ -490,7 +490,7 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                 } );
         },
         readArticle: function ( article ) {
-
+            
         },
         ignoreArticle: function ( article ) {
             
