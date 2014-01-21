@@ -20,6 +20,9 @@ Holly is named after the ship's computer in one of my all-time favorite televisi
 ### System Info Charts
 ![System Info Page Screen Shot](http://i.imgur.com/X24o0e7.png)
 
+### News
+![News Screen Shot](http://i.imgur.com/gVPEFek.jpg)
+
 # API Routes
 The following routes are used add/retreive data from the web server exposed on the local network. The user facing **dashboard** pages retrieve the all information they display through these endpoints. Likewise, the **worker** processes that gather info use the same routes to send data back to MongoDB.
 
