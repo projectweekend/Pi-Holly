@@ -1,18 +1,19 @@
 Pi-Holly
 ========
 
-A home server project for my Raspberry Pi. The *web app* portion of this project uses [Node.js](http://nodejs.org/)/[MongoDB](http://www.mongodb.org/). It's based on [btford's](https://github.com/btford) awesome [Angular Socket IO Seed](https://github.com/btford/angular-socket-io-seed). The *system dashboard* page shown below uses websockets to receive updates from the server as new data is collected. All of the charting is done with [Chart.js](http://www.chartjs.org/).
+This ia a home server project for my Raspberry Pi. The *web app* portion of this project uses [Node.js](http://nodejs.org/)/[MongoDB](http://www.mongodb.org/). It's based on [btford's](https://github.com/btford) awesome [Angular Socket IO Seed](https://github.com/btford/angular-socket-io-seed). The *system dashboard* page shown below uses websockets to receive updates from the server as new data is collected. All of the charting is done with [Chart.js](http://www.chartjs.org/).
 
-In addition to the web app, there is a collection of worker processes, written in [Python](http://www.python.org/), performing some decoupled tasks. Right now there are three:
+In addition to the web app, there is a collection of worker processes, written in [Python](http://www.python.org/), performing some decoupled tasks. Right now there are five:
 
 * One to check CPU temperature
 * One to check memory usage
 * One to check disk storage
+* One to check system configuration
+* One to collect news from specified sources
 
-Each of these workers is scheduled using `crontab` and reports the data colelcted data back to Mongo through a JSON API. 
+Each of these workers is scheduled using `crontab`. Some report data back to Mongo through a JSON API, while others may interact with the database directly directly.
 
-Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf)). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :) 
-
+Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf)). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
 
 ### System Temp Chart
 ![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
@@ -240,3 +241,159 @@ This returns an object with the current, average, min, and max temperatures.
  }
 ```
 
+## Get news sources
+
+**GET:** `/api/news-source/config`
+
+**Response:**
+```
+ [
+     {
+         date: "2014-01-20T00:48:56.373Z",
+         url: "http://gigaom.com",
+         _id: "52dc72782d0a03f342000001",
+         __v: 0
+     },
+     {
+         date: "2014-01-19T18:13:03.705Z",
+         url: "http://www.theverge.com/",
+         _id: "52dc15afbe18ba0000000001",
+         __v: 0
+     },
+     {
+         __v: 0,
+         _id: "52db3d87b606877fb2000001",
+         category: "technology",
+         date: "2014-01-19T02:50:47.621Z",
+         url: "http://arstechnica.com/"
+     }
+ ]
+```
+
+## Add a news source
+
+**POST:** `/api/news-source/config`
+
+**Payload:**
+```
+ {
+     url: "http://www.theverge.com"
+ }
+```
+
+## Update a news source
+
+**PUT:** `/api/news-source/config`
+**Payload:**
+```
+ {
+     _id: "52dc15afbe18ba0000000001",
+     url: "http://www.theverge.com"
+ }
+```
+
+## Remove a news source
+
+**DELETE:** `/api/news-source/config?id=52dc15afbe18ba0000000001`
+
+
+## Get daily news articles
+
+**GET:** `/api/news-articles`
+
+**Respoonse:**
+```
+ [
+     {
+         _id: "52dde0d80983886bbae8b4e9",
+         title: "Microsoft reportedly paying YouTube personalities to promote Xbox One",
+         url: "http://www.theverge.com/2014/1/20/5328766/microsoft-reportedly-paying-youtube-personalities-to-promote-xbox-one",
+         summary: "In addition, a copy of the full legal agreement leaked recently, detailing the confidentiality rules partners must abide by when they sign up. Digital marketing campaign clearinghouse Poptent shows listings from January 10th inviting YouTube stars to sign up for the Machinima deal, and reports of the quiet promotion surfaced this past weekend. Poptent also lists $1 per CPM deals from back in November inviting Machinima's stars to promote the Xbox One — suggesting that this new mode of advertising has been going on since at least the console's launch. Microsoft has reportedly partnered with Machinima to quietly pay the YouTube channel's video partners to promote the Xbox One. According to Ars Technica, Machinima's affiliates could get a $3 per CPM (or $3 for every 1,000 views) bonus if they included at least 30 seconds of Xbox One footage and mentioned the console by name in their videos. We've reached out to Microsoft and Machinima for comment.",
+         image_url: "http://cdn0.sbnation.com/entry_photo_images/9732109/IMG_5171-1024_large_verge_super_wide.jpg",
+         keywords: 
+         [
+             "paying",
+             "partners",
+             "personalities",
+             "reportedly",
+             "rules",
+             "machinimas",
+             "youtube",
+             "inviting",
+             "deal",
+             "xbox",
+             "video",
+             "promote",
+             "machinima",
+             "microsoft",
+             "sign"
+         ]
+     }
+ ]
+```
+
+## Read an article
+
+**POST:** `/api/news-articles/read`
+
+**Payload:**
+```
+ {
+     _id: "52dde0d80983886bbae8b4e9",
+     title: "Microsoft reportedly paying YouTube personalities to promote Xbox One",
+     url: "http://www.theverge.com/2014/1/20/5328766/microsoft-reportedly-paying-youtube-personalities-to-promote-xbox-one",
+     summary: "In addition, a copy of the full legal agreement leaked recently, detailing the confidentiality rules partners must abide by when they sign up. Digital marketing campaign clearinghouse Poptent shows listings from January 10th inviting YouTube stars to sign up for the Machinima deal, and reports of the quiet promotion surfaced this past weekend. Poptent also lists $1 per CPM deals from back in November inviting Machinima's stars to promote the Xbox One — suggesting that this new mode of advertising has been going on since at least the console's launch. Microsoft has reportedly partnered with Machinima to quietly pay the YouTube channel's video partners to promote the Xbox One. According to Ars Technica, Machinima's affiliates could get a $3 per CPM (or $3 for every 1,000 views) bonus if they included at least 30 seconds of Xbox One footage and mentioned the console by name in their videos. We've reached out to Microsoft and Machinima for comment.",
+     image_url: "http://cdn0.sbnation.com/entry_photo_images/9732109/IMG_5171-1024_large_verge_super_wide.jpg",
+     keywords: 
+     [
+         "paying",
+         "partners",
+         "personalities",
+         "reportedly",
+         "rules",
+         "machinimas",
+         "youtube",
+         "inviting",
+         "deal",
+         "xbox",
+         "video",
+         "promote",
+         "machinima",
+         "microsoft",
+         "sign"
+     ]
+ }
+```
+
+## Ignore an article
+
+**POST:** `/api/news-articles/ignore`
+
+**Payload:**
+```
+ {
+     _id: "52dde0d80983886bbae8b4e9",
+     title: "Microsoft reportedly paying YouTube personalities to promote Xbox One",
+     url: "http://www.theverge.com/2014/1/20/5328766/microsoft-reportedly-paying-youtube-personalities-to-promote-xbox-one",
+     summary: "In addition, a copy of the full legal agreement leaked recently, detailing the confidentiality rules partners must abide by when they sign up. Digital marketing campaign clearinghouse Poptent shows listings from January 10th inviting YouTube stars to sign up for the Machinima deal, and reports of the quiet promotion surfaced this past weekend. Poptent also lists $1 per CPM deals from back in November inviting Machinima's stars to promote the Xbox One — suggesting that this new mode of advertising has been going on since at least the console's launch. Microsoft has reportedly partnered with Machinima to quietly pay the YouTube channel's video partners to promote the Xbox One. According to Ars Technica, Machinima's affiliates could get a $3 per CPM (or $3 for every 1,000 views) bonus if they included at least 30 seconds of Xbox One footage and mentioned the console by name in their videos. We've reached out to Microsoft and Machinima for comment.",
+     image_url: "http://cdn0.sbnation.com/entry_photo_images/9732109/IMG_5171-1024_large_verge_super_wide.jpg",
+     keywords: 
+     [
+         "paying",
+         "partners",
+         "personalities",
+         "reportedly",
+         "rules",
+         "machinimas",
+         "youtube",
+         "inviting",
+         "deal",
+         "xbox",
+         "video",
+         "promote",
+         "machinima",
+         "microsoft",
+         "sign"
+     ]
+ }
+```
