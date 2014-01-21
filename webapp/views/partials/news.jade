@@ -20,6 +20,6 @@ div(class="row")
       div
         p {{ a.summary }}
       div(class="btn-group btn-group-justified")
-        button(class="btn btn-success") Read it
-        button(class="btn btn-danger") Ignore it        
+        a(ng-click="newsArticles.readArticle(a)", ng-href="{{ a.url }}", class="btn btn-success") Read it
+        a(ng-click="newsArticles.ignoreArticle(a)", class="btn btn-danger") Ignore it        
       hr

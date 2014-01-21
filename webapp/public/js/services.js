@@ -489,10 +489,10 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                     logError( data );
                 } );
         },
-        readArticle: function ( articleID ) {
-            
+        readArticle: function ( article ) {
+
         },
-        ignoreArticle: function ( articleID ) {
+        ignoreArticle: function ( article ) {
             
         }
     };
