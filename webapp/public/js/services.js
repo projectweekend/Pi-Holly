@@ -488,6 +488,12 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                 error( function ( data, status ) {
                     logError( data );
                 } );
+        },
+        readArticle: function ( articleID ) {
+            
+        },
+        ignoreArticle: function ( articleID ) {
+            
         }
     };
 
