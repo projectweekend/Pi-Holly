@@ -83,6 +83,8 @@ app.delete('/api/news-source/config', api.newsSourceConfig);
 
 app.get('/api/news-articles', api.newsArticles);
 
+app.post('/api/news-articles/read', api.readArticle);
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

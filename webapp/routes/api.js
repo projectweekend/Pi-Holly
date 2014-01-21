@@ -567,3 +567,67 @@ exports.newsArticles = function ( req, res ) {
     }
 
 };
+
+
+exports.readArticle = function ( req, res ) {
+
+    var updateWordScore = function ( wordToUpdate, callback ) {
+        wordToUpdate.score += 1;
+        wordToUpdate.save( function ( err ) {
+            if ( err ) {
+                callback( err );
+            } else {
+                callback();
+            }
+        } );
+    };
+
+    var addNewKeyWord = function ( newKeyword, callback ) {
+        NewsArticleKeyword.create({word: word, score: 1}, function ( err, newKeyword ) {
+            if ( err ) {
+                callback( err );
+            } else {
+                callback();
+            }
+        });
+    };
+
+    // Take a keyword as input and return a function that can be used in 
+    // async.parallel call
+    var buildAsyncCallback = function ( word ) {
+        
+        return function ( callback ) {
+            var q = NewsArticleKeyword.findOne( {word: word} );
+            q.exec( function ( err, wordToUpdate ) {
+                
+                if ( err ) {
+                    callback( err );
+                } else {
+                    if ( wordToUpdate ) {
+                        updateWordScore( wordToUpdate, callback );
+                    } else {
+                        addNewKeyWord( word, callback );
+                    }
+                }
+
+            } );
+        };
+
+    };
+
+    var keywords = req.body.keywords;
+    var asyncTaskList = keywords.map( buildAsyncCallback );
+
+    async.parallel( asyncTaskList, function ( err ) {
+        if ( err ) {
+            return next( errorHandler( err, res ) );
+        }
+        return res.send( 200 );
+    } );
+
+};
+
+
+exports.ignoreArticle = function ( req, res ) {
+
+};
