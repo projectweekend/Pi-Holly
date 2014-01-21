@@ -482,8 +482,7 @@ exports.newsSourceConfig = function ( req, res ) {
 
         var newConfigItem = {
             date: new Date(),
-            url: req.body.url,
-            category: req.body.category
+            url: req.body.url
         };
 
         NewsSourceConfig.create( newConfigItem, function ( err, configItemData) {
@@ -502,8 +501,7 @@ exports.newsSourceConfig = function ( req, res ) {
 
         var update = {
             $set: {
-                url: req.body.url,
-                category: req.body.category
+                url: req.body.url
             }
         };
         var callback = function ( err, updatedItem ) {
