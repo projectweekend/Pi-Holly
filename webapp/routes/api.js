@@ -569,28 +569,32 @@ exports.newsArticles = function ( req, res ) {
 };
 
 
+// Used in readArticle and ignoreArticle routes
+var updateWordScore = function ( wordToUpdate, scoreIncrement, callback ) {
+    wordToUpdate.score += scoreIncrement;
+    wordToUpdate.save( function ( err ) {
+        if ( err ) {
+            callback( err );
+        } else {
+            callback();
+        }
+    } );
+};
+
+
+// Used in readArticle and ignoreArticle routes
+var addNewKeyWord = function ( newKeyword, startingScore, callback ) {
+    NewsArticleKeyword.create({word: newKeyword, score: startingScore}, function ( err, newKeyword ) {
+        if ( err ) {
+            callback( err );
+        } else {
+            callback();
+        }
+    });
+};
+
+
 exports.readArticle = function ( req, res ) {
-
-    var updateWordScore = function ( wordToUpdate, callback ) {
-        wordToUpdate.score += 1;
-        wordToUpdate.save( function ( err ) {
-            if ( err ) {
-                callback( err );
-            } else {
-                callback();
-            }
-        } );
-    };
-
-    var addNewKeyWord = function ( newKeyword, callback ) {
-        NewsArticleKeyword.create({word: word, score: 1}, function ( err, newKeyword ) {
-            if ( err ) {
-                callback( err );
-            } else {
-                callback();
-            }
-        });
-    };
 
     // Take a keyword as input and return a function that can be used in 
     // async.parallel call
@@ -604,9 +608,9 @@ exports.readArticle = function ( req, res ) {
                     callback( err );
                 } else {
                     if ( wordToUpdate ) {
-                        updateWordScore( wordToUpdate, callback );
+                        updateWordScore( wordToUpdate, 1, callback );
                     } else {
-                        addNewKeyWord( word, callback );
+                        addNewKeyWord( word, 1, callback );
                     }
                 }
 
@@ -629,5 +633,38 @@ exports.readArticle = function ( req, res ) {
 
 
 exports.ignoreArticle = function ( req, res ) {
+
+    // Take a keyword as input and return a function that can be used in 
+    // async.parallel call
+    var buildAsyncCallback = function ( word ) {
+        
+        return function ( callback ) {
+            var q = NewsArticleKeyword.findOne( {word: word} );
+            q.exec( function ( err, wordToUpdate ) {
+                
+                if ( err ) {
+                    callback( err );
+                } else {
+                    if ( wordToUpdate ) {
+                        updateWordScore( wordToUpdate, -1, callback );
+                    } else {
+                        addNewKeyWord( word, -1, callback );
+                    }
+                }
+
+            } );
+        };
+
+    };
+
+    var keywords = req.body.keywords;
+    var asyncTaskList = keywords.map( buildAsyncCallback );
+
+    async.parallel( asyncTaskList, function ( err ) {
+        if ( err ) {
+            return next( errorHandler( err, res ) );
+        }
+        return res.send( 200 );
+    } );
 
 };
