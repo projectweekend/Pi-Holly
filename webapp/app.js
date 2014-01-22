@@ -82,6 +82,7 @@ app.put('/api/news-source/config', api.newsSourceConfig);
 app.delete('/api/news-source/config', api.newsSourceConfig);
 
 app.get('/api/news-articles', api.newsArticles);
+app.get('/api/article-keywords', api.articleKeywords);
 
 app.post('/api/news-articles/read', api.readArticle);
 app.post('/api/news-articles/ignore', api.ignoreArticle);

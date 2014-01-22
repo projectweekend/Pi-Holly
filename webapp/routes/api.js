@@ -679,3 +679,18 @@ exports.ignoreArticle = function ( req, res ) {
     } );
 
 };
+
+
+exports.articleKeywords = function ( req, res ) {
+
+    NewsArticleKeyword.find( {}, function ( err, data ) {
+
+        if ( err ) {
+            return errorHandler( err, res );
+        }
+
+        res.json( data );
+
+    } );
+
+};
