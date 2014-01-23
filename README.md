@@ -398,3 +398,43 @@ This returns an object with the current, average, min, and max temperatures.
      ]
  }
 ```
+
+## Get article keywords
+
+**GET:** `/api/article-keywords`
+
+**Response:**
+```
+ [
+     {
+         word: "service",
+         score: 1,
+         _id: "52ddfecffc1a6c1a09000011",
+         __v: 0
+     },
+     {
+         word: "experience",
+         score: 2,
+         _id: "52ddfecffc1a6c1a09000012",
+         __v: 0
+     },
+     {
+         word: "music",
+         score: 3,
+         _id: "52ddfecffc1a6c1a09000013",
+         __v: 0
+     },
+     {
+         word: "login",
+         score: 2,
+         _id: "52ddfecffc1a6c1a09000014",
+         __v: 0
+     },
+     {
+         word: "available",
+         score: 1,
+         _id: "52ddfee4fc1a6c1a09000018",
+         __v: 0
+     }
+ ]
+```
