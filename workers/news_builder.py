@@ -44,7 +44,7 @@ def enough_keyword_data(keyword_dictionaries):
 
 
 def article_is_interesting(article, keywords_by_word):
-    for kw in article['keywords']:
+    for kw in article.keywords:
         if keywords_by_word.get(kw, 1) < 1:
             return False
     return True
