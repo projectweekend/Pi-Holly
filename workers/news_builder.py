@@ -34,6 +34,15 @@ def build_keyword_dictionaries():
     return output
 
 
+def enough_keyword_data(keyword_dictionaries):
+    i = 0
+    if len(keyword_dictionaries['by_word']) > 100:
+        i += 1
+    if 3 in keyword_dictionaries['by_score'].keys():
+        i += 1
+    return i == 2
+
+
 def worker():
 
     source_urls = get_source_urls()
