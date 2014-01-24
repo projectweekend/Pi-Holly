@@ -60,6 +60,7 @@ def worker():
         processed_articles += utils.process_articles_for_paper(paper)
 
     keyword_dictionaries = build_keyword_dictionaries()
+    has_enough_keyword_data = enough_keyword_data(keyword_dictionaries)
 
     articles_collection = utils.get_collection('newsarticles')
     
@@ -69,14 +70,15 @@ def worker():
     # put new articles in the collection
     for article in processed_articles:
         # Only add an article if it is "complete"
-        if article_is_complete(article) and article_is_interesting(article, keyword_dictionaries['by_word']):
-            articles_collection.insert({
-                'title': article.title,
-                'summary': article.summary,
-                'image_url': article.top_image,
-                'url': article.url,
-                'keywords': article.keywords
-            })
+        if article_is_complete(article):
+            if has_enough_keyword_data and article_is_interesting(article, keyword_dictionaries['by_word']):
+                articles_collection.insert({
+                    'title': article.title,
+                    'summary': article.summary,
+                    'image_url': article.top_image,
+                    'url': article.url,
+                    'keywords': article.keywords
+                })
 
 
 if __name__ == "__main__":
