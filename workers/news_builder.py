@@ -43,6 +43,13 @@ def enough_keyword_data(keyword_dictionaries):
     return i == 2
 
 
+def article_is_interesting(article, keywords_by_word):
+    for kw in article['keywords']:
+        if keywords_by_word.get(kw, 1) < 1:
+            return False
+    return True
+
+
 def worker():
 
     source_urls = get_source_urls()
@@ -52,13 +59,17 @@ def worker():
     for paper in papers:
         processed_articles += utils.process_articles_for_paper(paper)
 
+    keyword_dictionaries = build_keyword_dictionaries()
+
     articles_collection = utils.get_collection('newsarticles')
+    
     # empty collection before filling with new articles
     articles_collection.remove()
+
     # put new articles in the collection
     for article in processed_articles:
         # Only add an article if it is "complete"
-        if article_is_complete(article):
+        if article_is_complete(article) and article_is_interesting(article, keyword_dictionaries['by_word']):
             articles_collection.insert({
                 'title': article.title,
                 'summary': article.summary,
