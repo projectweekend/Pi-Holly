@@ -16,6 +16,24 @@ def article_is_complete(article):
     return True
 
 
+def build_keyword_dictionaries():
+    output = {
+        'by_word': {},
+        'by_score': {}    
+    }
+    result = utils.get_documents_for_collection('newsarticlekeywords')
+    for i in result:
+        word = i['word']
+        score = i['score']
+
+        output['by_word'][word] = score
+        if output['by_score'].get(score, ''):
+            output['by_score'][score].append(word)
+        else:
+            output['by_score'][score] = [word]
+    return output
+
+
 def worker():
 
     source_urls = get_source_urls()
