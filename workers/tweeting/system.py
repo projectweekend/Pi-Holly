@@ -19,10 +19,10 @@ class CPUTemperatureTweeter(object):
         self.temperature_data = utils.get_latest_system_temperature()
 
     def _build_status_message(self):
+        message_template = "My current CPU temperature is: {0} F/{1} C"
         if self.temperature_data:
             celsius = self.temperature_data['celsius']
             fahrenheit = self.temperature_data['fahrenheit']
-            message_template = "My current CPU temperature is: {0} F/{1} C"
             self.status_message = message_template.format(fahrenheit, celsius)
 
     def tweet_it(self):
