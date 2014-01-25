@@ -14,3 +14,8 @@ def get_collection(collection_name):
 def get_documents_for_collection(collection_name):
     collection = get_collection(collection_name)
     return [d for d in collection.find()]
+
+
+def get_latest_system_temperature():
+    collection = get_collection('systemtemperaturedatas')
+    return collection.find_one(sort=[('date', -1)])
