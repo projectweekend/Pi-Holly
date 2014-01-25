@@ -19,7 +19,7 @@ class CPUTemperatureTweeter(object):
         self.temperature_data = utils.get_latest_system_temperature()
 
     def _build_status_message(self):
-        message_template = "My current CPU temperature is: {0} F/{1} C"
+        message_template = "My current CPU temperature is: {0} F/{1} C #raspberrypi"
         if self.temperature_data:
             celsius = self.temperature_data['celsius']
             fahrenheit = self.temperature_data['fahrenheit']
