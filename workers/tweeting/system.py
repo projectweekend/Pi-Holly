@@ -1,3 +1,5 @@
+import datetime
+
 import utils
 
 
@@ -18,12 +20,17 @@ class CPUTemperatureTweeter(object):
     def _get_temperature_data(self):
         self.temperature_data = utils.get_latest_system_temperature()
 
+    def _get_current_datetime(self):
+        dt = datetime.datetime.now()
+        return dt.strftime("%m/%d/%Y - %H:%M")
+
     def _build_status_message(self):
-        message_template = "My current CPU temperature is: {0} F/{1} C #raspberrypi"
+        message_template = "My current CPU temperature is: {0} F/{1} C ({2}) #raspberrypi"
         if self.temperature_data:
             celsius = self.temperature_data['celsius']
             fahrenheit = self.temperature_data['fahrenheit']
-            self.status_message = message_template.format(fahrenheit, celsius)
+            current_datetime = self._get_current_datetime()
+            self.status_message = message_template.format(fahrenheit, celsius, current_datetime)
 
     def tweet_it(self):
         if self.status_message:
