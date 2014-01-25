@@ -25,6 +25,6 @@ class CPUTemperatureTweeter(object):
             message_template = "My current CPU temperature is: {0} F/{1} C"
             self.status_message = message_template.format(fahrenheit, celsius)
 
-    def tweet(self):
+    def tweet_it(self):
         if self.status_message:
             self.twitter_client.PostUpdate(self.status_message)
