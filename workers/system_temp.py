@@ -1,6 +1,7 @@
 import subprocess
 
 import utils
+from tweeting import CPUTemperatureTweeter
 
 
 SHELL_COMMAND = ["/opt/vc/bin/vcgencmd", "measure_temp"]
@@ -20,7 +21,10 @@ def worker():
     if post_status != 201:
         # TODO: Add some logging when POST fails
         pass
-    return
+    else:
+        tweeter = CPUTemperatureTweeter()
+        tweeter.tweet_it()
+        return
 
 if __name__ == "__main__":
     worker()
