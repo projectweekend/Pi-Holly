@@ -13,7 +13,7 @@ In addition to the web app, there is a collection of worker processes, written i
 
 Each of these workers is scheduled using `crontab`. Some report data back to Mongo through a JSON API, while others may interact with the database directly directly.
 
-Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf)). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
+Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
 
 ### System Temp Chart
 ![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
