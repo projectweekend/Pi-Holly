@@ -8,7 +8,7 @@ IndoorEnvironmentalDataSchema = Schema( {
 	id: ObjectId,
 	date: {
 		type: Date,
-		default: new Date()
+		default: Date.now()
 	},
 	temperature: Number,
 	humidity: Number,
@@ -21,7 +21,7 @@ SystemTemperatureDataSchema = Schema( {
 	id: ObjectId,
 	date: {
 		type: Date,
-		default: new Date()
+		default: Date.now()
 	},
 	celsius: Number,
 	fahrenheit: Number
@@ -33,7 +33,7 @@ SystemMemoryDataSchema = Schema( {
 	id: ObjectId,
 	date: {
 		type: Date,
-		default: new Date()
+		default: Date.now()
 	},
     total: Number,
     used: Number,
@@ -49,7 +49,7 @@ SystemStorageDataSchema = Schema( {
 	id: ObjectId,
 	date: {
 		type: Date,
-		default: new Date()
+		default: Date.now()
 	},
     available: Number,
     used: Number,
@@ -62,7 +62,7 @@ SystemConfigDataSchema = Schema( {
 	id: ObjectId,
 	date: {
 		type: Date,
-		default: new Date()
+		default: Date.now()
 	},
 	arm_freq: Number,
 	config_hdmi_boost: Number,
