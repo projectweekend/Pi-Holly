@@ -42,18 +42,6 @@ The following routes are used add/retreive data from the web server exposed on t
  }
 ```
 
-## Add new system temperature
-
-**POST:** `/api/system-temperature-data`
-
-**Payload:**
-```
- {
-     celsius: 40,
-     fahrenheit: 104
- }     
-```
-
 ## Get recent system temperatures
 Right now, this returns the last 18 temperature readings. That limit will be moved into a URL parameter for more flexibility very soon.
 
@@ -131,22 +119,6 @@ This returns an object with the current, average, min, and max temperatures.
 }
 ```
 
-## Add new memory usage
-
-**POST:** `/api/system-memory-data`
-
-**Payload:**
-```
- {
-     total: 485,
-     used: 170,
-     free: 315,
-     shared: 0,
-     buffers: 15,
-     cached: 74
- }     
-```
-
 ## Get latest storage data
 
 **GET:** `/api/system-storage-data`
@@ -161,19 +133,6 @@ This returns an object with the current, average, min, and max temperatures.
      _id: "52d49a26163cb90b06000003",
      __v: 0
  }
-```
-
-## Add new storage data
-
-**POST:** `/api/system-storage-data`
-
-**Payload:**
-```
- {
-     available: 3531,
-     used: 2238,
-     percent: 39
- }     
 ```
 
 ## Get latest config data
@@ -207,37 +166,6 @@ This returns an object with the current, average, min, and max temperatures.
      temp_limit: 185,
      _id: "52d8825d858ee93205000004",
      __v: 0
- }
-```
-
-## Add new config data
-
-**POST:** `/api/system-config-data`
-
-**Payload:**
-```
- {
-     arm_freq: 800,
-     core_freq: 250,
-     sdram_freq: 400,
-     emmc_pll_core: 1,
-     force_pwm_open: 1,
-     config_hdmi_boost: 4,
-     hdmi_force_hotplug: 1,
-     hdmi_group: 2,
-     hdmi_ignore_edid: "0xa5000080",
-     hdmi_mode: 4,
-     hdmi_safe: 1,
-     disable_splash: 1,    
-     disable_overscan: 1,
-     overscan_bottom: 16,
-     overscan_left: 24,
-     overscan_right: 24,
-     overscan_top: 16,
-     pause_burst_frames: 1,
-     program_serial_random: 1,
-     second_boot: 1,
-     temp_limit: 185
  }
 ```
 
