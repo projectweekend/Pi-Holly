@@ -5,7 +5,6 @@ from tweeting import CPUTemperatureTweeter
 
 
 SHELL_COMMAND = ["/opt/vc/bin/vcgencmd", "measure_temp"]
-POST_URL = "http://127.0.0.1/api/system-temperature-data"
 
 
 def get_system_temp():
