@@ -4,7 +4,6 @@ import utils
 
 
 SHELL_COMMAND = ["/usr/bin/free", "-h"]
-POST_URL = "http://127.0.0.1/api/system-memory-data"
 
 
 def get_system_memory():
@@ -15,11 +14,8 @@ def get_system_memory():
 
 def worker():
     memory_data = get_system_memory()
-    post_status = utils.make_json_post(POST_URL, memory_data)
-    if post_status != 201:
-        # TODO: Add some logging when POST fails
-        pass
-    return
+    memory_data_collection = utils.get_collection('systemmemorydatas')
+    memory_data_collection.insert(memory_data)
 
 
 if __name__ == "__main__":
