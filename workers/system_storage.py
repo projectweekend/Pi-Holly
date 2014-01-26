@@ -4,7 +4,6 @@ import utils
 
 
 SHELL_COMMAND = ["/bin/df", "-BM"]
-POST_URL = "http://127.0.0.1/api/system-storage-data"
 
 
 def get_system_storage():
@@ -15,11 +14,8 @@ def get_system_storage():
 
 def worker():
     storage_data = get_system_storage()
-    post_status = utils.make_json_post(POST_URL, storage_data)
-    if post_status != 201:
-        # TODO: Add some logging when POST fails
-        pass
-    return
+    storage_data_collection = utils.get_collection('systemstoragedatas')
+    storage_data_collection.insert(storage_data)
 
 
 if __name__ == "__main__":
