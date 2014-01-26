@@ -331,57 +331,17 @@ exports.systemStorageData = function ( req, res ) {
 
 exports.systemConfigData = function ( req, res ) {
 
-    if ( req.method == 'POST' ) {
+    var query = SystemConfigData.findOne( ).sort( '-date' );
 
-        var newSystemConfig = {
-            date: new Date(),
-            arm_freq: req.body.arm_freq,
-            config_hdmi_boost: req.body.config_hdmi_boost,
-            core_freq: req.body.core_freq,
-            disable_overscan: req.body.disable_overscan,
-            disable_splash: req.body.disable_splash,
-            emmc_pll_core: req.body.emmc_pll_core,
-            force_pwm_open: req.body.force_pwm_open,
-            hdmi_force_hotplug: req.body.hdmi_force_hotplug,
-            hdmi_group: req.body.hdmi_group,
-            hdmi_ignore_edid: req.body.hdmi_ignore_edid,
-            hdmi_mode: req.body.hdmi_mode,
-            hdmi_safe: req.body.hdmi_safe,
-            overscan_bottom: req.body.overscan_bottom,
-            overscan_left: req.body.overscan_left,
-            overscan_right: req.body.overscan_right,
-            overscan_top: req.body.overscan_top,
-            pause_burst_frames: req.body.pause_burst_frames,
-            program_serial_random: req.body.program_serial_random,
-            sdram_freq: req.body.sdram_freq,
-            second_boot: req.body.second_boot,
-            temp_limit: req.body.temp_limit
-        };
+    query.exec( function ( err, data ) {
+        
+        if ( err ) {
+            return errorHandler( err, res);
+        }
 
-        SystemConfigData.create( newSystemConfig, function ( err, configData ) {
-            
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-            res.send( 201 );
-
-        } );
-
-    } else {
-
-        var query = SystemConfigData.findOne( ).sort( '-date' );
-
-        query.exec( function ( err, data ) {
-            
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-
-            res.json( data );
-            
-        } );
-
-    }
+        res.json( data );
+        
+    } );
 
 };
 

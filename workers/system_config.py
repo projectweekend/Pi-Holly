@@ -4,7 +4,6 @@ import utils
 
 
 SHELL_COMMAND = ["/opt/vc/bin/vcgencmd", "get_config", "int"]
-POST_URL = "http://127.0.0.1/api/system-config-data"
 
 
 def get_system_config():
@@ -17,11 +16,8 @@ def get_system_config():
 
 def worker():
     config_data = get_system_config()
-    post_status = utils.make_json_post(POST_URL, config_data)
-    if post_status != 201:
-        # TODO: Add some logging when POST fails
-        pass
-    return    
+    config_data_collection = utils.get_collection('systemconfigdatas')
+    config_data_collection.insert(config_data)
 
 
 if __name__ == "__main__":
