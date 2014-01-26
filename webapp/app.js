@@ -71,7 +71,6 @@ app.get('/api/system-memory-data', api.systemMemoryData);
 app.post('/api/system-memory-data', api.systemMemoryData);
 
 app.get('/api/system-storage-data', api.systemStorageData);
-app.post('/api/system-storage-data', api.systemStorageData);
 
 app.get('/api/system-config-data', api.systemConfigData);
 app.post('/api/system-config-data', api.systemConfigData);

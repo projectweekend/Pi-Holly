@@ -353,52 +353,17 @@ exports.systemMemoryData = function ( req, res ) {
 
 exports.systemStorageData = function ( req, res ) {
 
-    if ( req.method == 'POST' ) {
+    var query = SystemStorageData.findOne( ).sort( '-date' );
 
-        var requiredFields = ['available', 'percent', 'used'];
-        var fieldCount = 0;
-
-        requiredFields.forEach( function ( field ) {
-            if ( field in req.body ) {
-                fieldCount += 1;
-            }
-        } );
-
-        if ( fieldCount != 3 ) {
-            res.send( 400, "Required fields: available, percent, used" );
-            return;
+    query.exec( function ( err, data ) {
+        
+        if ( err ) {
+            return errorHandler( err, res);
         }
 
-        var newSystemStorage = {
-            date: new Date(),
-            available: req.body.available,
-            used: req.body.used,
-            percent: req.body.percent
-        };
-
-        SystemStorageData.create( newSystemStorage, function ( err, storData ) {
-            
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-            res.send( 201 );
-
-        } );
-
-    } else {
-
-        var query = SystemStorageData.findOne( ).sort( '-date' );
-
-        query.exec( function ( err, data ) {
-            
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-
-            res.json( data );
-            
-        } );
-    }
+        res.json( data );
+        
+    } );
 
 };
 
