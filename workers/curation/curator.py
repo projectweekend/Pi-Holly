@@ -47,7 +47,7 @@ class ArticleCurator(object):
 
     def _article_is_interesting(self, article):
         for kw in article.keywords:
-            if self.keywords_by_word.get(kw, 1) < 1:
+            if self.keywords_by_word.get(kw, 1) < 0:
                 return False
         return True
 
