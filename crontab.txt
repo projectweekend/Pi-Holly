@@ -1,4 +1,4 @@
-*/15 * * * * /home/pi/cron_system_temperature.sh
+*/30 * * * * /home/pi/cron_system_temperature.sh
 0 * * * * /home/pi/cron_system_memory.sh
 0 * * * * /home/pi/cron_system_storage.sh
 5 0 * * * /home/pi/cron_system_config.sh
