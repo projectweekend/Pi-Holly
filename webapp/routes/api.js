@@ -297,56 +297,17 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
 
 exports.systemMemoryData = function ( req, res ) {
 
-    if ( req.method == 'POST' ) {
+    var query = SystemMemoryData.findOne( ).sort( '-date' );
 
-        var requiredFields = ['total', 'used', 'free', 'shared', 'buffers', 'cached'];
-        var fieldCount = 0;
-        
-        requiredFields.forEach( function ( field ) {
-            if ( field in req.body ) {
-                fieldCount += 1;
-            }
-        } );
+    query.exec( function ( err, data ) {
 
-        if ( fieldCount != 6 ) {
-            res.send( 400, "Required fields: total, used, free, shared, buffers, cached" );
-            return;
+        if ( err ) {
+            return errorHandler( err, res);
         }
 
-        var newSystemMemory = {
-            date: new Date(),
-            total: req.body.total,
-            used: req.body.used,
-            free: req.body.free,
-            shared: req.body.shared,
-            buffers: req.body.buffers,
-            cached: req.body.cached
-        };
+        res.json( data );
 
-        SystemMemoryData.create( newSystemMemory, function ( err, memData ) {
-
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-            res.send( 201 );
-
-        } );
-
-    } else {
-
-        var query = SystemMemoryData.findOne( ).sort( '-date' );
-
-        query.exec( function ( err, data ) {
-
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-
-            res.json( data );
-
-        } );
-
-    }
+    } );
 
 };
 

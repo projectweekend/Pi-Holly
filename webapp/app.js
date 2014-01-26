@@ -68,8 +68,6 @@ app.get('/api/reporting/system-temperature-data/recent', api.systemTemperatureDa
 app.get('/api/reporting/system-temperature-data/stats', api.systemTemperatureDataReportingStats);
 
 app.get('/api/system-memory-data', api.systemMemoryData);
-app.post('/api/system-memory-data', api.systemMemoryData);
-
 app.get('/api/system-storage-data', api.systemStorageData);
 
 app.get('/api/system-config-data', api.systemConfigData);
