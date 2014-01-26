@@ -58,43 +58,17 @@ exports.indoorEnvironmentalData = function ( req, res ) {
 
 exports.systemTemperatureData = function ( req, res ) {
 
-    if ( req.method == 'POST' ) {
+    var query = SystemTemperatureData.findOne( ).sort( '-date' );
 
-        if ( !req.body.celsius || !req.body.fahrenheit ) {
-            res.send( 400, "Required fields: celsius, fahrenheit" );
-            return;
+    query.exec( function ( err, data ) {
+        
+        if ( err ) {
+            return errorHandler( err, res);
         }
 
-        var newSystemTemp = {
-            date: new Date(),
-            celsius: req.body.celsius,
-            fahrenheit: req.body.fahrenheit
-        };
+        res.json( data );
 
-        SystemTemperatureData.create( newSystemTemp, function ( err, tempData ) {
-
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-            res.send( 201 );
-
-        } );
-
-    } else {
-
-        var query = SystemTemperatureData.findOne( ).sort( '-date' );
-
-        query.exec( function ( err, data ) {
-            
-            if ( err ) {
-                return errorHandler( err, res);
-            }
-
-            res.json( data );
-
-        } );
-
-    }
+    } );
 
 };
 

@@ -16,15 +16,17 @@ def get_system_temp():
 
 
 def worker():
-    temp_data = get_system_temp()
-    post_status = utils.make_json_post(POST_URL, temp_data)
-    if post_status != 201:
-        # TODO: Add some logging when POST fails
-        pass
+    temperature_data = get_system_temp()
+    temperature_data_collection = utils.get_collection('systemtemperaturedatas')
+    try:
+        temperature_data_collection.insert(temperature_data)
+    except:
+        # TODO: Add some logging should this fail
+        return
     else:
         tweeter = CPUTemperatureTweeter()
         tweeter.tweet_it()
-        return
+
 
 if __name__ == "__main__":
     worker()

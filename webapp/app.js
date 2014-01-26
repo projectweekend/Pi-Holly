@@ -60,13 +60,11 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/indoor-environmental-data', api.indoorEnvironmentalData);
 app.post('/api/indoor-environmental-data', api.indoorEnvironmentalData);
 
-app.get('/api/system-temperature-data', api.systemTemperatureData);
-app.post('/api/system-temperature-data', api.systemTemperatureData);
-
 app.get('/api/reporting/system-temperature-data/all', api.systemTemperatureDataReportingAll);
 app.get('/api/reporting/system-temperature-data/recent', api.systemTemperatureDataReportingRecent);
 app.get('/api/reporting/system-temperature-data/stats', api.systemTemperatureDataReportingStats);
 
+app.get('/api/system-temperature-data', api.systemTemperatureData);
 app.get('/api/system-memory-data', api.systemMemoryData);
 app.get('/api/system-storage-data', api.systemStorageData);
 app.get('/api/system-config-data', api.systemConfigData);
