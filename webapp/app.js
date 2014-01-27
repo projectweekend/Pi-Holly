@@ -59,9 +59,11 @@ app.get('/partials/:name', routes.partials);
 // JSON API
 app.get('/api/indoor/temperature', api.indoorTemperatureData);
 app.post('/api/indoor/temperature', api.indoorTemperatureData);
+app.post('/api/indoor/temperature/bulk', api.indoorTemperatureDataBulk);
 
 app.get('/api/indoor/humidity', api.indoorHumidityData);
 app.post('/api/indoor/humidity', api.indoorHumidityData);
+app.post('/api/indoor/humidity/bulk', api.indoorHumidityDataBulk);
 
 app.get('/api/reporting/system-temperature-data/all', api.systemTemperatureDataReportingAll);
 app.get('/api/reporting/system-temperature-data/recent', api.systemTemperatureDataReportingRecent);

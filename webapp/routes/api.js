@@ -58,6 +58,36 @@ exports.indoorTemperatureData = function ( req, res ) {
 };
 
 
+exports.indoorTemperatureDataBulk = function ( req, res ) {
+
+    var newIndoorTemperatureData = req.body.temperature_data;
+
+    var buildAsyncCallback = function ( temperatureDataItem ) {
+        
+        return function ( callback ) {
+            IndoorTemperatureData.create( temperatureDataItem, function ( err, newData ) {
+                if ( err ) {
+                    callback( err );
+                } else {
+                    callback();
+                }
+            } );
+        };
+
+    };
+
+    var asyncTaskList = newIndoorTemperatureData.map( buildAsyncCallback );
+
+    async.parallel( asyncTaskList, function ( err ) {
+        if ( err ) {
+            return next( errorHandler( err, res ) );
+        }
+        return res.send( 201 );
+    } );
+
+};
+
+
 exports.indoorHumidityData = function ( req, res ) {
 
     if ( req.method == 'POST' ) {
@@ -99,6 +129,36 @@ exports.indoorHumidityData = function ( req, res ) {
         } );
 
     }
+
+};
+
+
+exports.indoorHumidityDataBulk = function ( req, res ) {
+
+    var newIndoorHumidityData = req.body.humidity_data;
+
+    var buildAsyncCallback = function ( humidityDataItem ) {
+        
+        return function ( callback ) {
+            IndoorHumidityData.create( humidityDataItem, function ( err, newData ) {
+                if ( err ) {
+                    callback( err );
+                } else {
+                    callback();
+                }
+            } );
+        };
+
+    };
+
+    var asyncTaskList = newIndoorHumidityData.map( buildAsyncCallback );
+
+    async.parallel( asyncTaskList, function ( err ) {
+        if ( err ) {
+            return next( errorHandler( err, res ) );
+        }
+        return res.send( 201 );
+    } );
 
 };
 
