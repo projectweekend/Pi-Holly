@@ -12,6 +12,85 @@ var errorHandler = function ( err, res ) {
 };
 
 
+exports.indoorTemperatureData = function ( req, res ) {
+
+    if ( req.method == 'POST' ) {
+
+        var newIndoorTemperatureData = {
+            celsius: req.body.celsius,
+            fahrenheit: req.body.fahrenheit
+        };
+
+        IndoorTemperatureData.create( newIndoorTemperatureData, function ( err, indoorTemperatureData ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.send( 201 );
+
+        } );
+
+    }
+
+    if ( req.method == 'GET' ) {
+
+        var q = IndoorTemperatureData.findOne( ).sort( '-date' );
+
+        q.exec( function ( err, data ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.json( data );
+
+        } );
+
+    }
+
+};
+
+
+exports.indoorHumidityData = function ( req, res ) {
+
+    if ( req.method == 'POST' ) {
+
+        var newIndoorHumidityData = {
+            percent: req.body.percent
+        };
+
+        IndoorHumidityData.create( newIndoorHumidityData, function ( err, indoorHumidityData ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.send( 201 );
+
+        } );
+
+    }
+
+    if ( req.method == 'GET' ) {
+
+        var q = IndoorHumidityData.findOne( ).sort( '-date' );
+
+        q.exec( function ( err, data ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.json( data );
+
+        } );
+
+    }
+
+};
+
+
 exports.systemTemperatureData = function ( req, res ) {
 
     var query = SystemTemperatureData.findOne( ).sort( '-date' );
