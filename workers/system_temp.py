@@ -13,7 +13,7 @@ def get_system_temp():
     celsius_temp = utils.parse_temp_value(system_result)
     fahrenheit_temp = utils.celsius_to_fahrenheit(celsius_temp)
     return {
-        'date': datetime.datetime.now(),
+        'date': datetime.datetime.utcnow(),
         'celsius':celsius_temp, 
         'fahrenheit': fahrenheit_temp
     }

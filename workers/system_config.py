@@ -12,7 +12,7 @@ def get_system_config():
     system_config = utils.parse_config_values(system_result)
     config_dict = dict(system_config)
     config_dict['temp_limit'] = utils.celsius_to_fahrenheit(config_dict['temp_limit'])
-    config_dict['date'] = datetime.datetime.now()
+    config_dict['date'] = datetime.datetime.utcnow()
     return config_dict
 
 

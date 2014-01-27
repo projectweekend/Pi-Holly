@@ -11,7 +11,7 @@ def get_system_storage():
     system_result = subprocess.check_output(SHELL_COMMAND)
     system_storage = utils.parse_storage_values(system_result)
     system_storage_dict = dict(system_storage)
-    system_storage_dict['date'] = datetime.datetime.now()
+    system_storage_dict['date'] = datetime.datetime.utcnow()
     return system_storage_dict
 
 
