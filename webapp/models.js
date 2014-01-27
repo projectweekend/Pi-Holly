@@ -4,6 +4,29 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 
+IndoorTemperatureDataSchema = Schema( {
+	id: ObjectId,
+	date: {
+		type: Date,
+		default: Date.now()
+	},
+	celsius: Number,
+	fahrenheit: Number
+} );
+IndoorTemperatureData = mongoose.model( 'IndoorTemperatureData', IndoorTemperatureDataSchema );
+
+
+IndoorHumidityDataSchema = Schema( {
+	id: ObjectId,
+	date: {
+		type: Date,
+		default: Date.now()
+	},
+	percent: Number
+} );
+IndoorHumidityData = mongoose.model( 'IndoorHumidityData', IndoorHumidityDataSchema );
+
+
 IndoorEnvironmentalDataSchema = Schema( {
 	id: ObjectId,
 	date: {
