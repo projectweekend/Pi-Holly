@@ -22,6 +22,11 @@ exports.indoorTemperatureData = function ( req, res ) {
             fahrenheit: req.body.fahrenheit
         };
 
+        // If we received a date on the end point, use that instead current
+        if ( req.body.date ) {
+            newIndoorTemperatureData.date = new Date(req.body.date);
+        }
+
         IndoorTemperatureData.create( newIndoorTemperatureData, function ( err, indoorTemperatureData ) {
 
             if ( err ) {
@@ -61,6 +66,11 @@ exports.indoorHumidityData = function ( req, res ) {
             date: new Date(),
             percent: req.body.percent
         };
+
+        // If we received a date on the end point, use that instead current
+        if ( req.body.date ) {
+            newIndoorHumidityData.date = new Date(req.body.date);
+        }
 
         IndoorHumidityData.create( newIndoorHumidityData, function ( err, indoorHumidityData ) {
 
