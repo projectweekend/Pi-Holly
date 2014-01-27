@@ -17,6 +17,7 @@ exports.indoorTemperatureData = function ( req, res ) {
     if ( req.method == 'POST' ) {
 
         var newIndoorTemperatureData = {
+            date: new Date(),
             celsius: req.body.celsius,
             fahrenheit: req.body.fahrenheit
         };
@@ -57,6 +58,7 @@ exports.indoorHumidityData = function ( req, res ) {
     if ( req.method == 'POST' ) {
 
         var newIndoorHumidityData = {
+            date: new Date(),
             percent: req.body.percent
         };
 
