@@ -1,4 +1,5 @@
 import subprocess
+import datetime
 
 import utils
 
@@ -11,6 +12,7 @@ def get_system_config():
     system_config = utils.parse_config_values(system_result)
     config_dict = dict(system_config)
     config_dict['temp_limit'] = utils.celsius_to_fahrenheit(config_dict['temp_limit'])
+    config_dict['date'] = datetime.datetime.now()
     return config_dict
 
 

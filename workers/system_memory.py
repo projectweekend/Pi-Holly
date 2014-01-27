@@ -1,4 +1,5 @@
 import subprocess
+import datetime
 
 import utils
 
@@ -9,7 +10,9 @@ SHELL_COMMAND = ["/usr/bin/free", "-h"]
 def get_system_memory():
     system_result = subprocess.check_output(SHELL_COMMAND)
     system_memory = utils.parse_memory_values(system_result)
-    return dict(system_memory)
+    system_memory_dict = dict(system_memory)
+    system_memory_dict['date'] = datetime.datetime.now()
+    return system_memory_dict
 
 
 def worker():

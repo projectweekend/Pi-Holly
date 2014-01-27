@@ -1,4 +1,5 @@
 import subprocess
+import datetime
 
 import utils
 from tweeting import CPUTemperatureTweeter
@@ -11,7 +12,11 @@ def get_system_temp():
     system_result = subprocess.check_output(SHELL_COMMAND)
     celsius_temp = utils.parse_temp_value(system_result)
     fahrenheit_temp = utils.celsius_to_fahrenheit(celsius_temp)
-    return {'celsius':celsius_temp, 'fahrenheit': fahrenheit_temp}
+    return {
+        'date': datetime.datetime.now(),
+        'celsius':celsius_temp, 
+        'fahrenheit': fahrenheit_temp
+    }
 
 
 def worker():
