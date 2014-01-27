@@ -27,19 +27,6 @@ IndoorHumidityDataSchema = Schema( {
 IndoorHumidityData = mongoose.model( 'IndoorHumidityData', IndoorHumidityDataSchema );
 
 
-IndoorEnvironmentalDataSchema = Schema( {
-	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
-	temperature: Number,
-	humidity: Number,
-	pressure: Number
-} );
-IndoorEnvironmentalData = mongoose.model( 'IndoorEnvironmentalData', IndoorEnvironmentalDataSchema );
-
-
 SystemTemperatureDataSchema = Schema( {
 	id: ObjectId,
 	date: {
