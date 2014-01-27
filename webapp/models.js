@@ -6,10 +6,7 @@ var ObjectId = Schema.ObjectId;
 
 IndoorTemperatureDataSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
+	date: Date,
 	celsius: Number,
 	fahrenheit: Number
 } );
@@ -18,10 +15,7 @@ IndoorTemperatureData = mongoose.model( 'IndoorTemperatureData', IndoorTemperatu
 
 IndoorHumidityDataSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
+	date: Date,
 	percent: Number
 } );
 IndoorHumidityData = mongoose.model( 'IndoorHumidityData', IndoorHumidityDataSchema );
@@ -29,10 +23,7 @@ IndoorHumidityData = mongoose.model( 'IndoorHumidityData', IndoorHumidityDataSch
 
 SystemTemperatureDataSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
+	date: Date,
 	celsius: Number,
 	fahrenheit: Number
 } );
@@ -41,10 +32,7 @@ SystemTemperatureData = mongoose.model( 'SystemTemperatureData', SystemTemperatu
 
 SystemMemoryDataSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
+	date: Date,
     total: Number,
     used: Number,
     free: Number,
@@ -57,10 +45,7 @@ SystemMemoryData = mongoose.model( 'SystemMemoryData', SystemMemoryDataSchema );
 
 SystemStorageDataSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
+	date: Date,
     available: Number,
     used: Number,
     percent: Number
@@ -70,10 +55,7 @@ SystemStorageData = mongoose.model( 'SystemStorageData', SystemStorageDataSchema
 
 SystemConfigDataSchema = Schema( {
 	id: ObjectId,
-	date: {
-		type: Date,
-		default: Date.now()
-	},
+	date: Date,
 	arm_freq: Number,
 	config_hdmi_boost: Number,
 	core_freq: Number,
