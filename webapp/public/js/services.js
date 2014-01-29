@@ -28,6 +28,52 @@ var svcMod = angular.module('myApp.services', []);
 
 svcMod.value('version', '0.1');
 
+// Indoor Temperature Reporting
+svcMod.factory( "IndoorTempReporting", function ( $http, socket ) {
+
+    return {
+        chart: {
+            options: {},
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        fillColor : "rgba(151,187,205,0)",
+                        strokeColor : "#e67e22",
+                        pointColor : "rgba(151,187,205,0)",
+                        pointStrokeColor : "#e67e22",
+                        data: []
+                    }
+                ]
+            }
+        }
+    };
+
+} );
+
+// Indoor Humidity Reporting
+svcMod.factory( "IndoorHumidityReporting", function ( $http, socket ) {
+
+    return {
+        chart: {
+            options: {},
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        fillColor : "rgba(151,187,205,0)",
+                        strokeColor : "#e67e22",
+                        pointColor : "rgba(151,187,205,0)",
+                        pointStrokeColor : "#e67e22",
+                        data: []
+                    }
+                ]
+            }
+        }
+    };
+
+} );
+
 // System Reporting
 svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
 
