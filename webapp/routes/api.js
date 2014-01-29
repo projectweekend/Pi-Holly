@@ -163,6 +163,40 @@ exports.indoorHumidityDataBulk = function ( req, res ) {
 };
 
 
+exports.indoorTemperatureDataRecent = function ( req, res ) {
+
+    var q = IndoorTemperatureData.find( ).sort( '-date' ).limit(12);
+    
+    query.exec( function ( err, data ) {
+
+        if ( err ) {
+            return errorHandler( err, res);
+        }
+
+        return res.json( data );
+
+    } );
+
+};
+
+
+exports.indoorHumidityDataRecent = function ( req, res ) {
+
+    var q = IndoorHumidityData.find( ).sort( '-date' ).limit(12);
+
+    query.exec( function ( err, data ) {
+
+        if ( err ) {
+            return errorHandler( err, res);
+        }
+
+        return res.json( data );
+
+    } );
+
+};
+
+
 exports.systemTemperatureData = function ( req, res ) {
 
     var query = SystemTemperatureData.findOne( ).sort( '-date' );
