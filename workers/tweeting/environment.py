@@ -38,8 +38,8 @@ class IndoorTemperatureTweeter(IndoorTweeter):
     def _build_status_message(self):
         message_template = "The current indoor temperature is: {0} F/{1} C ({2}) #raspberrypi"
         if self.temperature_data:
-            celsius = self.temperature_data['celsius']
-            fahrenheit = self.temperature_data['fahrenheit']
+            celsius = round(self.temperature_data['celsius'], 2)
+            fahrenheit = round(self.temperature_data['fahrenheit'], 2)
             current_datetime = self._get_current_datetime()
             self.status_message = message_template.format(fahrenheit, celsius, current_datetime)
 
@@ -60,6 +60,6 @@ class IndoorHumidityTweeter(IndoorTweeter):
     def _build_status_message(self):
         message_template = "The current indoor humidity is: {0}% ({1}) #raspberrypi"
         if self.humidity_data:
-            percent = self.humidity_data['percent']
+            percent = round(self.humidity_data['percent'], 2)
             current_datetime = self._get_current_datetime()
             self.status_message = message_template.format(percent, current_datetime)
