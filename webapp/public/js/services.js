@@ -46,6 +46,41 @@ svcMod.factory( "IndoorTempReporting", function ( $http, socket ) {
                     }
                 ]
             }
+        },
+        buildChart: function ( display_units ) {
+            var chart = this.chart;
+            var apiUrl = "/api/indoor/temperature/recent";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    data.forEach( function ( element, index, array ) {
+                        
+                        var parsedTime = makeHoursMinutesTimeString( element.date );
+                        chart.data.labels.push( parsedTime );
+
+                        if ( display_units == 'F' ) {
+                            chart.data.datasets[0].data.push( element.fahrenheit );
+                        } else {
+                            chart.data.datasets[0].data.push( element.celsius );
+                        }
+
+                    } );
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        clearChart: function () {
+            var chart = this.chart;
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
+        },
+        init: function ( display_units ) {
+            var IndoorTempReporting = this;
+            var currentData = IndoorTempReporting.chart.data.datasets[0].data;
+            if ( currentData.length === 0 ) {
+                IndoorTempReporting.buildChart( display_units );
+            }
         }
     };
 
@@ -68,6 +103,37 @@ svcMod.factory( "IndoorHumidityReporting", function ( $http, socket ) {
                         data: []
                     }
                 ]
+            }
+        },
+        buildChart: function () {
+            var chart = this.chart;
+            var apiUrl = "/api/indoor/humidity/recent";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    data.forEach( function ( element, index, array ) {
+
+                        var parsedTime = makeHoursMinutesTimeString( element.date );
+                        chart.data.labels.push( parsedTime );
+
+                        chart.data.datasets[0].data.push( element.percent );
+
+                    } );
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        clearChart: function () {
+            var chart = this.chart;
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
+        },
+        init: function () {
+            var IndoorHumidityReporting = this;
+            var currentData = IndoorHumidityReporting.chart.data.datasets[0].data;
+            if ( currentData.length === 0 ) {
+                IndoorHumidityReporting.buildChart( );
             }
         }
     };
