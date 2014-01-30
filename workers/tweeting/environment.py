@@ -27,10 +27,10 @@ class IndoorTemperatureTweeter(IndoorTweeter):
     temperature_data = {}
     
     def __init__(self):
+        super(IndoorTemperatureTweeter, self).__init__()
         self._get_temperature_data()
         self._build_status_message()
         self.twitter_client = self._connect_to_twitter()
-        super(IndoorTemperatureTweeter, self).__init__()
 
     def _get_temperature_data(self):
         self.temperature_data = utils.get_latest_indoor_temperature()
@@ -50,6 +50,9 @@ class IndoorHumidityTweeter(IndoorTweeter):
     
     def __init__(self):
         super(IndoorHumidityTweeter, self).__init__()
+        self._get_humidity_data()
+        self._build_status_message()
+        self.twitter_client = self._connect_to_twitter()
 
     def _get_humidity_data(self):
         self.humidity_data = utils.get_latest_indoor_humidity()
