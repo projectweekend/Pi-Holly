@@ -21,7 +21,7 @@ cMod.controller( 'AppCtrl', function ( $scope, $location ) {
 cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorHumidityReporting ) {
 
     $scope.indoorTemperatureReporting = IndoorTempReporting;
-    $scope.indoorTemperatureReporting.init();
+    $scope.indoorTemperatureReporting.init( 'F' );
 
     $scope.indoorHumidityReporting = IndoorHumidityReporting;
     $scope.indoorHumidityReporting.init();
@@ -32,8 +32,8 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, Ind
 cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, SystemTempCurrent, SystemTempStats, SystemMemoryCurrent, SystemStorageCurrent, SystemConfigCurrent ) {
 
     $scope.systemTempReporting = SystemTempReporting;
-    $scope.systemTempReporting.init('F');
-    $scope.systemTempReporting.listenForUpdates('F');
+    $scope.systemTempReporting.init( 'F' );
+    $scope.systemTempReporting.listenForUpdates( 'F' );
 
     $scope.systemCurrentTemp = SystemTempCurrent;
     $scope.systemCurrentTemp.init();
