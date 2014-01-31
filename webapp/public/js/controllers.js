@@ -54,8 +54,6 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
     $scope.starbugTempReporting = StarbugTempReporting;
     $scope.starbugTempReporting.init( 'F' );
 
-    console.log( $scope.starbugTempReporting );
-
 } );
 
 
@@ -63,8 +61,6 @@ cMod.controller( 'NewsCtrl', function ( $scope, NewsArticles ) {
     
     $scope.newsArticles = NewsArticles;
     $scope.newsArticles.getArticles();
-
-    console.log( $scope.newsArticles );
 
 } );
 
