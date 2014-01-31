@@ -67,6 +67,9 @@ app.post('/api/indoor/humidity', api.indoorHumidityData);
 app.post('/api/indoor/humidity/bulk', api.indoorHumidityDataBulk);
 app.get('/api/indoor/humidity/recent', api.indoorHumidityDataRecent);
 
+app.get('/api/starbug/temperature', api.starbugTemperatureData);
+app.post('/api/starbug/temperature', api.starbugTemperatureData);
+
 app.get('/api/reporting/system-temperature-data/all', api.systemTemperatureDataReportingAll);
 app.get('/api/reporting/system-temperature-data/recent', api.systemTemperatureDataReportingRecent);
 app.get('/api/reporting/system-temperature-data/stats', api.systemTemperatureDataReportingStats);

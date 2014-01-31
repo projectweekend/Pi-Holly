@@ -197,6 +197,47 @@ exports.indoorHumidityDataRecent = function ( req, res ) {
 };
 
 
+exports.starbugTemperatureData = function ( req, res ) {
+
+    if ( req.method == 'GET') {
+        
+        var q = StarbugTemperatureData.findOne( ).sort( '-date' );
+        
+        q.exec( function ( err, data ) {
+        
+            if ( err ) {
+                return errorHandler( err, res);
+            }
+
+            res.json( data );
+
+        } );
+
+    }
+
+    if ( req.method == 'POST') {
+
+        var newTemperatureData = {
+            date: new Date(),
+            celsius: req.body.celsius,
+            fahrenheit: req.body.fahrenheit
+        };
+
+        StarbugTemperatureData.create( newTemperatureData, function ( err, data ) {
+
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+
+            res.send( 201 );
+            
+        } );
+
+    }
+
+};
+
+
 exports.systemTemperatureData = function ( req, res ) {
 
     var query = SystemTemperatureData.findOne( ).sort( '-date' );
