@@ -238,6 +238,23 @@ exports.starbugTemperatureData = function ( req, res ) {
 };
 
 
+exports.starbugTemperatureDataRecent = function ( req, res ) {
+
+    var q = StarbugTemperatureData.find( ).sort( '-date' ).limit(12);
+    
+    q.exec( function ( err, data ) {
+
+        if ( err ) {
+            return errorHandler( err, res);
+        }
+
+        return res.json( data );
+
+    } );
+
+};
+
+
 exports.systemTemperatureData = function ( req, res ) {
 
     var query = SystemTemperatureData.findOne( ).sort( '-date' );
