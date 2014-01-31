@@ -169,6 +169,33 @@ This returns an object with the current, average, min, and max temperatures.
  }
 ```
 
+## Get latest [Starbug](https://github.com/projectweekend/Pi-Starbug) temperature data
+
+**GET:** `/api/starbug/temperature`
+
+**Response:**
+```
+ {
+     date: "2014-01-10T23:22:24.150Z",
+     celsius: 40,
+     fahrenheit: 104,
+     _id: "52d080b03a62e79fbf000003",
+     __v: 0
+ }
+```
+
+## Add [Starbug](https://github.com/projectweekend/Pi-Starbug) temperature data
+
+**POST:** `/api/starbug/temperature`
+
+**Response:**
+```
+ {
+     celsius: 40,
+     fahrenheit: 104
+ }
+```
+
 ## Get news sources
 
 **GET:** `/api/news-source/config`
