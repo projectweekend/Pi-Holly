@@ -29,7 +29,7 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, Ind
 } );
 
 
-cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, SystemTempCurrent, SystemTempStats, SystemMemoryCurrent, SystemStorageCurrent, SystemConfigCurrent ) {
+cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, SystemTempCurrent, SystemTempStats, SystemMemoryCurrent, SystemStorageCurrent, SystemConfigCurrent, StarbugTempReporting ) {
 
     $scope.systemTempReporting = SystemTempReporting;
     $scope.systemTempReporting.init( 'F' );
@@ -50,6 +50,9 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
 
     $scope.systemCurrentConfig = SystemConfigCurrent;
     $scope.systemCurrentConfig.init();
+
+    $scope.starbugTempReporting = StarbugTempReporting;
+    $scope.starbugTempReporting.init( 'F' );
 
 } );
 

@@ -492,6 +492,88 @@ svcMod.factory( "SystemConfigCurrent", function ( $http, socket ) {
 
 } );
 
+// Starbug Temperature Reporting
+svcMod.factory( "StarbugTempReporting", function ( $http, socket ) {
+
+    return {
+        chart: {
+            options: {},
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        fillColor : "rgba(151,187,205,0)",
+                        strokeColor : "#e67e22",
+                        pointColor : "rgba(151,187,205,0)",
+                        pointStrokeColor : "#e67e22",
+                        data: []
+                    }
+                ]
+            }
+        },
+        buildChart: function ( display_units ) {
+            var chart = this.chart;
+            var apiUrl = "/api/starbug/temperature/recent";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    data.forEach( function ( element, index, array ) {
+
+                        var parsedTime = makeHoursMinutesTimeString( element.date );
+                        chart.data.labels.push( parsedTime );
+
+                        if ( display_units == 'F' ) {
+                            chart.data.datasets[0].data.push( element.fahrenheit );
+                        } else {
+                            chart.data.datasets[0].data.push( element.celsius );
+                        }
+
+                    } );
+                }).
+                error( function ( data, status ) {
+                    logError( data );
+                });
+        },
+        clearChart: function () {
+            var chart = this.chart;
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
+        },
+        listenForUpdates: function ( display_units ) {
+            var chart = this.chart;
+            
+            socket.on( 'updates:starbug:temp', function ( data ) {
+            
+                var newLabel = makeHoursMinutesTimeString( data.date );
+                var latestLabel = chart.data.labels[0];
+
+                if ( newLabel != latestLabel ) {
+                    // remove oldest one
+                    chart.data.labels.pop();
+                    chart.data.datasets[0].data.pop();
+                    // add new one
+                    chart.data.labels.unshift( newLabel );
+                    if ( display_units == 'F' ) {
+                        chart.data.datasets[0].data.unshift( data.fahrenheit );
+                    } else {
+                        chart.data.datasets[0].data.unshift( data.celsius );
+                    }
+
+                }
+
+            } );
+        },
+        init: function ( display_units ) {
+            var StarbugTempReporting = this;
+            var currentData = StarbugTempReporting.chart.data.datasets[0].data;
+            if ( currentData.length === 0 ) {
+                StarbugTempReporting.buildChart( display_units );
+            }
+        }
+    };
+
+} );
+
 // News Source Config
 svcMod.factory( "NewsSourceConfig", function ( $http ) {
 
