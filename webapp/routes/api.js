@@ -165,7 +165,7 @@ exports.indoorHumidityDataBulk = function ( req, res ) {
 
 exports.indoorTemperatureDataRecent = function ( req, res ) {
 
-    var q = IndoorTemperatureData.find( ).sort( '-date' ).limit(12);
+    var q = IndoorTemperatureData.find( ).sort( '-date' ).limit(24);
     
     q.exec( function ( err, data ) {
 
@@ -182,7 +182,7 @@ exports.indoorTemperatureDataRecent = function ( req, res ) {
 
 exports.indoorHumidityDataRecent = function ( req, res ) {
 
-    var q = IndoorHumidityData.find( ).sort( '-date' ).limit(12);
+    var q = IndoorHumidityData.find( ).sort( '-date' ).limit(24);
 
     q.exec( function ( err, data ) {
 
