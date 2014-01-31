@@ -83,3 +83,11 @@ div(class="row")
       dd
         div(ng-if="systemCurrentConfig.values.sdram_freq", class="system-config-wrapper")
           span(class="text-primary system-config-value") {{systemCurrentConfig.values.sdram_freq}} MHz
+
+div(class="row")
+
+  div(class="page-header")
+    h1 Starbug Temperature
+
+  div(class="col-md-8")
+    canvas(chart, id="starbugTempChart", type="Line", options="starbugTempReporting.chart.options", data="starbugTempReporting.chart.data", width="700", height="350")
