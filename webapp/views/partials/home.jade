@@ -6,6 +6,12 @@ div(class="row")
   div(class="col-md-8")
     canvas(chart, id="temperatureChart", type="Line", options="indoorTemperatureReporting.chart.options", data="indoorTemperatureReporting.chart.data", width="700", height="350")
 
+  div(class="col-md-4")
+    div(class="panel panel-default")
+      div(class="panel-heading")
+        h3(class="panel-title") Stats
+      div(class="panel-body")      
+
 div(class="row")
 
   div(class="page-header")
@@ -13,3 +19,9 @@ div(class="row")
 
   div(class="col-md-8")
     canvas(chart, id="humidityChart", type="Line", options="indoorHumidityReporting.chart.options", data="indoorHumidityReporting.chart.data", width="700", height="350")
+
+  div(class="col-md-4")
+    div(class="panel panel-default")
+      div(class="panel-heading")
+        h3(class="panel-title") Stats
+      div(class="panel-body")      
