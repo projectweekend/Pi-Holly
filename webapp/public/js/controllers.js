@@ -54,6 +54,8 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
     $scope.starbugTempReporting = StarbugTempReporting;
     $scope.starbugTempReporting.init( 'F' );
 
+    console.log( $scope.starbugTempReporting );
+
 } );
 
 
