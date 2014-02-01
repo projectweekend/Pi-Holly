@@ -18,13 +18,18 @@ cMod.controller( 'AppCtrl', function ( $scope, $location ) {
 } );
 
 
-cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorHumidityReporting ) {
+cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorHumidityReporting, HueLighting ) {
 
     $scope.indoorTemperatureReporting = IndoorTempReporting;
     $scope.indoorTemperatureReporting.init( 'F' );
 
     $scope.indoorHumidityReporting = IndoorHumidityReporting;
     $scope.indoorHumidityReporting.init();
+
+    $scope.hueLighting = HueLighting;
+    $scope.hueLighting.init();
+
+    console.log( $scope.hueLighting );
 
 } );
 

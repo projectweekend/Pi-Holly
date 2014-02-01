@@ -717,13 +717,15 @@ svcMod.factory( "NewsArticles", function ( $http ) {
 svcMod.factory( "HueLighting", function ( $http ) {
 
     return {
-        bridgeIP: null,
+        bridge: {
+            ip: ""
+        },
         findBridgeIP: function () {
-            var bridgeIP = this.bridgeIP;
+            var bridge = this.bridge;
             var apiUrl = "http://www.meethue.com/api/nupnp";
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    bridgeIP = data.internalipaddress;
+                    bridge.ip = data[0].internalipaddress;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
@@ -731,9 +733,7 @@ svcMod.factory( "HueLighting", function ( $http ) {
         },
         init: function () {
             var HueLighting = this;
-            if ( HueLighting.bridgeIP === null ) {
-                HueLighting.findBridgeIP();
-            }
+            HueLighting.findBridgeIP();
         }
     };
 
