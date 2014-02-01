@@ -693,7 +693,7 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                     }
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
         },
         ignoreArticle: function ( article, articleList ) {
@@ -706,8 +706,34 @@ svcMod.factory( "NewsArticles", function ( $http ) {
                     }
                 } ).
                 error( function ( data, status ) {
-                    console.log( data );
+                    logError( data );
                 } );
+        }
+    };
+
+} );
+
+
+svcMod.factory( "HueLighting", function ( $http ) {
+
+    return {
+        bridgeIP: null,
+        findBridgeIP: function () {
+            var bridgeIP = this.bridgeIP;
+            var apiUrl = "http://www.meethue.com/api/nupnp";
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    bridgeIP = data.internalipaddress;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        init: function () {
+            var HueLighting = this;
+            if ( HueLighting.bridgeIP === null ) {
+                HueLighting.findBridgeIP();
+            }
         }
     };
 
