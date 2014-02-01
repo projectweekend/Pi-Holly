@@ -718,14 +718,71 @@ svcMod.factory( "HueLighting", function ( $http ) {
 
     return {
         bridge: {
-            ip: ""
+            ip: "",
+            isAuthorized: false
+        },
+        lights: {},
+        buildRouteURL: function ( route ) {
+            var bridge = this.bridge;
+            return "http://" + bridge.ip + route;
         },
         findBridgeIP: function () {
-            var bridge = this.bridge;
+            var HueLighting = this;
             var apiUrl = "http://www.meethue.com/api/nupnp";
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    bridge.ip = data[0].internalipaddress;
+                    HueLighting.bridge.ip = data[0].internalipaddress;
+                    HueLighting.checkBridgeAuthorization();
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        checkBridgeAuthorization: function () {
+            var HueLighting = this;
+            var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal" );
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    var response = data[0];
+                    if ( response.error.type == 1 ) {
+                        HueLighting.bridge.isAuthorized = false;
+                    } else {
+                        HueLighting.bridge.isAuthorized = true;
+                        HueLighting.findLights();
+                    }
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        authorizeBridge: function () {
+            var HueLighting = this;
+            var apiUrl = HueLighting.buildRouteURL( "/api" );
+            var postData = {
+                "devicetype": "Holly.local",
+                "username": "hollydotlocal"
+            };
+            $http.post( apiUrl, postData ).
+                success( function ( data, status ) {
+                    var response = data[0];
+                    if ( response.error.type == 101 ) {
+                        HueLighting.bridge.isAuthorized = false;
+                    } else {
+                        HueLighting.bridge.isAuthorized = true;
+                        HueLighting.findLights();
+                    }
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+
+        },
+        findLights: function () {
+            var HueLighting = this;
+            var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal/lights" );
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    HueLighting.lights = data;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
