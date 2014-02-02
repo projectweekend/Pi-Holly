@@ -777,12 +777,30 @@ svcMod.factory( "HueLighting", function ( $http ) {
                 } );
 
         },
+        populateLightAttributes: function ( lightID, lightItem ) {
+            var HueLighting = this;
+            var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal/lights/" + lightID );
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    lightItem.data = data;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
         findLights: function () {
             var HueLighting = this;
             var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal/lights" );
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    HueLighting.lights = data;
+                    for (var key in data) {
+                        var light = {
+                            id: key,
+                            name: data[key].name
+                        };
+                        HueLighting.populateLightAttributes( key, light );
+                        HueLighting.lights.push( light );
+                    }
                 } ).
                 error( function ( data, status ) {
                     logError( data );
