@@ -836,7 +836,9 @@ svcMod.factory( "HueLighting", function ( $http ) {
         },
         init: function () {
             var HueLighting = this;
-            HueLighting.findBridgeIP();
+            if ( HueLighting.bridge.ip === "" ) {
+                HueLighting.findBridgeIP();
+            }
         }
     };
 
