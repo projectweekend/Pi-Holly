@@ -574,6 +574,45 @@ svcMod.factory( "StarbugTempReporting", function ( $http, socket ) {
 
 } );
 
+// Starbug Temperature Stats
+svcMod.factory( "StarbugTempStats", function ( $http, socket ) {
+
+    return {
+        values: {
+            average: null,
+            min: null,
+            max: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/starbug/temperature/stats";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.average = data.average;
+                    values.min = data.min;
+                    values.max = data.max;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+
+        },
+        listenForUpdates: function () {
+            // TOOD: Make a socket and hook this up
+            var values = this.values;
+        },
+        init: function () {
+            var StarbugTempStats = this;
+            var values = this.values;
+            if ( values.average === null || values.min === null || values.max === null ) {
+                StarbugTempStats.getValues();
+            }
+        }
+    };
+
+} );
+
 // News Source Config
 svcMod.factory( "NewsSourceConfig", function ( $http ) {
 
