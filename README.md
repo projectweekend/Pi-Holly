@@ -18,7 +18,7 @@ I have also integrated Holly with the [Philips HUE Wireless Lighting](http://www
 * Handle the first time authorization/pairing process
 * Present on/off buttons for each existing light in the Home section. An example of the controls can be found in the **Home Temperature Chart** screen shot below.
 
-Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
+Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf)). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
 
 ### Home Temperature Chart
 ![Home Temperature Chart Screen Shot](http://i.imgur.com/1SEwUQ6.png)
