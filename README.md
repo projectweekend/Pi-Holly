@@ -11,9 +11,15 @@ In addition to the web app, there is a collection of worker processes, written i
 * One to check system configuration
 * One to collect news from specified sources
 
-Each of these workers is scheduled using `crontab`. Some report data back to Mongo through a JSON API, while others may interact with the database directly directly.
+Each of these workers is scheduled using `crontab`. Some report data back to Mongo through a JSON API, while others may interact with the database directly directly. Holly also receives external room temperature/humidity data from another Raspberry Pi project I built called [Starbug](https://github.com/projectweekend/Pi-Starbug). This data is logged in the MongoDB and displayed in a couple charts also.
 
 Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
+
+### Home Temperature Chart
+![Home Temperature Chart Screen Shot](http://i.imgur.com/1SEwUQ6.png)
+
+### Home Humidity Chart
+![Home Humidity Chart Screen Shot](http://i.imgur.com/fpbESXm.png)
 
 ### System Temp Chart
 ![System Temp Page Screen Shot](http://i.imgur.com/pVhWYt1.png)
