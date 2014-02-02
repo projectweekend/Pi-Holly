@@ -17,12 +17,19 @@ div(class="row")
       div(class="panel-heading")
         h3(class="panel-title") HUE Lighting Controls
       div(class="panel-body")
-        div(ng-hide="hueLighting.bridge.isAuthorized")
-          div(class="alert alert-danger")
-            strong Bridge is not authorized. 
-            | Go press the link button on the bridge, then try authorizing again.
-          div(class="btn-toolbar")
-            a(ng-click="hueLighting.authorizeBridge()", class="btn btn-primary btn-block") Authorize bridge
-        div(ng-show="hueLighting.bridge.isAuthorized")
-          ul(class="list-unstyled")
-            li(ng-repeat="l in hueLighting.lights")
+        div(ng-show="hueLighting.isLoading", class="alert alert-success")
+          strong Checking lights...
+        div(ng-hide="hueLighting.isLoading")
+          div(ng-hide="hueLighting.bridge.isAuthorized")
+            div(class="alert alert-danger")
+              strong Bridge is not authorized. 
+              | Go press the link button on the bridge, then try authorizing again.
+            div(class="btn-toolbar")
+              a(ng-click="hueLighting.authorizeBridge()", class="btn btn-primary btn-block") Authorize bridge
+          div(ng-show="hueLighting.bridge.isAuthorized")
+            ul(class="list-unstyled")
+              li(ng-repeat="l in hueLighting.lights")
+                h4 {{ l.name }}
+                a(ng-hide="l.data.state.on", ng-click="l.turnOn()", class="btn btn-success btn-block") Turn on
+                a(ng-show="l.data.state.on", ng-click="l.turnOff()", class="btn btn-danger btn-block") Turn off
+

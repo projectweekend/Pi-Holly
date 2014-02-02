@@ -721,6 +721,7 @@ svcMod.factory( "HueLighting", function ( $http ) {
             ip: "",
             isAuthorized: false
         },
+        isLoading: true,
         lights: [],
         buildRouteURL: function ( route ) {
             var bridge = this.bridge;
@@ -743,8 +744,9 @@ svcMod.factory( "HueLighting", function ( $http ) {
             var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal" );
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    var response = data[0];
-                    if ( response.error.type == 1 ) {
+                    HueLighting.isLoading = false;
+                    var response = data;
+                    if ( response[0] !== undefined && response[0].error.type == 1 ) {
                         HueLighting.bridge.isAuthorized = false;
                     } else {
                         HueLighting.bridge.isAuthorized = true;
@@ -783,6 +785,32 @@ svcMod.factory( "HueLighting", function ( $http ) {
             $http.get( apiUrl ).
                 success( function ( data, status ) {
                     lightItem.data = data;
+                    lightItem.turnOn = function () {
+                        var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal/lights/" + lightID + "/state" );
+                        var putData = {
+                            on: true
+                        };
+                        $http.put( apiUrl, putData ).
+                            success( function ( data, status ) {
+                                lightItem.data.state.on = true;
+                            } ).
+                            error( function ( data, status ) {
+                                logError( data );
+                            } );
+                    };
+                    lightItem.turnOff = function () {
+                        var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal/lights/" + lightID + "/state" );
+                        var putData = {
+                            on: false
+                        };
+                        $http.put( apiUrl, putData ).
+                            success( function ( data, status ) {
+                                lightItem.data.state.on = false;
+                            } ).
+                            error( function ( data, status ) {
+                                logError( data );
+                            } );
+                    };
                 } ).
                 error( function ( data, status ) {
                     logError( data );
