@@ -100,8 +100,8 @@ div(class="row")
         dl
           dt Current:
           dd
-            div(ng-if="systemCurrentTemp.values.fahrenheit", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{systemCurrentTemp.values.fahrenheit | number:2}}&deg; F
+            div(ng-if="starbugCurrentTemp.values.fahrenheit", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{starbugCurrentTemp.values.fahrenheit | number:2}}&deg; F
           dt Average:
           dd
             div(ng-if="starbugTempStats.values.average", class="temp-stat-wrapper")
