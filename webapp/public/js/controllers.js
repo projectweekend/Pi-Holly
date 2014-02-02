@@ -29,8 +29,6 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, Ind
     $scope.hueLighting = HueLighting;
     $scope.hueLighting.init();
 
-    console.log( $scope.hueLighting );
-
 } );
 
 

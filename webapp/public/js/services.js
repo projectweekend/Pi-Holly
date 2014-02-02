@@ -574,6 +574,51 @@ svcMod.factory( "StarbugTempReporting", function ( $http, socket ) {
 
 } );
 
+// Current Starbug Temp
+svcMod.factory( "StarbugTempCurrent", function ( $http, socket ) {
+
+    return {
+        values: {
+            date: null,
+            fahrenheit: null,
+            celsius: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/starbug/temperature";
+
+            $http.get( apiUrl ).
+                success( function ( data, status) {
+                    values.date = data.date;
+                    values.fahrenheit = data.fahrenheit;
+                    values.celsius = data.celsius;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+            socket.on( 'updates:starbug:temp', function ( data ) {
+                if ( values.date != data.date ) {
+                    values.date = data.date;
+                    values.fahrenheit = data.fahrenheit;
+                    values.celsius = data.celsius;
+                }
+            } );
+        },
+        init: function () {
+            var StarbugTempCurrent = this;
+            var currentFarenheit = StarbugTempCurrent.values.fahrenheit;
+            var currentCelsius = StarbugTempCurrent.values.celsius;
+            if ( currentFarenheit === null && currentCelsius === null ) {
+                StarbugTempCurrent.getValues();
+            }
+        }
+    };
+
+} );
+
 // Starbug Temperature Stats
 svcMod.factory( "StarbugTempStats", function ( $http, socket ) {
 
