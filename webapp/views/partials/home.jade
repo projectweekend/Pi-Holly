@@ -25,4 +25,4 @@ div(class="row")
             a(ng-click="hueLighting.authorizeBridge()", class="btn btn-primary btn-block") Authorize bridge
         div(ng-show="hueLighting.bridge.isAuthorized")
           ul(class="list-unstyled")
-            li(ng-repeat="")
+            li(ng-repeat="l in hueLighting.lights")

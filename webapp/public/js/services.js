@@ -721,7 +721,7 @@ svcMod.factory( "HueLighting", function ( $http ) {
             ip: "",
             isAuthorized: false
         },
-        lights: {},
+        lights: [],
         buildRouteURL: function ( route ) {
             var bridge = this.bridge;
             return "http://" + bridge.ip + route;
