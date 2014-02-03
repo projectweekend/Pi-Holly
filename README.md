@@ -13,7 +13,7 @@ In addition to the web app, there is a collection of worker processes, written i
 
 Each of these workers is scheduled using `crontab`. Some report data back to Mongo through a JSON API, while others may interact with the database directly directly. Holly also receives external room temperature/humidity data from another Raspberry Pi project I built called [Starbug](https://github.com/projectweekend/Pi-Starbug). This data is logged in the MongoDB and displayed in a couple charts also.
 
-I have also integrated Holly with the [Philips HUE Wireless Lighting](http://www.meethue.com) system. This is component is fairly basic at the moment. Right now it will:
+I have also integrated Holly with the [Philips HUE Wireless Lighting](http://www.meethue.com) system. This component is fairly basic at the moment. Right now it will:
 * Find an existing bridge on the local network
 * Handle the first time authorization/pairing process
 * Present on/off buttons for each existing light in the Home section. An example of the controls can be found in the **Home Temperature Chart** screen shot below.
