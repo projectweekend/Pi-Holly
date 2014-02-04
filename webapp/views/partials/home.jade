@@ -30,6 +30,9 @@ div(class="row")
             ul(class="list-unstyled")
               li(ng-repeat="l in hueLighting.lights")
                 h4 {{ l.name }}
-                a(ng-hide="l.data.state.on", ng-click="l.turnOn()", class="btn btn-success btn-block") Turn on
-                a(ng-show="l.data.state.on", ng-click="l.turnOff()", class="btn btn-danger btn-block") Turn off
-
+                div(ng-hide="l.data.state.on")
+                  div(class="btn-toolbar")
+                    a(ng-click="l.turnOn()", class="btn btn-success btn-block") Turn on
+                div(ng-show="l.data.state.on")
+                  div(class="btn-toolbar")
+                    a(ng-click="l.turnOff()", class="btn btn-danger btn-block") Turn off
