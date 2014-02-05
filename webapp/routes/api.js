@@ -288,6 +288,11 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         };
         
         StarbugTemperatureData.mapReduce( avgConfig, function ( err, model, stats ) {
+            
+            if ( err ) {
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -314,6 +319,11 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         };
 
         StarbugTemperatureData.mapReduce( avgConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -350,6 +360,11 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         };
 
         StarbugTemperatureData.mapReduce( maxConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -387,6 +402,11 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         };
 
         StarbugTemperatureData.mapReduce( maxConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -409,7 +429,7 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
     // callback function for processes running async
     function( err ){
         if ( err ) {
-            return next( errorHandler( err, res ) );
+            return errorHandler( err, res );
         }
         return res.json( output );
     } );
@@ -501,6 +521,12 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
         };
         
         SystemTemperatureData.mapReduce( avgConfig, function ( err, model, stats ) {
+            
+            if ( err ) {
+                console.log( err );
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -527,6 +553,12 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
         };
 
         SystemTemperatureData.mapReduce( avgConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                console.log( err );
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -563,6 +595,12 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
         };
 
         SystemTemperatureData.mapReduce( maxConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                console.log( err );
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -600,6 +638,12 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
         };
 
         SystemTemperatureData.mapReduce( maxConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                console.log( err );
+                return callback( err );
+            }
+
             model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
@@ -622,7 +666,7 @@ exports.systemTemperatureDataReportingStats = function ( req, res ) {
     // callback function for processes running async
     function( err ){
         if ( err ) {
-            return next( errorHandler( err, res ) );
+            return errorHandler( err, res );
         }
         return res.json( output );
     } );
