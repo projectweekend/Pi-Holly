@@ -290,6 +290,7 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         StarbugTemperatureData.mapReduce( avgConfig, function ( err, model, stats ) {
             
             if ( err ) {
+                console.log( err );
                 return callback( err );
             }
 
@@ -321,6 +322,7 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         StarbugTemperatureData.mapReduce( avgConfig, function ( err, model, stats ) {
 
             if ( err ) {
+                console.log( err );
                 return callback( err );
             }
 
@@ -362,6 +364,7 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         StarbugTemperatureData.mapReduce( maxConfig, function ( err, model, stats ) {
 
             if ( err ) {
+                console.log( err );
                 return callback( err );
             }
 
@@ -404,6 +407,7 @@ exports.starbugTemperatureDataStats = function ( req, res ) {
         StarbugTemperatureData.mapReduce( maxConfig, function ( err, model, stats ) {
 
             if ( err ) {
+                console.log( err );
                 return callback( err );
             }
 
