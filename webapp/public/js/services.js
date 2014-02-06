@@ -900,11 +900,9 @@ svcMod.factory( "HueLighting", function ( $http ) {
                         var putData = {
                             bri: parseInt(lightItem.data.state.bri)
                         };
-                        console.log( putData );
                         $http.put( apiUrl, putData ).
                             success( function ( data, status ) {
-                                console.log( data );
-                                // lightItem.data.state.bri = newBrightness;
+
                             } ).
                             error( function ( data, status ) {
                                 logError( data );
