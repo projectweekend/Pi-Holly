@@ -24,3 +24,11 @@
 #hue-lighting-control {
     margin-top: 60px;
 }
+
+.brightness-control {
+    margin-top: 10px;
+}
+
+.brightness-slider {
+    width: 100%;
+}

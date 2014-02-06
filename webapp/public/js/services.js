@@ -895,6 +895,21 @@ svcMod.factory( "HueLighting", function ( $http ) {
                                 logError( data );
                             } );
                     };
+                    lightItem.setBrightness = function ( ) {
+                        var apiUrl = HueLighting.buildRouteURL( "/api/hollydotlocal/lights/" + lightID + "/state" );
+                        var putData = {
+                            bri: parseInt(lightItem.data.state.bri)
+                        };
+                        console.log( putData );
+                        $http.put( apiUrl, putData ).
+                            success( function ( data, status ) {
+                                console.log( data );
+                                // lightItem.data.state.bri = newBrightness;
+                            } ).
+                            error( function ( data, status ) {
+                                logError( data );
+                            } );
+                    };
                 } ).
                 error( function ( data, status ) {
                     logError( data );

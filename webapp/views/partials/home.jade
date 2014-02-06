@@ -36,3 +36,6 @@ div(class="row")
                 div(ng-show="l.data.state.on")
                   div(class="btn-toolbar")
                     a(ng-click="l.turnOff()", class="btn btn-danger btn-block") Turn off
+                  div(class="brightness-control")
+                    label Brightness
+                    input(ng-model="l.data.state.bri", ng-change="l.setBrightness()", class="brightness-slider", type="range", min="1", max="255", value="{{ l.data.state.bri }}", name="{{ l.name }}_brightness")
