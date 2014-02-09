@@ -31,7 +31,6 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, Ind
 
     $scope.busTracker = BusTracker;
     $scope.busTracker.init();
-    $scope.busTracker.getBusPredictions();
 
     console.log( $scope.busTracker );
 

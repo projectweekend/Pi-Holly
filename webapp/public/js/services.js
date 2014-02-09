@@ -948,46 +948,22 @@ svcMod.factory( "BusTracker", function ( $http ) {
         values: {
             stops: []
         },
-        apiConfig: {
-            key: "",
-            stops: [
-                { stpid: 5518, rt: 56 }
-            ]
-        },
-        getKey: function () {
+        getBusPredictions: function () {
             var BusTracker = this;
-            var apiUrl = "/api/bustracker/key";
+            var apiUrl = "/api/bustracker/predictions";
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    BusTracker.apiConfig.key = data.value;
+                    BusTracker.values.stops = [];
+                    BusTracker.values.stops = data;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
                 } );
         },
-        buildBusPredictionURL: function ( config ) {
-            var apiKey = this.apiConfig.key;
-            var baseURL = "http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=";
-            return baseURL + apiKey + "&rt=" + config.rt + "&stpid=" + config.stpid;
-        },
-        getBusPredictions: function () {
-            var BusTracker = this;
-            BusTracker.values.stops = [];
-            BusTracker.apiConfig.stops.forEach( function ( element, index, array ) {
-                var predictionURL = BusTracker.buildBusPredictionURL( element );
-                $http.get( predictionURL ).
-                    success( function ( data, status ) {
-                        console.log( data );
-                    } ).
-                    error( function ( data, status ) {
-                        logError( data );
-                    } );
-            } );
-        },
         init: function () {
             var BusTracker = this;
-            if ( BusTracker.apiConfig.key === "" ) {
-                BusTracker.getKey();
+            if ( BusTracker.values.stops.length === 0 ) {
+                BusTracker.getBusPredictions();
             }
         }
     };
