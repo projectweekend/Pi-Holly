@@ -1,6 +1,7 @@
 var appModels = require( '../models' ),
 	http = require( 'http' ),
-	async = require( 'async' );
+	async = require( 'async' ),
+	xml2js = require( 'xml2js' );
 
 
 var errorHandler = function ( err, res ) {
@@ -11,7 +12,10 @@ var errorHandler = function ( err, res ) {
 
 var busTrackerKey = process.env.BUS_TRACKER_API_KEY || "Not defined";
 var busStopsToTrack = [
-	{ stpid: 5518, rt: 56 }
+	{ stpid: 5518, rt: 56 },
+	{ stpid: 5029, rt: 125 },
+	{ stpid: 5012, rt: 124 },
+	{ stpid: 15356, rt: 8 }
 ];
 
 exports.busTrackerPredictions = function ( req, res ) {
@@ -23,20 +27,26 @@ exports.busTrackerPredictions = function ( req, res ) {
 
 			var apiOptions = {
 				hostname: "www.ctabustracker.com",
-				path: "/bustime/api/v1/getpredictions?key=" + busTrackerKey + "&rt=" + busStopConfig.rt + "&stpid=" + busStopConfig.stpid
+				path: "/bustime/api/v1/getpredictions?key=" + busTrackerKey + "&rt=" + busStopConfig.rt + "&stpid=" + busStopConfig.stpid + "&top=5"
 			};
 			
 			http.get( apiOptions, function ( ctaRes ) {
 
-				var fullResponse = "";
+				var shittyXML = "";
 
 				ctaRes.on( 'data', function ( chunk ) {
-					fullResponse += chunk;
+					shittyXML += chunk;
 				} );
 
 				ctaRes.on( 'end', function () {
-					output.push( fullResponse );
-					callback();
+					xml2js.parseString( shittyXML, function ( err, awesomeJSON ) {
+						if ( err ) {
+							callback( err );
+						}
+						awesomeJSON.route = awesomeJSON['bustime-response']['prd'][0]['rt'][0];
+						output.push( awesomeJSON );
+						callback();
+					} );
 				} );
 
 			} ).on( 'error', function ( err ) {
@@ -52,8 +62,7 @@ exports.busTrackerPredictions = function ( req, res ) {
 		if ( err ) {
 			return errorHandler( err, res );
 		}
-		console.log( output );
-		return res.send( 200 );
+		return res.json( output );
 	} );
 
 };
