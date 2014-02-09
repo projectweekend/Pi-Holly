@@ -92,7 +92,7 @@ app.get('/api/article-keywords', api.articleKeywords);
 app.post('/api/news-articles/read', api.readArticle);
 app.post('/api/news-articles/ignore', api.ignoreArticle);
 
-app.get('/api/bustracker/key', api.bustrackerKey);
+app.get('/api/bustracker/key', api.busTrackerKey);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

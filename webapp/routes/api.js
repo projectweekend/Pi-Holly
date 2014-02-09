@@ -965,6 +965,10 @@ exports.articleKeywords = function ( req, res ) {
 };
 
 
-exports.bustrackerKey = function ( req, res ) {
+exports.busTrackerKey = function ( req, res ) {
+
+    var busTrackerKey = process.env.BUS_TRACKER_API_KEY || "Not defined";
+
+    res.json( { value: busTrackerKey } );
 
 };
