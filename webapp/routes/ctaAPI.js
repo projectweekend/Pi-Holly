@@ -46,7 +46,7 @@ exports.busTrackerPredictions = function ( req, res ) {
 						}
 
 						var formattedJSON = {
-							title: "",
+							title: busStopConfig.rt + " - No data available",
 							predictions: []
 						};
 
