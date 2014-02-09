@@ -18,7 +18,7 @@ cMod.controller( 'AppCtrl', function ( $scope, $location ) {
 } );
 
 
-cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorHumidityReporting, HueLighting, BusTracker ) {
+cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorHumidityReporting, HueLighting ) {
 
     $scope.indoorTemperatureReporting = IndoorTempReporting;
     $scope.indoorTemperatureReporting.init( 'F' );
@@ -28,11 +28,6 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, Ind
 
     $scope.hueLighting = HueLighting;
     $scope.hueLighting.init();
-
-    $scope.busTracker = BusTracker;
-    $scope.busTracker.init();
-
-    console.log( $scope.busTracker );
 
 } );
 
@@ -68,6 +63,14 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
 
     $scope.starbugTempStats = StarbugTempStats;
     $scope.starbugTempStats.init();
+
+} );
+
+
+cMod.controller( 'TransitCtrl', function ( $scope, BusTracker ) {
+
+    $scope.busTracker = BusTracker;
+    $scope.busTracker.init();
 
 } );
 

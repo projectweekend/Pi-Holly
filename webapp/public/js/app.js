@@ -26,6 +26,10 @@ config( function ( $routeProvider, $locationProvider, $httpProvider ) {
         templateUrl: 'partials/system',
         controller: 'SystemCtrl'
     } ).
+    when( '/transit', {
+        templateUrl: 'partials/transit',
+        controller: 'TransitCtrl'
+    } ).
     when( '/news', {
         templateUrl: 'partials/news',
         controller: 'NewsCtrl'
