@@ -59,9 +59,9 @@ exports.busTrackerPredictions = function ( req, res ) {
 
 						} else {
 
-							if ( awesomeJSON['bustime-response']['prd'].length > 0 ) {
+							if ( awesomeJSON['bustime-response']['prd'] ) {
 
-								if ( awesomeJSON['bustime-response']['prd'][0]['rt'].length > 0 ) {
+								if ( awesomeJSON['bustime-response']['prd'][0]['rt'] ) {
 
 									var busRoute = awesomeJSON['bustime-response']['prd'][0]['rt'][0];
 									var routeDirection = awesomeJSON['bustime-response']['prd'][0]['rtdir'][0];
