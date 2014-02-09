@@ -72,7 +72,8 @@ exports.busTrackerPredictions = function ( req, res ) {
 										formattedJSON.predictions.push( {
 											type: prd.typ[0],
 											time: prd.prdtm[0].split( " " )[1],
-											distanceToStop: prd.dstp[0]
+											distanceToStop: prd.dstp[0],
+											delayed: prd.dly[0]
 										} );
 
 									} );
