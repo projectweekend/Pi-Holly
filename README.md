@@ -32,6 +32,9 @@ Holly is named after the ship's computer in one of my all-time favorite televisi
 ### System Info Charts
 ![System Info Page Screen Shot](http://i.imgur.com/X24o0e7.png)
 
+### CTA Transit Info
+![Transit Page Screen Shot](http://imgur.com/c206GSF)
+
 ### News
 ![News Screen Shot](http://i.imgur.com/gVPEFek.jpg)
 
@@ -242,7 +245,7 @@ This returns an object with the current, average, min, and max temperatures.
 
 **GET:** `/api/starbug/temperature/stats`
 
-**Recent:**
+**Response:**
 ```
  {
      average: 
@@ -261,6 +264,55 @@ This returns an object with the current, average, min, and max temperatures.
          fahrenheit: 116.6
      }
  }
+```
+
+## Get bus tracker predictions
+
+**GET:** `/api/bustracker/predictions`
+
+**Response:**
+```
+ [
+     {
+         title: "56 - Northbound",
+         predictions: [
+             {
+                 type: "A",
+                 time: "16:56",
+                 distanceToStop: "6863",
+                 delayed: false
+             },
+             {
+                 type: "A",
+                 time: "17:11",
+                 distanceToStop: "22118",
+                 delayed: false
+             }
+         ]
+     },
+     {
+         title: "8 - Northbound",
+         predictions: [
+             {
+                 type: "A",
+                 time: "16:58",
+                 distanceToStop: "9826",
+                 delayed: false
+             },
+             {
+                 type: "A",
+                 time: "17:12",
+                 distanceToStop: "22648",
+                 delayed: false
+             }
+         ]
+     },
+     {
+         title: "125 - No service scheduled",
+         predictions: []
+     },
+     ...
+ ]
 ```
 
 ## Get news sources
