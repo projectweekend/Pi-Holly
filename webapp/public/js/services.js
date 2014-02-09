@@ -962,9 +962,7 @@ svcMod.factory( "BusTracker", function ( $http ) {
         },
         init: function () {
             var BusTracker = this;
-            if ( BusTracker.values.stops.length === 0 ) {
-                BusTracker.getBusPredictions();
-            }
+            BusTracker.getBusPredictions();
         }
     };
 
