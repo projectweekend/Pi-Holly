@@ -963,3 +963,8 @@ exports.articleKeywords = function ( req, res ) {
     } );
 
 };
+
+
+exports.bustrackerKey = function ( req, res ) {
+
+};
