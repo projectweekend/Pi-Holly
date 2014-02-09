@@ -68,13 +68,19 @@ exports.busTrackerPredictions = function ( req, res ) {
 									
 									formattedJSON.title = busRoute + " - " + routeDirection;
 									awesomeJSON['bustime-response']['prd'].forEach( function ( prd, index, array ) {
-										
-										formattedJSON.predictions.push( {
+
+										var formattedPrediction = {
 											type: prd.typ[0],
 											time: prd.prdtm[0].split( " " )[1],
 											distanceToStop: prd.dstp[0],
-											delayed: prd.dly[0]
-										} );
+											delayed: false
+										};
+
+										if ( prd.dly ) {
+											formattedPrediction.delayed = true;
+										}
+										
+										formattedJSON.predictions.push( formattedPrediction );
 
 									} );
 
