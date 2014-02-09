@@ -945,13 +945,15 @@ svcMod.factory( "HueLighting", function ( $http ) {
 svcMod.factory( "BusTracker", function ( $http ) {
 
     return {
-        key: "",
+        values: {
+            key: "",
+        },
         getKey: function () {
             var BusTracker = this;
             var apiUrl = "/api/bustracker/key";
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    BusTracker.key = data.value;
+                    BusTracker.values.key = data.value;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
@@ -959,7 +961,7 @@ svcMod.factory( "BusTracker", function ( $http ) {
         },
         init: function () {
             var BusTracker = this;
-            if ( BusTracker.key === "" ) {
+            if ( BusTracker.values.key === "" ) {
                 BusTracker.getKey();
             }
         }
