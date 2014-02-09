@@ -1,1 +1,38 @@
-div TRANSIT
+div(class="row")
+
+  div(class="col-md-8")
+    
+    div(class="row")
+      div(class="col-md-12")    
+        div(class="page-header")
+          h1 Bus Tracker
+        div(ng-repeat=" stop in busTracker.values.stops | orderBy:'-title'", class="bus-stop")
+          h3(ng-class="{ 'text-primary': stop.predictions.length, 'text-danger': !stop.predictions.length }") {{ stop.title }}
+          div(ng-if="stop.predictions.length", class="table-responsive")
+            table(class="table")
+              thead
+                tr
+                  th Estimated Arrival Time
+                  th Distance From Stop
+                  th Status
+              tbody
+                tr(ng-repeat="p in stop.predictions")
+                  td {{ p.time }}
+                  td {{ p.distanceToStop }} feet
+                  td 
+                    span(ng-if="p.delayed", class="text-danger") DELAYED
+                    span(ng-if="!p.delayed", class="text-success") ON TIME
+
+    div(class="row")
+      div(class="col-md-12")    
+        div(class="page-header")
+          h1 L Tracker
+            small  coming soon...
+
+  div(class="col-md-4")
+    
+    div(id="transit-config", class="panel panel-default")
+      div(class="panel-heading")
+        h3(class="panel-title") Configuration
+      div(class="panel-body")
+        p Coming soon...
