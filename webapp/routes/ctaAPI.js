@@ -1,5 +1,6 @@
 var appModels = require( '../models' ),
- async = require( 'async' );
+	http = require( 'http' ),
+	async = require( 'async' );
 
 
 var errorHandler = function ( err, res ) {
@@ -15,18 +16,44 @@ var busStopsToTrack = [
 
 exports.busTrackerPredictions = function ( req, res ) {
 
+	var output = [];
 
 	var buildAsyncCallback = function ( busStopConfig ) {
-		var apiURL = "http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=" + busTrackerKey + "&rt=" + busStopConfig.rt + "&stpid=" + busStopConfig.stpid;
 		return function ( callback ) {
+
+			var apiOptions = {
+				hostname: "www.ctabustracker.com",
+				path: "/bustime/api/v1/getpredictions?key=" + busTrackerKey + "&rt=" + busStopConfig.rt + "&stpid=" + busStopConfig.stpid
+			};
 			
+			http.get( apiOptions, function ( ctaRes ) {
+
+				var fullResponse = "";
+
+				ctaRes.on( 'data', function ( chunk ) {
+					fullResponse += chunk;
+				} );
+
+				ctaRes.on( 'end', function () {
+					output.push( fullResponse );
+					callback();
+				} );
+
+			} ).on( 'error', function ( err ) {
+				callback( err );
+			} );
+
 		};
 	};
 
+	var asyncTaskList = busStopsToTrack.map( buildAsyncCallback );
 
-
-
-
-    res.json( { value: busTrackerKey } );
+	async.parallel( asyncTaskList, function ( err ) {
+		if ( err ) {
+			return errorHandler( err, res );
+		}
+		console.log( output );
+		return res.send( 200 );
+	} );
 
 };
