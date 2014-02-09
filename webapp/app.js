@@ -5,7 +5,11 @@
 
 var express = require('express'),
   routes = require('./routes'),
-  api = require('./routes/api'),
+  indoorEnvAPI = require('./routes/indoorEnvironmentalAPI'),
+  systemDataAPI = require('./routes/systemDataAPI'),
+  starbugDataAPI = require('./routes/starbugDataAPI'),
+  newsAPI = require('./routes/newsAPI'),
+  ctaAPI = require('./routes/ctaAPI'),
   http = require('http'),
   path = require('path'),
   mongoose = require('mongoose');
@@ -57,42 +61,42 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // JSON API
-app.get('/api/indoor/temperature', api.indoorTemperatureData);
-app.post('/api/indoor/temperature', api.indoorTemperatureData);
-app.post('/api/indoor/temperature/bulk', api.indoorTemperatureDataBulk);
-app.get('/api/indoor/temperature/recent', api.indoorTemperatureDataRecent);
+app.get('/api/indoor/temperature', indoorEnvAPI.indoorTemperatureData);
+app.post('/api/indoor/temperature', indoorEnvAPI.indoorTemperatureData);
+app.post('/api/indoor/temperature/bulk', indoorEnvAPI.indoorTemperatureDataBulk);
+app.get('/api/indoor/temperature/recent', indoorEnvAPI.indoorTemperatureDataRecent);
 
-app.get('/api/indoor/humidity', api.indoorHumidityData);
-app.post('/api/indoor/humidity', api.indoorHumidityData);
-app.post('/api/indoor/humidity/bulk', api.indoorHumidityDataBulk);
-app.get('/api/indoor/humidity/recent', api.indoorHumidityDataRecent);
+app.get('/api/indoor/humidity', indoorEnvAPI.indoorHumidityData);
+app.post('/api/indoor/humidity', indoorEnvAPI.indoorHumidityData);
+app.post('/api/indoor/humidity/bulk', indoorEnvAPI.indoorHumidityDataBulk);
+app.get('/api/indoor/humidity/recent', indoorEnvAPI.indoorHumidityDataRecent);
 
-app.get('/api/starbug/temperature', api.starbugTemperatureData);
-app.post('/api/starbug/temperature', api.starbugTemperatureData);
-app.get('/api/starbug/temperature/recent', api.starbugTemperatureDataRecent);
-app.get('/api/starbug/temperature/stats', api.starbugTemperatureDataStats);
+app.get('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
+app.post('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
+app.get('/api/starbug/temperature/recent', starbugDataAPI.starbugTemperatureDataRecent);
+app.get('/api/starbug/temperature/stats', starbugDataAPI.starbugTemperatureDataStats);
 
-app.get('/api/reporting/system-temperature-data/all', api.systemTemperatureDataReportingAll);
-app.get('/api/reporting/system-temperature-data/recent', api.systemTemperatureDataReportingRecent);
-app.get('/api/reporting/system-temperature-data/stats', api.systemTemperatureDataReportingStats);
+app.get('/api/reporting/system-temperature-data/all', systemDataAPI.systemTemperatureDataReportingAll);
+app.get('/api/reporting/system-temperature-data/recent', systemDataAPI.systemTemperatureDataReportingRecent);
+app.get('/api/reporting/system-temperature-data/stats', systemDataAPI.systemTemperatureDataReportingStats);
 
-app.get('/api/system-temperature-data', api.systemTemperatureData);
-app.get('/api/system-memory-data', api.systemMemoryData);
-app.get('/api/system-storage-data', api.systemStorageData);
-app.get('/api/system-config-data', api.systemConfigData);
+app.get('/api/system-temperature-data', systemDataAPI.systemTemperatureData);
+app.get('/api/system-memory-data', systemDataAPI.systemMemoryData);
+app.get('/api/system-storage-data', systemDataAPI.systemStorageData);
+app.get('/api/system-config-data', systemDataAPI.systemConfigData);
 
-app.get('/api/news-source/config', api.newsSourceConfig);
-app.post('/api/news-source/config', api.newsSourceConfig);
-app.put('/api/news-source/config', api.newsSourceConfig);
-app.delete('/api/news-source/config', api.newsSourceConfig);
+app.get('/api/news-source/config', newsAPI.newsSourceConfig);
+app.post('/api/news-source/config', newsAPI.newsSourceConfig);
+app.put('/api/news-source/config', newsAPI.newsSourceConfig);
+app.delete('/api/news-source/config', newsAPI.newsSourceConfig);
 
-app.get('/api/news-articles', api.newsArticles);
-app.get('/api/article-keywords', api.articleKeywords);
+app.get('/api/news-articles', newsAPI.newsArticles);
+app.get('/api/article-keywords', newsAPI.articleKeywords);
 
-app.post('/api/news-articles/read', api.readArticle);
-app.post('/api/news-articles/ignore', api.ignoreArticle);
+app.post('/api/news-articles/read', newsAPI.readArticle);
+app.post('/api/news-articles/ignore', newsAPI.ignoreArticle);
 
-app.get('/api/bustracker/key', api.busTrackerKey);
+app.get('/api/bustracker/key', ctaAPI.busTrackerKey);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

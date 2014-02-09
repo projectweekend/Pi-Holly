@@ -946,7 +946,7 @@ svcMod.factory( "BusTracker", function ( $http ) {
 
     return {
         values: {
-            
+            stops: []
         },
         apiConfig: {
             key: "",
@@ -969,6 +969,20 @@ svcMod.factory( "BusTracker", function ( $http ) {
             var apiKey = this.apiConfig.key;
             var baseURL = "http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=";
             return baseURL + apiKey + "&rt=" + config.rt + "&stpid=" + config.stpid;
+        },
+        getBusPredictions: function () {
+            var BusTracker = this;
+            BusTracker.values.stops = [];
+            BusTracker.apiConfig.stops.forEach( function ( element, index, array ) {
+                var predictionURL = BusTracker.buildBusPredictionURL( element );
+                $http.get( predictionURL ).
+                    success( function ( data, status ) {
+                        console.log( data );
+                    } ).
+                    error( function ( data, status ) {
+                        logError( data );
+                    } );
+            } );
         },
         init: function () {
             var BusTracker = this;
