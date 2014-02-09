@@ -946,22 +946,33 @@ svcMod.factory( "BusTracker", function ( $http ) {
 
     return {
         values: {
+            
+        },
+        apiConfig: {
             key: "",
+            stops: [
+                { stpid: 5518, rt: 56 }
+            ]
         },
         getKey: function () {
             var BusTracker = this;
             var apiUrl = "/api/bustracker/key";
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    BusTracker.values.key = data.value;
+                    BusTracker.apiConfig.key = data.value;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
                 } );
         },
+        buildBusPredictionURL: function ( config ) {
+            var apiKey = this.apiConfig.key;
+            var baseURL = "http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=";
+            return baseURL + apiKey + "&rt=" + config.rt + "&stpid=" + config.stpid;
+        },
         init: function () {
             var BusTracker = this;
-            if ( BusTracker.values.key === "" ) {
+            if ( BusTracker.apiConfig.key === "" ) {
                 BusTracker.getKey();
             }
         }
