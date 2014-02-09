@@ -11,7 +11,6 @@ var errorHandler = function ( err, res ) {
 
 
 var busTrackerKey = process.env.BUS_TRACKER_API_KEY || "Not defined";
-console.log( busTrackerKey );
 var busStopsToTrack = [
 	{ stpid: 5518, rt: 56 },
 	{ stpid: 5029, rt: 125 },
@@ -59,20 +58,28 @@ exports.busTrackerPredictions = function ( req, res ) {
 							formattedJSON.title = busRoute + " - " + message;
 
 						} else {
-							
-							var busRoute = awesomeJSON['bustime-response']['prd'][0]['rt'][0];
-							var routeDirection = awesomeJSON['bustime-response']['prd'][0]['rtdir'][0];
-							
-							formattedJSON.title = busRoute + " - " + routeDirection;
-							awesomeJSON['bustime-response']['prd'].forEach( function ( prd, index, array ) {
-								
-								formattedJSON.predictions.push( {
-									type: prd.typ[0],
-									time: prd.prdtm[0].split( " " )[1],
-									distanceToStop: prd.dstp[0]
-								} );
 
-							} );
+							if ( awesomeJSON['bustime-response']['prd'].length > 0 ) {
+
+								if ( awesomeJSON['bustime-response']['prd'][0]['rt'].length > 0 ) {
+
+									var busRoute = awesomeJSON['bustime-response']['prd'][0]['rt'][0];
+									var routeDirection = awesomeJSON['bustime-response']['prd'][0]['rtdir'][0];
+									
+									formattedJSON.title = busRoute + " - " + routeDirection;
+									awesomeJSON['bustime-response']['prd'].forEach( function ( prd, index, array ) {
+										
+										formattedJSON.predictions.push( {
+											type: prd.typ[0],
+											time: prd.prdtm[0].split( " " )[1],
+											distanceToStop: prd.dstp[0]
+										} );
+
+									} );
+
+								}
+
+							}
 
 						}
 						output.push( formattedJSON );
@@ -90,11 +97,17 @@ exports.busTrackerPredictions = function ( req, res ) {
 
 	var asyncTaskList = busStopsToTrack.map( buildAsyncCallback );
 
-	async.parallel( asyncTaskList, function ( err ) {
-		if ( err ) {
-			return errorHandler( err, res );
-		}
-		return res.json( output );
-	} );
+	if ( busTrackerKey ) {
+
+		async.parallel( asyncTaskList, function ( err ) {
+			if ( err ) {
+				return errorHandler( err, res );
+			}
+			return res.json( output );
+		} );
+
+	} else {
+		return res.json( { error: "CTA API key is missing"} );
+	}
 
 };
