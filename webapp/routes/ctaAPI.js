@@ -11,6 +11,7 @@ var errorHandler = function ( err, res ) {
 
 
 var busTrackerKey = process.env.BUS_TRACKER_API_KEY || "Not defined";
+console.log( busTrackerKey );
 var busStopsToTrack = [
 	{ stpid: 5518, rt: 56 },
 	{ stpid: 5029, rt: 125 },
