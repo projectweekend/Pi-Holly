@@ -33,7 +33,7 @@ Holly is named after the ship's computer in one of my all-time favorite televisi
 ![System Info Page Screen Shot](http://i.imgur.com/X24o0e7.png)
 
 ### CTA Transit Info
-![Transit Page Screen Shot](http://imgur.com/c206GSF)
+![Transit Page Screen Shot](http://i.imgur.com/c206GSF.png)
 
 ### News
 ![News Screen Shot](http://i.imgur.com/gVPEFek.jpg)
