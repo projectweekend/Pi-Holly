@@ -948,6 +948,10 @@ svcMod.factory( "BusTracker", function ( $http ) {
         values: {
             stops: []
         },
+        status: {
+            isLoading: false,
+            receivedError: false
+        },
         getBusPredictions: function () {
             var BusTracker = this;
             var apiUrl = "/api/bustracker/predictions";
@@ -955,13 +959,16 @@ svcMod.factory( "BusTracker", function ( $http ) {
                 success( function ( data, status ) {
                     BusTracker.values.stops = [];
                     BusTracker.values.stops = data;
+                    BusTracker.status.isLoading = false;
                 } ).
                 error( function ( data, status ) {
+                    BusTracker.status.receivedError = true;
                     logError( data );
                 } );
         },
         init: function () {
             var BusTracker = this;
+            BusTracker.status.isLoading = true;
             BusTracker.getBusPredictions();
         }
     };

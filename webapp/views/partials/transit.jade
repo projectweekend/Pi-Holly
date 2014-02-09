@@ -6,7 +6,14 @@ div(class="row")
       div(class="col-md-12")    
         div(class="page-header")
           h1 Bus Tracker
-        div(ng-repeat=" stop in busTracker.values.stops | orderBy:'-title'", class="bus-stop")
+
+        div(ng-if="busTracker.status.isLoading", class="alert alert-info")
+          strong Loading CTA data...
+
+        div(ng-if="busTracker.status.receivedError", class="alert alert-danger")
+          strong Error getting data from CTA
+        
+        div(ng-if="!busTracker.status.isLoading && !busTracker.status.receivedError", ng-repeat=" stop in busTracker.values.stops | orderBy:'-title'", class="bus-stop")
           h3(ng-class="{ 'text-primary': stop.predictions.length, 'text-danger': !stop.predictions.length }") {{ stop.title }}
           div(ng-if="stop.predictions.length", class="table-responsive")
             table(class="table")
