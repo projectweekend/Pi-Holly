@@ -21,7 +21,8 @@
     margin-bottom: 10px;
 }
 
-#hue-lighting-control {
+#hue-lighting-control,
+#transit-config {
     margin-top: 60px;
 }
 
