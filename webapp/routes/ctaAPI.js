@@ -40,12 +40,43 @@ exports.busTrackerPredictions = function ( req, res ) {
 
 				ctaRes.on( 'end', function () {
 					xml2js.parseString( shittyXML, function ( err, awesomeJSON ) {
+
 						if ( err ) {
 							callback( err );
 						}
-						awesomeJSON.route = awesomeJSON['bustime-response']['prd'][0]['rt'][0];
+
+						var formattedJSON = {
+							title: "",
+							predictions: []
+						};
+
+						if ( awesomeJSON['bustime-response']['error'] ) {
+							
+							var busRoute = awesomeJSON['bustime-response']['error'][0]['rt'];
+							var message = awesomeJSON['bustime-response']['error'][0]['msg'];
+
+							formattedJSON.title = busRoute + " - " + message;
+
+						} else {
+							
+							var busRoute = awesomeJSON['bustime-response']['prd'][0]['rt'][0];
+							var routeDirection = awesomeJSON['bustime-response']['prd'][0]['rtdir'][0];
+							
+							formattedJSON.title = busRoute + " - " + routeDirection;
+							awesomeJSON['bustime-response']['prd'].forEach( function ( prd, index, array ) {
+								
+								formattedJSON.predictions.push( {
+									type: prd.typ[0],
+									time: prd.prdtm[0],
+									distanceToStop: prd.dstp[0]
+								} );
+								
+							} );
+
+						}
 						output.push( awesomeJSON );
 						callback();
+
 					} );
 				} );
 
