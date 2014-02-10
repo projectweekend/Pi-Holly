@@ -161,7 +161,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
         },
         buildRecentTempChart: function ( display_units ) {
             var recentTempChart = this.recentTempChart;
-            var apiUrl = "/api/reporting/system/temperature/recent";
+            var apiUrl = "/api/system/temperature/recent";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -280,7 +280,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
         },
         getValues: function () {
             var values = this.values;
-            var apiUrl = "/api/reporting/system/temperature/stats";
+            var apiUrl = "/api/system/temperature/stats";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
