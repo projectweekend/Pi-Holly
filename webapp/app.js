@@ -76,14 +76,14 @@ app.post('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
 app.get('/api/starbug/temperature/recent', starbugDataAPI.starbugTemperatureDataRecent);
 app.get('/api/starbug/temperature/stats', starbugDataAPI.starbugTemperatureDataStats);
 
-app.get('/api/reporting/system-temperature-data/all', systemDataAPI.systemTemperatureDataReportingAll);
-app.get('/api/reporting/system-temperature-data/recent', systemDataAPI.systemTemperatureDataReportingRecent);
-app.get('/api/reporting/system-temperature-data/stats', systemDataAPI.systemTemperatureDataReportingStats);
+app.get('/api/system/temperature/all', systemDataAPI.systemTemperatureDataReportingAll);
+app.get('/api/system/temperature/recent', systemDataAPI.systemTemperatureDataReportingRecent);
+app.get('/api/system/temperature/stats', systemDataAPI.systemTemperatureDataReportingStats);
 
-app.get('/api/system-temperature-data', systemDataAPI.systemTemperatureData);
-app.get('/api/system-memory-data', systemDataAPI.systemMemoryData);
-app.get('/api/system-storage-data', systemDataAPI.systemStorageData);
-app.get('/api/system-config-data', systemDataAPI.systemConfigData);
+app.get('/api/system/temperature', systemDataAPI.systemTemperatureData);
+app.get('/api/system/memory', systemDataAPI.systemMemoryData);
+app.get('/api/system/storage', systemDataAPI.systemStorageData);
+app.get('/api/system/config', systemDataAPI.systemConfigData);
 
 app.get('/api/news-source/config', newsAPI.newsSourceConfig);
 app.post('/api/news-source/config', newsAPI.newsSourceConfig);

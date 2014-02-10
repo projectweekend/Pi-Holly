@@ -161,7 +161,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
         },
         buildRecentTempChart: function ( display_units ) {
             var recentTempChart = this.recentTempChart;
-            var apiUrl = "/api/reporting/system-temperature-data/recent";
+            var apiUrl = "/api/reporting/system/temperature/recent";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -235,7 +235,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
         },
         getValues: function () {
             var values = this.values;
-            var apiUrl = "/api/system-temperature-data";
+            var apiUrl = "/api/system/temperature";
 
             $http.get( apiUrl ).
                 success( function ( data, status) {
@@ -280,7 +280,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
         },
         getValues: function () {
             var values = this.values;
-            var apiUrl = "/api/reporting/system-temperature-data/stats";
+            var apiUrl = "/api/reporting/system/temperature/stats";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -354,7 +354,7 @@ svcMod.factory( "SystemMemoryCurrent", function ( $http, socket ) {
         getValues: function () {
             var SystemMemoryCurrent = this;
             var values = this.values;
-            var apiUrl = "/api/system-memory-data";
+            var apiUrl = "/api/system/memory";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -421,7 +421,7 @@ svcMod.factory( "SystemStorageCurrent", function ( $http, socket ) {
         getValues: function () {
             var SystemStorageCurrent = this;
             var values = this.values;
-            var apiUrl = "/api/system-storage-data";
+            var apiUrl = "/api/system/storage";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -464,7 +464,7 @@ svcMod.factory( "SystemConfigCurrent", function ( $http, socket ) {
         },
         getValues: function () {
             var values = this.values;
-            var apiUrl = "/api/system-config-data";
+            var apiUrl = "/api/system/config";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
