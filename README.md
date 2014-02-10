@@ -16,7 +16,10 @@ Each of these workers is scheduled using `crontab`. Holly also receives external
 Holly is integrated with the [Philips HUE Wireless Lighting](http://www.meethue.com) system. This component is fairly basic at the moment. Right now it will:
 * Find an existing bridge on the local network
 * Handle the first time authorization/pairing process
-* Present on/off buttons for each existing light in the Home section. An example of the controls can be found in the **Home Temperature Chart** screen shot below.
+* Present on/off buttons for each existing light in the Home section.
+* While a light is on, display a slider control to change the current brightness.
+
+An example of the controls can be found in the **Home Temperature Chart** screen shot below.
 
 Holly is named after the ship's computer in one of my all-time favorite television shows, [Red Dwarf](http://en.wikipedia.org/wiki/Holly_(Red_Dwarf)). Growing up, I only caught this British Comedy/Sci-Fi sporadically on PBS, but it made a lasting impression. If it wasn't already obvious, this is definitely a work in progress. Stay tuned. :)
 
