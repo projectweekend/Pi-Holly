@@ -18,6 +18,29 @@ var busStopsToTrack = [
 	{ stpid: 15356, rt: 8 }
 ];
 
+
+exports.busTrackerRoutes = function ( req, res ) {
+
+	var output = [];
+
+	var apiOptions = {
+		hostname: "www.ctabustracker.com",
+		path: "/bustime/api/v1/getroutes?key=" + busTrackerKey
+	};
+
+	http.get( apiOptions, function ( ctaRes ) {
+
+		var shittyXML = "";
+
+		ctaRes.on( 'data', function ( chunk ) {
+			shittyXML += chunk;
+		} );
+
+	});
+
+};
+
+
 exports.busTrackerPredictions = function ( req, res ) {
 
 	var output = [];
