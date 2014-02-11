@@ -62,6 +62,42 @@ exports.busTrackerRoutes = function ( req, res ) {
 };
 
 
+exports.busTrackerRouteDirections = function ( req, res ) {
+
+	var output = [];
+
+	var apiOptions = {
+		hostname: "www.ctabustracker.com",
+		path: "/bustime/api/v1/getdirections?key=" + busTrackerKey + "&rt=" + req.query.route
+	};
+
+	http.get( apiOptions, function ( ctaRes ) {
+
+		var shittyXML = "";
+
+		ctaRes.on( 'data', function ( chunk ) {
+			shittyXML += chunk;
+		} );
+
+		ctaRes.on( 'end', function () {
+			xml2js.parseString( shittyXML, function ( err, awesomeJSON ) {
+				
+				if ( err ) {
+					return errorHandler( err, res );
+				}
+
+				var directions = awesomeJSON['bustime-response']['dir'];
+				
+				return res.json( directions );
+
+			} );
+		} );
+
+	} );
+
+};
+
+
 exports.busTrackerPredictions = function ( req, res ) {
 
 	var output = [];

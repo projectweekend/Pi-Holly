@@ -97,6 +97,7 @@ app.post('/api/news-articles/read', newsAPI.readArticle);
 app.post('/api/news-articles/ignore', newsAPI.ignoreArticle);
 
 app.get('/api/bustracker/routes', ctaAPI.busTrackerRoutes);
+app.get('/api/bustracker/directions', ctaAPI.busTrackerRouteDirections);
 app.get('/api/bustracker/predictions', ctaAPI.busTrackerPredictions);
 
 // redirect all others to the index (HTML5 history)
