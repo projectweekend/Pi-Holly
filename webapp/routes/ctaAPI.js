@@ -38,18 +38,22 @@ exports.busTrackerRoutes = function ( req, res ) {
 
 		ctaRes.on( 'end', function () {
 			xml2js.parseString( shittyXML, function ( err, awesomeJSON ) {
+				
 				if ( err ) {
 					return errorHandler( err, res );
 				}
-				var formattedJSON = {
-					route: "",
-					routeName: ""
-				};
 
 				var routes = awesomeJSON['bustime-response']['route'];
 
-				output.push( awesomeJSON );
+				routes.forEach( function ( r, index, array ) {
+					output.push( {
+						route: r.rt[0],
+						routeName: r.rtnm[0]
+					} );
+				} );
+				
 				return res.json( output );
+
 			} );
 		} );
 
