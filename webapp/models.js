@@ -119,3 +119,11 @@ NewsArticleKeywordSchema = Schema( {
 	score: Number
 } );
 NewsArticleKeyword = mongoose.model( 'NewsArticleKeyword', NewsArticleKeywordSchema );
+
+
+BusStopConfigSchema = Schema( {
+	id: ObjectId,
+	spid: String,
+	rt: String
+} );
+BusStopConfig = mongoose.model( 'BusStopConfig', BusStopConfigSchema );
