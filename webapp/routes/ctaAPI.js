@@ -43,14 +43,20 @@ exports.busTrackerRoutes = function ( req, res ) {
 					return errorHandler( err, res );
 				}
 
-				var routes = awesomeJSON['bustime-response']['route'];
+				if ( awesomeJSON['bustime-response']['error'] ) {
+					output.push( awesomeJSON['bustime-response'] );
+				}
 
-				routes.forEach( function ( r, index, array ) {
-					output.push( {
-						route: r.rt[0],
-						routeName: r.rtnm[0]
+				if ( awesomeJSON['bustime-response']['route'] ) {
+					var routes = awesomeJSON['bustime-response']['route'];
+
+					routes.forEach( function ( r, index, array ) {
+						output.push( {
+							route: r.rt[0],
+							routeName: r.rtnm[0]
+						} );
 					} );
-				} );
+				}
 				
 				return res.json( output );
 
