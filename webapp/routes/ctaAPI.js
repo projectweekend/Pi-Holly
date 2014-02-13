@@ -92,9 +92,62 @@ exports.busTrackerRouteDirections = function ( req, res ) {
 					return errorHandler( err, res );
 				}
 
+				if ( awesomeJSON['bustime-response']['error'] ) {
+					return res.json( awesomeJSON['bustime-response'] );
+				}
+
 				var directions = awesomeJSON['bustime-response']['dir'];
 				
 				return res.json( directions );
+
+			} );
+		} );
+
+	} );
+
+};
+
+
+exports.busTrackerRouteStops = function ( req, res ) {
+
+	var output = [];
+
+	var apiOptions = {
+		hostname: "www.ctabustracker.com",
+		path: "/bustime/api/v1/getstops?key=" + busTrackerKey + "&rt=" + req.query.route + "&dir=" + req.query.direction
+	};
+
+	http.get( apiOptions, function ( ctaRes ) {
+
+		var shittyXML = "";
+
+		ctaRes.on( 'data', function ( chunk ) {
+			shittyXML += chunk;
+		} );
+
+		ctaRes.on( 'end', function () {
+			xml2js.parseString( shittyXML, function ( err, awesomeJSON ) {
+
+				if ( err ) {
+					return errorHandler( err, res );
+				}
+
+				if ( awesomeJSON['bustime-response']['error'] ) {
+					return res.json( awesomeJSON['bustime-response'] );
+				}
+
+				var stops = awesomeJSON['bustime-response']['stop'];
+
+				stops.forEach( function ( s, index, array ) {
+					output.push( {
+						stopID: s.stpid[0],
+						stopName: s.stpnm[0],
+						latitude: s.lat[0],
+						longitude: s.lon[0]
+					} );
+				} );
+
+				return res.json( output );
 
 			} );
 		} );
