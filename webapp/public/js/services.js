@@ -976,7 +976,7 @@ svcMod.factory( "BusTracker", function ( $http ) {
 } );
 
 
-svcMod.factory( "BusTrackerConfig", function ( $http ) {
+svcMod.factory( "BusTrackerConfig", function ( $http, BusTracker ) {
 
     return {
         values: {
@@ -1032,11 +1032,24 @@ svcMod.factory( "BusTrackerConfig", function ( $http ) {
             };
             $http.post( apiUrl, newFavorite ).
                 success( function ( data, status ) {
-
+                    BusTracker.getBusPredictions();
+                    BusTrackerConfig.clearSelections();
+                    BusTrackerConfig.resetForm();
                 } ).
                 error( function ( data, status ) {
                     logError( data );
                 } );
+        },
+        clearSelections: function () {
+            var BusTrackerConfig = this;
+            BusTrackerConfig.selected.route = "";
+            BusTrackerConfig.selected.direction = "";
+            BusTrackerConfig.selected.stop = "";
+        },
+        resetForm: function () {
+            var BusTrackerConfig = this;
+            BusTrackerConfig.directions = [];
+            BusTrackerConfig.stops = [];
         },
         init: function () {
             var BusTrackerConfig = this;

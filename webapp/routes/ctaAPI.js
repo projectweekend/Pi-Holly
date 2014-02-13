@@ -19,7 +19,7 @@ var busStopsToTrack = [
 ];
 
 
-exports.busTrackerFavorites = function ( res, req ) {
+exports.busTrackerFavorites = function ( req, res ) {
 
 	if ( req.method == 'POST' ) {
 		var newFavorite = {
@@ -35,7 +35,7 @@ exports.busTrackerFavorites = function ( res, req ) {
 	}
 
 	if ( req.method == 'GET' ) {
-		var q = BusStopConfig.find( ).sort( 'rt' );
+		var q = BusStopConfig.find( ).sort( 'route' );
 		q.exec( function ( err, data ) {
             if ( err ) {
                 return errorHandler( err, res );
@@ -50,7 +50,7 @@ exports.busTrackerFavorites = function ( res, req ) {
                 return errorHandler( err, res );
             }
             itemToDelete.remove();
-            res.send( 200 );
+            return res.send( 200 );
 		} );
 	}
 
