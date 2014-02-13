@@ -67,10 +67,13 @@ cMod.controller( 'SystemCtrl', function ( $scope, socket, SystemTempReporting, S
 } );
 
 
-cMod.controller( 'TransitCtrl', function ( $scope, BusTracker ) {
+cMod.controller( 'TransitCtrl', function ( $scope, BusTracker, BusTrackerConfig ) {
 
     $scope.busTracker = BusTracker;
     $scope.busTracker.init();
+
+    $scope.busTrackerConfig = BusTrackerConfig;
+    $scope.busTrackerConfig.init();
 
 } );
 

@@ -974,3 +974,66 @@ svcMod.factory( "BusTracker", function ( $http ) {
     };
 
 } );
+
+
+svcMod.factory( "BusTrackerConfig", function ( $http ) {
+
+    return {
+        values: {
+            favorites: [],
+            newFavorite: {
+                stpid: "",
+                rt: ""
+            },
+            routes: [],
+            directions: [],
+            stops: [],
+            selected: {
+                route: "",
+                direction: "",
+                stop:""
+            }
+        },
+        getRoutes: function () {
+            var BusTrackerConfig = this;
+            var apiUrl = "/api/bustracker/routes";
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    BusTrackerConfig.routes = data;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        getDirections: function () {
+            var BusTrackerConfig = this;
+            var apiUrl = "/api/bustracker/directions?route=" + BusTrackerConfig.selected.route;
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    BusTrackerConfig.directions = data;
+                }).
+                error( function ( data, status ) {
+                    logError( data );
+                });
+        },
+        getStops: function () {
+            var BusTrackerConfig = this;
+            var apiUrl = "/api/bustracker/stops?route=" + BusTrackerConfig.selected.route + "&direction=" + BusTrackerConfig.selected.direction;
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    BusTrackerConfig.stops = data;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        saveFavorite: function () {
+            var BusTrackerConfig = this;
+        },
+        init: function () {
+            var BusTrackerConfig = this;
+            BusTrackerConfig.getRoutes();
+        }
+    };
+
+} );
