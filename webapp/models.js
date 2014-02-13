@@ -123,7 +123,7 @@ NewsArticleKeyword = mongoose.model( 'NewsArticleKeyword', NewsArticleKeywordSch
 
 BusStopConfigSchema = Schema( {
 	id: ObjectId,
-	spid: String,
-	rt: String
+	stopID: String,
+	route: String
 } );
 BusStopConfig = mongoose.model( 'BusStopConfig', BusStopConfigSchema );

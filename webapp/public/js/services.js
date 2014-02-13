@@ -981,10 +981,6 @@ svcMod.factory( "BusTrackerConfig", function ( $http ) {
     return {
         values: {
             favorites: [],
-            newFavorite: {
-                stpid: "",
-                rt: ""
-            },
             routes: [],
             directions: [],
             stops: [],
@@ -1029,6 +1025,18 @@ svcMod.factory( "BusTrackerConfig", function ( $http ) {
         },
         saveFavorite: function () {
             var BusTrackerConfig = this;
+            var apiUrl = "/api/bustracker/favorites";
+            var newFavorite = {
+                stopID: BusTrackerConfig.selected.stop,
+                route: BusTrackerConfig.selected.route
+            };
+            $http.post( apiUrl, newFavorite ).
+                success( function ( data, status ) {
+
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
         },
         init: function () {
             var BusTrackerConfig = this;

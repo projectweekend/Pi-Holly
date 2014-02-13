@@ -23,8 +23,8 @@ exports.busTrackerFavorites = function ( res, req ) {
 
 	if ( req.method == 'POST' ) {
 		var newFavorite = {
-			spid: req.body.stopID,
-			rt: req.body.route
+			stopID: req.body.stopID,
+			route: req.body.route
 		};
 		BusStopConfig.create( newFavorite, function ( err, newFavoriteData ) {
             if ( err ) {
