@@ -19,6 +19,44 @@ var busStopsToTrack = [
 ];
 
 
+exports.busTrackerFavorites = function ( res, req ) {
+
+	if ( req.method == 'POST' ) {
+		var newFavorite = {
+			spid: req.body.stopID,
+			rt: req.body.route
+		};
+		BusStopConfig.create( newFavorite, function ( err, newFavoriteData ) {
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+            return res.send( 201 );
+		} );
+	}
+
+	if ( req.method == 'GET' ) {
+		var q = BusStopConfig.find( ).sort( 'rt' );
+		q.exec( function ( err, data ) {
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+            return res.json( data );
+		} );
+	}
+
+	if ( req.method == 'DELETE' ) {
+		BusStopConfig.findById( req.query.id, function ( err, itemToDelete ) {
+            if ( err ) {
+                return errorHandler( err, res );
+            }
+            itemToDelete.remove();
+            res.send( 200 );
+		} );
+	}
+
+};
+
+
 exports.busTrackerRoutes = function ( req, res ) {
 
 	var output = [];
