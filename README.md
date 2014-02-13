@@ -42,7 +42,7 @@ Holly is named after the ship's computer in one of my all-time favorite televisi
 ![News Screen Shot](http://i.imgur.com/gVPEFek.jpg)
 
 # Twitter Integration
-Holly will tweet the most recent **system CPU temperature** as well as the most recent **indoor temperature** and **indoor humidity** readings on an hourly basis. Currently, the frequency of the tweets is not configurable from the front-end, but I have plans to work on that. Auto-tweeting requires a [Twitter Developer](https://dev.twitter.com/) account. The following environment variables need to be defined on the Pi:
+Holly tweets the most recent **system CPU temperature** as well as the most recent **indoor temperature** and **indoor humidity** readings on an hourly basis. Currently, the frequency of the tweets is not configurable from the front-end, but I have plans to work on that. Auto-tweeting requires a [Twitter Developer](https://dev.twitter.com/) account so that the following environment variables can be defined on the Pi:
 * `TWITTER_CONSUMER_KEY`
 * `TWITTER_CONSUMER_SECRET`
 * `TWITTER_ACCESS_TOKEN_KEY`
