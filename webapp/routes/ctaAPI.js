@@ -11,12 +11,6 @@ var errorHandler = function ( err, res ) {
 
 
 var busTrackerKey = process.env.BUS_TRACKER_API_KEY || "Not defined";
-var busStopsToTrack = [
-	{ stpid: 5518, rt: 56 },
-	{ stpid: 5029, rt: 125 },
-	{ stpid: 5012, rt: 124 },
-	{ stpid: 15356, rt: 8 }
-];
 
 
 exports.busTrackerFavorites = function ( req, res ) {
@@ -204,7 +198,7 @@ exports.busTrackerPredictions = function ( req, res ) {
 
 			var apiOptions = {
 				hostname: "www.ctabustracker.com",
-				path: "/bustime/api/v1/getpredictions?key=" + busTrackerKey + "&rt=" + busStopConfig.rt + "&stpid=" + busStopConfig.stpid + "&top=5"
+				path: "/bustime/api/v1/getpredictions?key=" + busTrackerKey + "&rt=" + busStopConfig.route + "&stpid=" + busStopConfig.stopID + "&top=5"
 			};
 			
 			http.get( apiOptions, function ( ctaRes ) {
@@ -223,7 +217,7 @@ exports.busTrackerPredictions = function ( req, res ) {
 						}
 
 						var formattedJSON = {
-							title: busStopConfig.rt + " - No data available",
+							title: busStopConfig.route + " - No data available",
 							predictions: []
 						};
 
@@ -279,19 +273,33 @@ exports.busTrackerPredictions = function ( req, res ) {
 		};
 	};
 
-	var asyncTaskList = busStopsToTrack.map( buildAsyncCallback );
+	var busStopQuery = BusStopConfig.find();
+	busStopQuery.exec( function ( err, data ) {
+        
+        if ( err ) {
+            return errorHandler( err, res );
+        }
 
-	if ( busTrackerKey ) {
+        if ( data.length === 0 ) {
+			return res.json( [] );
+        }
 
-		async.parallel( asyncTaskList, function ( err ) {
-			if ( err ) {
-				return errorHandler( err, res );
-			}
-			return res.json( output );
-		} );
+		if ( busTrackerKey ) {
 
-	} else {
-		return res.json( { error: "CTA API key is missing"} );
-	}
+			var asyncTaskList = data.map( buildAsyncCallback );
+
+			async.parallel( asyncTaskList, function ( err ) {
+				if ( err ) {
+					return errorHandler( err, res );
+				}
+				return res.json( output );
+			} );
+
+		} else {
+			return res.json( { error: "CTA API key is missing"} );
+		}
+
+
+	} );
 
 };
