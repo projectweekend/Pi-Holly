@@ -522,3 +522,42 @@ This returns an object with the current, average, min, and max temperatures.
      }
  ]
 ```
+
+## Get CTA bus routes
+
+**GET:** `/api/bustracker/routes`
+
+**Response:**
+```
+ [
+     {
+         route: "1",
+         routeName: "Bronzeville/Union Station"
+     },
+     {
+         route: "2",
+         routeName: "Hyde Park Express"
+     },
+     {
+         route: "3",
+         routeName: "King Drive"
+     },
+     {
+         route: "4",
+         routeName: "Cottage Grove"
+     },
+     ...
+ ]
+```
+
+## Get direction of travel a CTA bus route
+
+**GET:** `/api/bustracker/directions?route=<route>`
+
+**Response:**
+```
+ [
+     "Northbound",
+     "Southbound"
+ ]
+```
