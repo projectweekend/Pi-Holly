@@ -7,7 +7,7 @@ div(class="row")
         div(class="page-header")
           h1 Bus Tracker
 
-        div(ng-if="busTracker.status.isLoading", class="alert alert-info")
+        div(ng-if="busTracker.status.isLoading && !busTracker.status.receivedError", class="alert alert-info")
           strong Loading CTA data...
 
         div(ng-if="busTracker.status.receivedError", class="alert alert-danger")
@@ -29,6 +29,8 @@ div(class="row")
                   td 
                     span(ng-if="p.delayed", class="text-danger") DELAYED
                     span(ng-if="!p.delayed", class="text-success") ON TIME
+          div(ng-if="!stop.predictions.length", class="alert alert-info")
+            strong No bus stop favorites
 
     div(class="row")
       div(class="col-md-12")    
