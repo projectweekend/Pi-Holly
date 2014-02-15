@@ -561,3 +561,32 @@ This returns an object with the current, average, min, and max temperatures.
      "Southbound"
  ]
 ```
+
+## Get bus stops for route and direction
+
+**GET:** `/api/bustracker/stops?route=<route>&direction=<direction>`
+
+**Response:**
+```
+ [
+     {
+         stopID: "17773",
+         stopName: "Desplaines & Fulton/Milwaukee/Kinzie",
+         latitude: "41.888009687847",
+         longitude: "-87.644301652908"
+     },
+     {
+         stopID: "5520",
+         stopName: "Fulton & Desplaines",
+         latitude: "41.886835573972",
+         longitude: "-87.644060254097"
+     },
+     {
+         stopID: "5518",
+         stopName: "Jefferson & Lake",
+         latitude: "41.885573577175",
+         longitude: "-87.64274597168"
+     },
+     ...
+ ]
+```
