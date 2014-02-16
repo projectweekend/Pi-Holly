@@ -217,6 +217,7 @@ exports.busTrackerPredictions = function ( req, res ) {
 						}
 
 						var formattedJSON = {
+							favoritesID: busStopConfig._id,
 							title: busStopConfig.route + " - No data available",
 							predictions: []
 						};
