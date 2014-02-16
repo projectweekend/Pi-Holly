@@ -41,7 +41,7 @@ div(class="row")
       
       div(class="panel-body")
         div(ng-show="busTrackerConfig.routes.length > 0", class="form-group")
-          label Select a bus route
+          label Select a route
           select(ng-model="busTrackerConfig.selected.route", ng-change="busTrackerConfig.getDirections()", class="form-control")
             option(ng-repeat="r in busTrackerConfig.routes", value="{{ r.route }}") {{ r.route }}: {{ r.routeName }}
         div(ng-show="busTrackerConfig.directions.length > 0", class="form-group")
