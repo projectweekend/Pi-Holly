@@ -590,3 +590,87 @@ This returns an object with the current, average, min, and max temperatures.
      ...
  ]
 ```
+
+## Get bus predictions for route and stop
+
+**GET:** `/api/bustracker/predictions`
+
+**Response:**
+```
+ [
+     {
+         title: "8 - Southbound",
+         predictions: [
+             {
+                 type: "A",
+                 time: "08:56",
+                 distanceToStop: "9376",
+                 delayed: false
+             },
+             {
+                 type: "A",
+                 time: "09:14",
+                 distanceToStop: "28635",
+                 delayed: false
+             }
+         ]
+     },
+     {
+         title: "10 - Southbound",
+         predictions: [
+             {
+                 type: "A",
+                 time: "08:58",
+                 distanceToStop: "1838",
+                 delayed: false
+             }
+         ]
+     },
+     ...
+ ]
+```
+
+## Get favorite bus stops
+
+**GET:** `/api/bustracker/favorites`
+
+**Response:**
+```
+ [
+     {
+         stopID: "1100",
+         route: "10",
+         _id: "52fc46b912b1c55b92000001",
+         __v: 0
+     },
+     {
+         stopID: "386",
+         route: "20",
+         _id: "52fc47641d07cc2293000001",
+         __v: 0
+     },
+     {
+         stopID: "1115",
+         route: "29",
+         _id: "52fc472f645abde092000001",
+         __v: 0
+     },
+     ...
+ ]
+```
+
+## Add a bus stop favorite
+
+***POST:*** `/api/bustracker/favorites`
+
+**Payload:**
+```
+ {
+     stopID: "1100",
+     route: "10"
+ }
+```
+
+## Remove a bus stop favorite
+
+***DELETE:** `/api/bustracker/favorites?id=<_id>`
