@@ -9,7 +9,7 @@ var express = require('express'),
   systemDataAPI = require('./routes/systemDataAPI'),
   starbugDataAPI = require('./routes/starbugDataAPI'),
   newsAPI = require('./routes/newsAPI'),
-  ctaAPI = require('./routes/ctaAPI'),
+  ctaBusAPI = require('./routes/ctaBusAPI'),
   http = require('http'),
   path = require('path'),
   mongoose = require('mongoose');
@@ -96,13 +96,13 @@ app.get('/api/article-keywords', newsAPI.articleKeywords);
 app.post('/api/news-articles/read', newsAPI.readArticle);
 app.post('/api/news-articles/ignore', newsAPI.ignoreArticle);
 
-app.get('/api/bustracker/routes', ctaAPI.busTrackerRoutes);
-app.get('/api/bustracker/directions', ctaAPI.busTrackerRouteDirections);
-app.get('/api/bustracker/stops', ctaAPI.busTrackerRouteStops);
-app.get('/api/bustracker/predictions', ctaAPI.busTrackerPredictions);
-app.get('/api/bustracker/favorites', ctaAPI.busTrackerFavorites);
-app.post('/api/bustracker/favorites', ctaAPI.busTrackerFavorites);
-app.delete('/api/bustracker/favorites', ctaAPI.busTrackerFavorites);
+app.get('/api/bustracker/routes', ctaBusAPI.busTrackerRoutes);
+app.get('/api/bustracker/directions', ctaBusAPI.busTrackerRouteDirections);
+app.get('/api/bustracker/stops', ctaBusAPI.busTrackerRouteStops);
+app.get('/api/bustracker/predictions', ctaBusAPI.busTrackerPredictions);
+app.get('/api/bustracker/favorites', ctaBusAPI.busTrackerFavorites);
+app.post('/api/bustracker/favorites', ctaBusAPI.busTrackerFavorites);
+app.delete('/api/bustracker/favorites', ctaBusAPI.busTrackerFavorites);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
