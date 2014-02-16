@@ -22,7 +22,8 @@
 }
 
 #hue-lighting-control,
-#transit-config {
+#bus-stop-config,
+#l-stop-config {
     margin-top: 60px;
 }
 

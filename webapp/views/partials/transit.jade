@@ -1,48 +1,42 @@
 div(class="row")
 
   div(class="col-md-8")
+
+    div(class="page-header")
+      h1 Bus Tracker
     
-    div(class="row")
-      div(class="col-md-12")    
-        div(class="page-header")
-          h1 Bus Tracker
-
-        div(ng-if="busTracker.status.isLoading && !busTracker.status.receivedError", class="alert alert-info")
-          strong Loading CTA data...
-
-        div(ng-if="busTracker.status.receivedError", class="alert alert-danger")
-          strong Error getting data from CTA
-        
-        div(ng-if="!busTracker.status.isLoading && !busTracker.status.receivedError", ng-repeat=" stop in busTracker.values.stops | orderBy:'-title'", class="bus-stop")
-          h3(ng-class="{ 'text-primary': stop.predictions.length, 'text-danger': !stop.predictions.length }") {{ stop.title }}
-          div(ng-if="stop.predictions.length", class="table-responsive")
-            table(class="table")
-              thead
-                tr
-                  th Estimated Arrival Time
-                  th Distance From Stop
-                  th Status
-              tbody
-                tr(ng-repeat="p in stop.predictions")
-                  td {{ p.time }}
-                  td {{ p.distanceToStop }} feet
-                  td 
-                    span(ng-if="p.delayed", class="text-danger") DELAYED
-                    span(ng-if="!p.delayed", class="text-success") ON TIME
-          div(ng-if="!stop.predictions.length", class="alert alert-info")
-            strong No bus stop favorites
-
-    div(class="row")
-      div(class="col-md-12")    
-        div(class="page-header")
-          h1 L Tracker
-            small  coming soon...
+    div(ng-if="busTracker.status.isLoading && !busTracker.status.receivedError", class="alert alert-info")
+      strong Loading CTA data...
+    
+    div(ng-if="busTracker.status.receivedError", class="alert alert-danger")
+      strong Error getting data from CTA
+    
+    div(ng-if="!busTracker.status.isLoading && !busTracker.status.receivedError", ng-repeat=" stop in busTracker.values.stops | orderBy:'-title'", class="bus-stop")
+      h3(ng-class="{ 'text-primary': stop.predictions.length, 'text-danger': !stop.predictions.length }") {{ stop.title }}
+      div(ng-if="stop.predictions.length", class="table-responsive")
+        table(class="table")
+          thead
+            tr
+              th Estimated Arrival Time
+              th Distance From Stop
+              th Status
+          tbody
+            tr(ng-repeat="p in stop.predictions")
+              td {{ p.time }}
+              td {{ p.distanceToStop }} feet
+              td 
+                span(ng-if="p.delayed", class="text-danger") DELAYED
+                span(ng-if="!p.delayed", class="text-success") ON TIME
+      div(ng-if="!stop.predictions.length", class="alert alert-info")
+        strong No bus stop favorites
 
   div(class="col-md-4")
     
     div(id="bus-stop-config", class="panel panel-default")
+      
       div(class="panel-heading")
         h3(class="panel-title") Add Favorite Bus Stops
+      
       div(class="panel-body")
         div(ng-show="busTrackerConfig.routes.length > 0", class="form-group")
           label Select a bus route
@@ -58,7 +52,18 @@ div(class="row")
             option(ng-repeat="s in busTrackerConfig.stops", value="{{ s.stopID }}") {{ s.stopName }}
         div(ng-show="busTrackerConfig.selected.stop.length > 0", class="btn-toolbar")
           a(ng-click="busTrackerConfig.saveFavorite()", class="btn btn-primary") Save this favorite
-          a(ng-click="busTrackerConfig.clearSelections()", class="btn btn-danger pull-right") Clear selections
+          a(ng-click="busTrackerConfig.clearSelections()", class="btn btn-danger pull-right") Clear selections    
+
+
+div(class="row")
+
+  div(class="col-md-8")    
+    
+    div(class="page-header")
+      h1 L Tracker
+        small  coming soon...
+
+  div(class="col-md-4")
 
     div(id="l-stop-config", class="panel panel-default")
       div(class="panel-heading")
