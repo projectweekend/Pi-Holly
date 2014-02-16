@@ -8,6 +8,9 @@ div(class="row")
     div(ng-if="busTracker.status.isLoading && !busTracker.status.receivedError", class="alert alert-info")
       strong Loading CTA data...
 
+    div(ng-if="busTracker.values.stops < 1  && !busTracker.status.isLoading && !busTracker.status.receivedError", class="alert alert-info")
+      strong No favorites to display      
+
     div(ng-if="busTracker.status.isDeleting", class="alert alert-info")
       strong Deleting favorite...
     
