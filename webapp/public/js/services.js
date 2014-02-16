@@ -950,7 +950,8 @@ svcMod.factory( "BusTracker", function ( $http ) {
         },
         status: {
             isLoading: false,
-            receivedError: false
+            receivedError: false,
+            isDeleting: false
         },
         getBusPredictions: function () {
             var BusTracker = this;
@@ -960,6 +961,7 @@ svcMod.factory( "BusTracker", function ( $http ) {
                     BusTracker.values.stops = [];
                     BusTracker.values.stops = data;
                     BusTracker.status.isLoading = false;
+                    BusTracker.status.isDeleting = false;
                 } ).
                 error( function ( data, status ) {
                     BusTracker.status.receivedError = true;
@@ -968,6 +970,7 @@ svcMod.factory( "BusTracker", function ( $http ) {
         },
         deleteFavorite: function ( favoritesID ) {
             var BusTracker = this;
+            BusTracker.status.isDeleting = true;
             var apiUrl = "/api/bustracker/favorites?id=" + favoritesID;
             $http.delete( apiUrl ).
                 success( function ( data, status ) {

@@ -7,11 +7,15 @@ div(class="row")
     
     div(ng-if="busTracker.status.isLoading && !busTracker.status.receivedError", class="alert alert-info")
       strong Loading CTA data...
+
+    div(ng-if="busTracker.status.isDeleting", class="alert alert-info")
+      strong Deleting favorite...
     
     div(ng-if="busTracker.status.receivedError", class="alert alert-danger")
       strong Error getting data from CTA
     
     div(ng-if="!busTracker.status.isLoading && !busTracker.status.receivedError", ng-repeat=" stop in busTracker.values.stops | orderBy:'-title'", class="bus-stop")
+      a(ng-click="busTracker.deleteFavorite(stop.favoritesID)", class="btn btn-xs btn-danger pull-right") Delete
       h3(ng-class="{ 'text-primary': stop.predictions.length, 'text-danger': !stop.predictions.length }") {{ stop.title }}
       div(ng-if="stop.predictions.length", class="table-responsive")
         table(class="table")
@@ -27,8 +31,6 @@ div(class="row")
               td 
                 span(ng-if="p.delayed", class="text-danger") DELAYED
                 span(ng-if="!p.delayed", class="text-success") ON TIME
-      div(ng-if="!stop.predictions.length", class="alert alert-info")
-        strong No bus stop favorites
 
   div(class="col-md-4")
     
