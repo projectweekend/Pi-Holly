@@ -966,6 +966,17 @@ svcMod.factory( "BusTracker", function ( $http ) {
                     logError( data );
                 } );
         },
+        deleteFavorite: function ( favoritesID ) {
+            var BusTracker = this;
+            var apiUrl = "/api/bustracker/favorites?id=" + favoritesID;
+            $http.delete( apiUrl ).
+                success( function ( data, status ) {
+                    BusTracker.getBusPredictions();
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
         init: function () {
             var BusTracker = this;
             BusTracker.status.isLoading = true;
@@ -1035,6 +1046,17 @@ svcMod.factory( "BusTrackerConfig", function ( $http, BusTracker ) {
                     BusTracker.getBusPredictions();
                     BusTrackerConfig.clearSelections();
                     BusTrackerConfig.resetForm();
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        deleteFavorite: function ( favoritesID ) {
+            var BusTrackerConfig = this;
+            var apiUrl = "/api/bustracker/favorites?id=" + favoritesID;
+            $http.delete( apiUrl ).
+                success( function ( data, status ) {
+                    BusTracker.getBusPredictions();
                 } ).
                 error( function ( data, status ) {
                     logError( data );
