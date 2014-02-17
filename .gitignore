@@ -20,3 +20,4 @@ env
 *.pyc
 
 start_dev_app.sh
+.vagrant
