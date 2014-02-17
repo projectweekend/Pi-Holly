@@ -71,6 +71,10 @@ Right now, this returns the last 18 temperature readings. That limit will be mov
 
 **GET:** `/api/reporting/system-temperature-data/recent`
 
+**URL Parameters:**
+
+* numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
+
 **Response:**
 ```
  [
@@ -223,6 +227,10 @@ This returns an object with the current, average, min, and max temperatures.
 ## Get recent [Starbug](https://github.com/projectweekend/Pi-Starbug) temperatures
 
 **GET:** `/api/starbug/temperature/recent`
+
+**URL Parameters:**
+
+* numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
 
 **Response:**
 ```

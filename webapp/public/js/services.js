@@ -49,7 +49,7 @@ svcMod.factory( "IndoorTempReporting", function ( $http, socket ) {
         },
         buildChart: function ( display_units ) {
             var chart = this.chart;
-            var apiUrl = "/api/indoor/temperature/recent";
+            var apiUrl = "/api/indoor/temperature/recent?numberOfReadings=24";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -107,7 +107,7 @@ svcMod.factory( "IndoorHumidityReporting", function ( $http, socket ) {
         },
         buildChart: function () {
             var chart = this.chart;
-            var apiUrl = "/api/indoor/humidity/recent";
+            var apiUrl = "/api/indoor/humidity/recent?numberOfReadings=24";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -161,7 +161,7 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
         },
         buildRecentTempChart: function ( display_units ) {
             var recentTempChart = this.recentTempChart;
-            var apiUrl = "/api/system/temperature/recent";
+            var apiUrl = "/api/system/temperature/recent?numberOfReadings=18";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
@@ -513,7 +513,7 @@ svcMod.factory( "StarbugTempReporting", function ( $http, socket ) {
         },
         buildChart: function ( display_units ) {
             var chart = this.chart;
-            var apiUrl = "/api/starbug/temperature/recent";
+            var apiUrl = "/api/starbug/temperature/recent?numberOfReadings=18";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {

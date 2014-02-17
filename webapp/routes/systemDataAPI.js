@@ -44,7 +44,9 @@ exports.systemTemperatureDataReportingAll = function ( req, res ) {
 
 exports.systemTemperatureDataReportingRecent = function ( req, res ) {
 
-    var query = SystemTemperatureData.find().sort( '-date' ).limit(18);
+    var numberOfReadings = req.query.numberOfReadings || 6;
+
+    var query = SystemTemperatureData.find().sort( '-date' ).limit( numberOfReadings );
 
     query.exec( function ( err, data ) {
 

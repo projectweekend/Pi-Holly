@@ -51,7 +51,9 @@ exports.starbugTemperatureData = function ( req, res ) {
 
 exports.starbugTemperatureDataRecent = function ( req, res ) {
 
-    var q = StarbugTemperatureData.find( ).sort( '-date' ).limit(18);
+    var numberOfReadings = req.query.numberOfReadings || 6;
+
+    var q = StarbugTemperatureData.find( ).sort( '-date' ).limit( numberOfReadings );
     
     q.exec( function ( err, data ) {
 
