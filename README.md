@@ -661,7 +661,7 @@ This returns an object with the current, average, min, and max temperatures.
 
 ## Add a bus stop favorite
 
-***POST:*** `/api/bustracker/favorites`
+**POST:** `/api/bustracker/favorites`
 
 **Payload:**
 ```
