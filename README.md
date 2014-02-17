@@ -69,7 +69,7 @@ The following routes are used add/retreive data from the web server exposed on t
 ## Get recent system temperatures
 Right now, this returns the last 18 temperature readings. That limit will be moved into a URL parameter for more flexibility very soon.
 
-**GET:** `/api/reporting/system-temperature-data/recent`
+**GET:** `/api/system/temperature/recent`
 
 **URL Parameters:**
 
@@ -105,7 +105,7 @@ Right now, this returns the last 18 temperature readings. That limit will be mov
 ## Get system temperature stats
 This returns an object with the current, average, min, and max temperatures.
 
-**GET:** `/api/reporting/system-temperature-data/stats`
+**GET:** `/api/system/temperature/stats`
 
 **Response:**
 ```
@@ -130,7 +130,7 @@ This returns an object with the current, average, min, and max temperatures.
 
 ## Get latest memory usage
 
-**GET:** `/api/system-memory-data`
+**GET:** `/api/system/memory`
 
 **Response:**
 ```
@@ -149,7 +149,7 @@ This returns an object with the current, average, min, and max temperatures.
 
 ## Get latest storage data
 
-**GET:** `/api/system-storage-data`
+**GET:** `/api/system/storage`
 
 **Response:**
 ```
@@ -165,7 +165,7 @@ This returns an object with the current, average, min, and max temperatures.
 
 ## Get latest config data
 
-**GET:** `/api/system-config-data`
+**GET:** `/api/system/config`
 
 **Respoonse:**
 ```
@@ -282,55 +282,6 @@ This returns an object with the current, average, min, and max temperatures.
          fahrenheit: 116.6
      }
  }
-```
-
-## Get bus tracker predictions
-
-**GET:** `/api/bustracker/predictions`
-
-**Response:**
-```
- [
-     {
-         title: "56 - Northbound",
-         predictions: [
-             {
-                 type: "A",
-                 time: "16:56",
-                 distanceToStop: "6863",
-                 delayed: false
-             },
-             {
-                 type: "A",
-                 time: "17:11",
-                 distanceToStop: "22118",
-                 delayed: false
-             }
-         ]
-     },
-     {
-         title: "8 - Northbound",
-         predictions: [
-             {
-                 type: "A",
-                 time: "16:58",
-                 distanceToStop: "9826",
-                 delayed: false
-             },
-             {
-                 type: "A",
-                 time: "17:12",
-                 distanceToStop: "22648",
-                 delayed: false
-             }
-         ]
-     },
-     {
-         title: "125 - No service scheduled",
-         predictions: []
-     },
-     ...
- ]
 ```
 
 ## Get news sources
