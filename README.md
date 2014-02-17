@@ -673,4 +673,4 @@ This returns an object with the current, average, min, and max temperatures.
 
 ## Remove a bus stop favorite
 
-***DELETE:** `/api/bustracker/favorites?id=<_id>`
+**DELETE:** `/api/bustracker/favorites?id=<_id>`
