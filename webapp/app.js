@@ -6,6 +6,8 @@
 var express = require('express'),
   routes = require('./routes'),
   indoorEnvAPI = require('./routes/indoorEnvironmentalAPI'),
+  indoorTempStatsAPI = require('./routes/indoorTemperatureStatsAPI'),
+  indoorHumidStatsAPI = require('./routes/indoorHumidityStatsAPI'),
   systemDataAPI = require('./routes/systemDataAPI'),
   starbugDataAPI = require('./routes/starbugDataAPI'),
   newsAPI = require('./routes/newsAPI'),
@@ -66,10 +68,20 @@ app.post('/api/indoor/temperature', indoorEnvAPI.indoorTemperatureData);
 app.post('/api/indoor/temperature/bulk', indoorEnvAPI.indoorTemperatureDataBulk);
 app.get('/api/indoor/temperature/recent', indoorEnvAPI.indoorTemperatureDataRecent);
 
+app.get('/api/indoor/temperature/stats', indoorTempStatsAPI.indoorTemperatureStatsOverall);
+app.get('/api/indoor/temperature/stats/day', indoorTempStatsAPI.indoorTemperatureStatsDay);
+app.get('/api/indoor/temperature/stats/week', indoorTempStatsAPI.indoorTemperatureStatsWeek);
+app.get('/api/indoor/temperature/stats/month', indoorTempStatsAPI.indoorTemperatureStatsMonth);
+
 app.get('/api/indoor/humidity', indoorEnvAPI.indoorHumidityData);
 app.post('/api/indoor/humidity', indoorEnvAPI.indoorHumidityData);
 app.post('/api/indoor/humidity/bulk', indoorEnvAPI.indoorHumidityDataBulk);
 app.get('/api/indoor/humidity/recent', indoorEnvAPI.indoorHumidityDataRecent);
+
+app.get('/api/indoor/humidity/stats', indoorHumidStatsAPI.indoorHumidityStatsOverall);
+app.get('/api/indoor/humidity/stats/day', indoorHumidStatsAPI.indoorHumidityStatsDay);
+app.get('/api/indoor/humidity/stats/week', indoorHumidStatsAPI.indoorHumidityStatsWeek);
+app.get('/api/indoor/humidity/stats/month', indoorHumidStatsAPI.indoorHumidityStatsMonth);
 
 app.get('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
 app.post('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
