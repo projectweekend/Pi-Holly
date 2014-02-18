@@ -65,6 +65,88 @@ The following routes are used add/retreive data from the web server exposed on t
  }
 ```
 
+## Add indoor temperature reading
+
+**POST:** `/api/indoor/temperature`
+
+**Payload:**
+```
+ {
+     fahrenheit: 79.5199993133545,
+     celsius: 26.399999618530273
+ }
+```
+
+## Add multiple indoor temperature readings
+
+**POST:** `/api/indoor/temperature/bulk`
+
+**Payload:**
+```
+ {
+     temperature_data: [
+         {
+             fahrenheit: 79.5199993133545,
+             celsius: 26.399999618530273
+         },
+         {
+             fahrenheit: 79.5199993133545,
+             celsius: 26.399999618530273
+         },
+         {
+             fahrenheit: 79.5199993133545,
+             celsius: 26.399999618530273
+         }
+         ...
+     ]
+ }
+```
+
+## Get latest indoor humidity
+
+**GET:** `/api/indoor/humidity`
+
+**Response:**
+```
+ {
+     _id: "5302c65d09838858dffd7922",
+     date: "2014-01-28T00:55:28.829Z",
+     percent: 12.800000190734863
+ }
+```
+
+## Add indoor humidity reading
+
+**POST:** `/api/indoor/humidity`
+
+**Payload:**
+```
+ {
+     percent: 12.800000190734863
+ }
+```
+
+## Add multiple indoor humidity readings
+
+**POST:** `/api/indoor/humidity/bulk`
+
+**Payload:**
+```
+ {
+     humidity_data: [
+         {
+             percent: 12.800000190734863
+         },
+         {
+             percent: 12.800000190734863
+         },
+         {
+             percent: 12.800000190734863
+         }
+     ]
+ }
+```
+
 ## Get latest system temperature
 
 **GET:** `/api/system-temperature-data`
