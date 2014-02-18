@@ -5,4 +5,4 @@ ADD . /webapp_root/
 WORKDIR /webapp_root
 RUN npm install
 
-EXPOSE 49001
+EXPOSE 3000

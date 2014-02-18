@@ -8,7 +8,7 @@ web:
     volumes:
         - .:/webapp_root
     ports:
-        - 49001:49001
+        - 3000:3000
     links:
         - db
     environment:
