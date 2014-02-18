@@ -51,6 +51,20 @@ Holly tweets the most recent **system CPU temperature** as well as the most rece
 # API Routes
 The following routes are used add/retreive data from the web server exposed on the local network.
 
+## Get latest indoor temperature
+
+**GET:** `/api/indoor/temperature`
+
+**Response:**
+```
+ {
+     _id: "5302c65d09838858dffd791d",
+     date: "2014-01-29T23:30:04.658Z",
+     fahrenheit: 79.5199993133545,
+     celsius: 26.399999618530273
+ }
+```
+
 ## Get latest system temperature
 
 **GET:** `/api/system-temperature-data`
