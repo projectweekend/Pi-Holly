@@ -102,6 +102,39 @@ The following routes are used add/retreive data from the web server exposed on t
  }
 ```
 
+## Get recent indoor temperature readings
+
+**GET:** `/api/indoor/temperature/recent`
+
+**URL Parameters:**
+
+* numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
+
+**Response:**
+```
+ [
+     {
+         _id: "5302c65d09838858dffd791d",
+         date: "2014-01-29T23:30:04.658Z",
+         fahrenheit: 79.5199993133545,
+         celsius: 26.399999618530273
+     },
+     {
+         _id: "5302c65d09838858dffd791c",
+         date: "2014-01-28T01:10:42.159Z",
+         fahrenheit: 83.83999862670899,
+         celsius: 28.799999237060547
+     },
+     {
+         _id: "5302c65d09838858dffd791b",
+         date: "2014-01-28T00:55:28.826Z",
+         fahrenheit: 83.30000000000001,
+         celsius: 28.5
+     }
+     ...
+ ]
+```
+
 ## Get latest indoor humidity
 
 **GET:** `/api/indoor/humidity`
@@ -145,6 +178,35 @@ The following routes are used add/retreive data from the web server exposed on t
          }
      ]
  }
+```
+
+## Get recent indoor humidity readings
+
+**GET:** `/api/indoor/humidity/recent`
+
+**URL Parameters:**
+
+* numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
+
+**Response:**
+```
+ [
+     {
+         _id: "5302c65d09838858dffd7922",
+         date: "2014-01-28T00:55:28.829Z",
+         percent: 12.800000190734863
+     },
+     {
+         _id: "5302c65d09838858dffd7921",
+         date: "2014-01-27T03:51:23.173Z",
+         percent: 18.899999618530273
+     },
+     {
+         _id: "5302c65d09838858dffd7920",
+         date: "2014-01-27T03:46:53.939Z",
+         percent: 18.899999618530273
+     }
+ ]
 ```
 
 ## Get latest system temperature
