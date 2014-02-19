@@ -65,6 +65,8 @@ var buildCelsiusAverageCallback = function ( config, output ) {
     };
 };
 
+var buildFahrenheitMinMax
+
 
 exports.indoorTemperatureStatsOverall = function ( req, res ) {
 
@@ -84,18 +86,12 @@ exports.indoorTemperatureStatsOverall = function ( req, res ) {
     };
 
     var fahrenheitAverage = buildFahrenheitAverageCallback(
-        {
-            collection: "AverageIndoorOverallTempFahrenheit",
-            query: {}
-        },
+        { collection: "AverageIndoorOverallTempFahrenheit", query: {} },
         output
     );
 
     var celsiusAverage = buildCelsiusAverageCallback(
-        {
-            collection: "AverageIndoorOverallTempCelsius",
-            query: {}
-        },
+        { collection: "AverageIndoorOverallTempCelsius", query: {} },
         output
     );
 
