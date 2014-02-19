@@ -8,7 +8,7 @@ var errorHandler = function ( err, res ) {
 };
 
 
-var buildFahrenheitAverageCallback = function ( config ) {
+var buildFahrenheitAverageCallback = function ( config, output ) {
 
     // performs fahrenheit average map reduce
     return function ( callback ) {
@@ -37,7 +37,7 @@ var buildFahrenheitAverageCallback = function ( config ) {
 
 };
 
-var buildCelsiusAverageCallback = function ( config ) {
+var buildCelsiusAverageCallback = function ( config, output ) {
     
     // performs celsius average map reduce
     return function ( callback ) {
@@ -87,14 +87,16 @@ exports.indoorTemperatureStatsOverall = function ( req, res ) {
         {
             collection: "AverageIndoorOverallTempFahrenheit",
             query: {}
-        }
+        },
+        output
     );
 
     var celsiusAverage = buildCelsiusAverageCallback(
         {
             collection: "AverageIndoorOverallTempCelsius",
             query: {}
-        }
+        },
+        output
     );
 
     // run all stat calculations async
