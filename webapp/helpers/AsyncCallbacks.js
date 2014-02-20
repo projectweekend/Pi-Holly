@@ -72,25 +72,25 @@ exports.buildFahrenheitMinMaxCallback = function ( config, output ) {
     // performs fahrenheit min/max map reduce
     return function ( callback ) {
         
-        var maxConfig = {};
-        maxConfig.out = { replace: config.collection };
-
-        maxConfig.map = function () {
-            var x = { fahrenheit: this.fahrenheit, _id: this._id };
-            emit( 1, { min: x, max: x } );
-        };
-
-        maxConfig.reduce = function (key, fahrenheitValues) {
-            var result = fahrenheitValues[0];
-            for ( var i = 1; i < fahrenheitValues.length; i++ ) {
-                if ( fahrenheitValues[i].min.fahrenheit < result.min.fahrenheit ) {
-                    result.min = fahrenheitValues[i].min;
+        var maxConfig = {
+            out: { replace: config.collection },
+            query: config.query,
+            map: function () {
+                var x = { fahrenheit: this.fahrenheit, _id: this._id };
+                emit( 1, { min: x, max: x } );
+            },
+            reduce: function (key, fahrenheitValues) {
+                var result = fahrenheitValues[0];
+                for ( var i = 1; i < fahrenheitValues.length; i++ ) {
+                    if ( fahrenheitValues[i].min.fahrenheit < result.min.fahrenheit ) {
+                        result.min = fahrenheitValues[i].min;
+                    }
+                    if ( fahrenheitValues[i].max.fahrenheit > result.max.fahrenheit ) {
+                        result.max = fahrenheitValues[i].max;
+                    }
                 }
-                if ( fahrenheitValues[i].max.fahrenheit > result.max.fahrenheit ) {
-                    result.max = fahrenheitValues[i].max;
-                }
+                return result;
             }
-            return result;
         };
 
         config.model.mapReduce( maxConfig, function ( err, model, stats ) {
@@ -100,7 +100,7 @@ exports.buildFahrenheitMinMaxCallback = function ( config, output ) {
                 return callback( err );
             }
 
-            model.find( config.query, function ( err, data ) {
+            model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
                 }
@@ -125,25 +125,25 @@ exports.buildCelsiusMinMaxCallback = function ( config, output ) {
     // performs celsius min/max map reduce
     return function ( callback ) {
         
-        var maxConfig = {};
-        maxConfig.out = { replace: config.collection };
-
-        maxConfig.map = function () {
-            var x = { celsius: this.celsius, _id: this._id };
-            emit( 1, { min: x, max: x } );
-        };
-
-        maxConfig.reduce = function (key, celsiusValues) {
-            var result = celsiusValues[0];
-            for ( var i = 1; i < celsiusValues.length; i++ ) {
-                if ( celsiusValues[i].min.celsius < result.min.celsius ) {
-                    result.min = celsiusValues[i].min;
+        var maxConfig = {
+            out: { replace: config.collection },
+            query: config.query,
+            map: function () {
+                var x = { celsius: this.celsius, _id: this._id };
+                emit( 1, { min: x, max: x } );
+            },
+            reduce: function (key, celsiusValues) {
+                var result = celsiusValues[0];
+                for ( var i = 1; i < celsiusValues.length; i++ ) {
+                    if ( celsiusValues[i].min.celsius < result.min.celsius ) {
+                        result.min = celsiusValues[i].min;
+                    }
+                    if ( celsiusValues[i].max.celsius > result.max.celsius ) {
+                        result.max = celsiusValues[i].max;
+                    }
                 }
-                if ( celsiusValues[i].max.celsius > result.max.celsius ) {
-                    result.max = celsiusValues[i].max;
-                }
+                return result;
             }
-            return result;
         };
 
         config.model.mapReduce( maxConfig, function ( err, model, stats ) {
@@ -153,7 +153,7 @@ exports.buildCelsiusMinMaxCallback = function ( config, output ) {
                 return callback( err );
             }
 
-            model.find( config.query, function ( err, data ) {
+            model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
                 }
