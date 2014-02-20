@@ -86,16 +86,18 @@ exports.indoorTemperatureStatsDay = function ( req, res ) {
     var currentMonth = d.getMonth();
     var currentYear = d.getFullYear();
 
+    var q = {
+        "date": {
+            "$gte": new Date( currentYear, currentMonth, currentDate ),
+            "$lt": new Date( currentYear, currentMonth, currentDate + 1 )
+        }
+    };
+
     var getFahrenheitAverage = asyncCallbackHelpers.buildFahrenheitAverageCallback(
         {
             model: IndoorTemperatureData,
             collection: "AverageIndoorDayTempFahrenheit",
-            query: {
-                "date": {
-                    "$gte": new Date( currentYear, currentMonth, currentDate ),
-                    "$lt": new Date( currentYear, currentMonth, currentDate + 1 )
-                }
-            }
+            query: q
         },
         output
     );
@@ -104,12 +106,25 @@ exports.indoorTemperatureStatsDay = function ( req, res ) {
         {
             model: IndoorTemperatureData,
             collection: "AverageIndoorDayTempCelsius",
-            query: {
-                "date": {
-                    "$gte": new Date( currentYear, currentMonth, currentDate ),
-                    "$lt": new Date( currentYear, currentMonth, currentDate + 1 )
-                }
-            }
+            query: q
+        },
+        output
+    );
+
+    var getFahrenheitMinMax = asyncCallbackHelpers.buildFahrenheitMinMaxCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "MinMaxIndoorDayTempFahrenheit",
+            query: q
+        },
+        output
+    );
+
+    var getCelsiusMinMax = asyncCallbackHelpers.buildCelsiusMinMaxCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "MinMaxIndoorDayTempCelsius",
+            query: q
         },
         output
     );
@@ -117,7 +132,9 @@ exports.indoorTemperatureStatsDay = function ( req, res ) {
     // run all stat calculations async
     async.parallel( [
         getFahrenheitAverage,
-        getCelsiusAverage
+        getCelsiusAverage,
+        getFahrenheitMinMax,
+        getCelsiusMinMax
     ],
     // callback function for processes running async
     function( err ){
