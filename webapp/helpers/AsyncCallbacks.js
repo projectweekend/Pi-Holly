@@ -40,6 +40,7 @@ exports.buildCelsiusAverageCallback = function ( config, output ) {
 
         var avgConfig = {
             out: { replace: config.collection },
+            query: config.query,
             map: function () { emit( 1, this.celsius ); },
             reduce: function ( keyVal, celsiusValues ) { return Array.avg( celsiusValues ); }
         };
@@ -49,7 +50,7 @@ exports.buildCelsiusAverageCallback = function ( config, output ) {
                 console.log( err );
                 return callback( err );
             }
-            model.find( config.query, function ( err, data ) {
+            model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
                 }

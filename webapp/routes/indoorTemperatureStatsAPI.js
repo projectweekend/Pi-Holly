@@ -100,9 +100,24 @@ exports.indoorTemperatureStatsDay = function ( req, res ) {
         output
     );
 
+    var getCelsiusAverage = asyncCallbackHelpers.buildCelsiusAverageCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "AverageIndoorDayTempCelsius",
+            query: {
+                "date": {
+                    "$gte": new Date( currentYear, currentMonth, currentDate ),
+                    "$lt": new Date( currentYear, currentMonth, currentDate + 1 )
+                }
+            }
+        },
+        output
+    );
+
     // run all stat calculations async
     async.parallel( [
-        getFahrenheitAverage
+        getFahrenheitAverage,
+        getCelsiusAverage
     ],
     // callback function for processes running async
     function( err ){
