@@ -11,7 +11,6 @@ exports.buildFahrenheitAverageCallback = function ( config, output ) {
         };
 
         config.model.mapReduce( avgConfig, function ( err, model, stats ) {
-            console.log( avgConfig.query );
             if ( err ) {
                 console.log( err );
                 return callback( err );
@@ -20,7 +19,11 @@ exports.buildFahrenheitAverageCallback = function ( config, output ) {
                 if ( err ) {
                     return callback( err );
                 }
-                output.average.fahrenheit = data[0].value;
+                if ( data.length > 0 ) {
+                    output.average.fahrenheit = data[0].value;
+                } else {
+                    output.average.fahrenheit = "No data";
+                }
                 callback();
             } );
         } );
@@ -50,7 +53,11 @@ exports.buildCelsiusAverageCallback = function ( config, output ) {
                 if ( err ) {
                     return callback( err );
                 }
-                output.average.celsius = data[0].value;
+                if ( data.length > 0 ) {
+                    output.average.celsius = data[0].value;
+                } else {
+                    output.average.celsius = "No data";
+                }
                 callback();
             } );
         } );
@@ -96,8 +103,13 @@ exports.buildFahrenheitMinMaxCallback = function ( config, output ) {
                 if ( err ) {
                     return callback( err );
                 }
-                output.min.fahrenheit = data[0].value.min.fahrenheit;
-                output.max.fahrenheit = data[0].value.max.fahrenheit;
+                if ( data.length > 0 ) {
+                    output.min.fahrenheit = data[0].value.min.fahrenheit;
+                    output.max.fahrenheit = data[0].value.max.fahrenheit;
+                } else {
+                    output.min.fahrenheit = "No data";
+                    output.max.fahrenheit = "No data";
+                }
                 callback();
             } );
         } );
@@ -144,8 +156,13 @@ exports.buildCelsiusMinMaxCallback = function ( config, output ) {
                 if ( err ) {
                     return callback( err );
                 }
-                output.min.celsius = data[0].value.min.celsius;
-                output.max.celsius = data[0].value.max.celsius;
+                if ( data.length > 0 ) {
+                    output.min.celsius = data[0].value.min.celsius;
+                    output.max.celsius = data[0].value.max.celsius;
+                } else {
+                    output.min.celsius = "No data";
+                    output.max.celsius = "No data";
+                }
                 callback();
             } );
         } );
