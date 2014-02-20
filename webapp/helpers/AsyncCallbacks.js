@@ -5,16 +5,18 @@ exports.buildFahrenheitAverageCallback = function ( config, output ) {
 
         var avgConfig = {
             out: { replace: config.collection },
+            query: config.query,
             map: function () { emit( 1, this.fahrenheit ); },
             reduce: function ( keyVal, fahrenheitValues ) { return Array.avg( fahrenheitValues ); }
         };
 
         config.model.mapReduce( avgConfig, function ( err, model, stats ) {
+            console.log( avgConfig.query );
             if ( err ) {
                 console.log( err );
                 return callback( err );
             }
-            model.find( config.query, function ( err, data ) {
+            model.find( {}, function ( err, data ) {
                 if ( err ) {
                     return callback( err );
                 }

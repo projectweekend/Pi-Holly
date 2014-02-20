@@ -66,6 +66,52 @@ exports.indoorTemperatureStatsOverall = function ( req, res ) {
 
 exports.indoorTemperatureStatsDay = function ( req, res ) {
 
+    var output = {
+        average: {
+            celsius: 0,
+            fahrenheit: 0
+        },
+        min: {
+            celsius: 0,
+            fahrenheit: 0
+        },
+        max: {
+            celsius: 0,
+            fahrenheit: 0
+        }
+    };
+
+    var d = new Date();
+    var currentDate = d.getDate();
+    var currentMonth = d.getMonth();
+    var currentYear = d.getFullYear();
+
+    var getFahrenheitAverage = asyncCallbackHelpers.buildFahrenheitAverageCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "AverageIndoorDayTempFahrenheit",
+            query: {
+                "date": {
+                    "$gte": new Date( currentYear, currentMonth, currentDate ),
+                    "$lt": new Date( currentYear, currentMonth, currentDate + 1 )
+                }
+            }
+        },
+        output
+    );
+
+    // run all stat calculations async
+    async.parallel( [
+        getFahrenheitAverage
+    ],
+    // callback function for processes running async
+    function( err ){
+        if ( err ) {
+            return errorHandler( err, res );
+        }
+        return res.json( output );
+    } );
+
 };
 
 

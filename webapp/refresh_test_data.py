@@ -27,7 +27,22 @@ INDOOR_TEMPERATURE_DATA = [
         'celsius': 26.399999618530273,
         'date': datetime.datetime(2014, 1, 29, 23, 30, 4, 658000),
         'fahrenheit': 79.5199993133545
-    }
+    },
+    {
+        'celsius': 25.600000381469727,
+        'date': datetime.datetime(2014, 2, 19, 3, 51, 22, 875000),
+        'fahrenheit': 78.08000068664552
+    },
+    {
+        'celsius': 25.799999237060547,
+        'date': datetime.datetime(2014, 2, 19, 0, 55, 28, 826000),
+        'fahrenheit': 78.43999862670898,
+    },
+    {
+        'celsius': 26.299999237060547,    
+        'date': datetime.datetime(2014, 2, 19, 3, 46, 53, 20000),
+        'fahrenheit': 79.33999862670899
+    }    
 ]
 
 INDOOR_HUMIDITY_DATA = [
