@@ -149,6 +149,84 @@ exports.indoorTemperatureStatsDay = function ( req, res ) {
 
 exports.indoorTemperatureStatsWeek = function ( req, res ) {
 
+    var output = {
+        average: {
+            celsius: 0,
+            fahrenheit: 0
+        },
+        min: {
+            celsius: 0,
+            fahrenheit: 0
+        },
+        max: {
+            celsius: 0,
+            fahrenheit: 0
+        }
+    };
+
+    var d = new Date();
+    var currentDate = d.getDate();
+    var currentMonth = d.getMonth();
+    var currentYear = d.getFullYear();
+
+    var q = {
+        "date": {
+            "$gte": new Date( currentYear, currentMonth, currentDate - 7 ),
+            "$lt": new Date( currentYear, currentMonth, currentDate + 1 )
+        }
+    };
+
+    var getFahrenheitAverage = asyncCallbackHelpers.buildFahrenheitAverageCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "AverageIndoorWeekTempFahrenheit",
+            query: q
+        },
+        output
+    );
+
+    var getCelsiusAverage = asyncCallbackHelpers.buildCelsiusAverageCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "AverageIndoorWeekTempCelsius",
+            query: q
+        },
+        output
+    );
+
+    var getFahrenheitMinMax = asyncCallbackHelpers.buildFahrenheitMinMaxCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "MinMaxIndoorWeekTempFahrenheit",
+            query: q
+        },
+        output
+    );
+
+    var getCelsiusMinMax = asyncCallbackHelpers.buildCelsiusMinMaxCallback(
+        {
+            model: IndoorTemperatureData,
+            collection: "MinMaxIndoorWeekTempCelsius",
+            query: q
+        },
+        output
+    );
+
+    // run all stat calculations async
+    async.parallel( [
+        getFahrenheitAverage,
+        getCelsiusAverage,
+        getFahrenheitMinMax,
+        getCelsiusMinMax
+    ],
+    // callback function for processes running async
+    function( err ){
+        if ( err ) {
+            return errorHandler( err, res );
+        }
+        return res.json( output );
+    } );
+
 };
 
 
