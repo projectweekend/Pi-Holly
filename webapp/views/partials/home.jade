@@ -33,16 +33,13 @@ div(class="row")
   div(class="col-md-8")    
     div(class="chart-wrapper")
       canvas(chart, id="humidityChart", type="Line", options="indoorHumidityReporting.chart.options", data="indoorHumidityReporting.chart.data", width="700", height="350")
-  div(class="col-md-4")        
+  div(class="col-md-4")
+    div(class="current-value-label text-primary") {{indoorHumidityCurrent.values.percent | number:2}}%
     div(class="panel panel-default")
       div(class="panel-heading")
         h3(class="panel-title") Stats
       div(class="panel-body")
         dl
-          dt Current:
-          dd
-            div(ng-if="indoorHumidityCurrent.values.percent", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{indoorHumidityCurrent.values.percent | number:2}}%
           dt Average:
           dd
             div(ng-if="indoorHumidityStats.values.average", class="temp-stat-wrapper")

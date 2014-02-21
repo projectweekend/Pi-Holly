@@ -136,10 +136,27 @@ svcMod.factory( "IndoorTemperatureStats", function ( $http, socket ) {
     
     return {
         values: {
+            label: "",
             average: null,
             min: null,
             max: null
         },
+        gatOverallValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/indoor/temperature/stats";
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.label = "Overall";
+                    values.average = data.average;
+                    values.min = data.min;
+                    values.max = data.max;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+
+        },
+        
         getValues: function () {
             var values = this.values;
             var apiUrl = "/api/indoor/temperature/stats";
