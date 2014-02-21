@@ -25,7 +25,7 @@ div(class="row")
           dt Min:
           dd
             div(ng-if="indoorTemperatureStats.values.min", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{indoorTemperatureStats.values.min.fahrenheit | number:2}}&deg; F        
+              span(class="text-primary temp-stat-value") {{indoorTemperatureStats.values.min.fahrenheit | number:2}}&deg; F
 
 div(class="row")
   div(class="page-header")
@@ -38,3 +38,20 @@ div(class="row")
       div(class="panel-heading")
         h3(class="panel-title") Stats
       div(class="panel-body")
+        dl
+          dt Current:
+          dd
+            div(ng-if="indoorHumidityCurrent.values.percent", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorHumidityCurrent.values.percent | number:2}}%
+          dt Average:
+          dd
+            div(ng-if="indoorHumidityStats.values.average", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorHumidityStats.values.average | number:2}}%
+          dt Max:
+          dd 
+            div(ng-if="indoorHumidityStats.values.max", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorHumidityStats.values.max | number:2}}%
+          dt Min:
+          dd
+            div(ng-if="indoorHumidityStats.values.min", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorHumidityStats.values.min | number:2}}%

@@ -1,3 +1,89 @@
+exports.buildHumidityAverageCallback = function ( config, output ) {
+
+    return function ( callback ) {
+        
+        var avgConfig = {
+            out: { replace: config.collection },
+            query: config.query,
+            map: function () { emit( 1, this.percent ); },
+            reduce: function ( keyVal, humidityValues ) { return Array.avg( humidityValues ); }
+        };
+
+        config.model.mapReduce( avgConfig, function ( err, model, stats ) {
+            if ( err ) {
+                console.log( err );
+                return callback( err );
+            }
+            model.find( {}, function ( err, data ) {
+                if ( err ) {
+                    return callback( err );
+                }
+                if ( data.length > 0 ) {
+                    output.average.percent = data[0].value;
+                } else {
+                    output.average.percent = "No data";
+                }
+                callback();
+            } );
+        } );
+
+    };
+
+};
+
+
+exports.buildHumidityMinMaxCallback = function ( config, output ) {
+    
+    return function ( callback ) {
+        
+        var maxConfig = {
+            out: { replace: config.collection },
+            query: config.query,
+            map: function () {
+                var x = { percent: this.percent, _id: this._id };
+                emit( 1, { min: x, max: x } );
+            },
+            reduce: function (key, humidityValues) {
+                var result = humidityValues[0];
+                for ( var i = 1; i < humidityValues.length; i++ ) {
+                    if ( humidityValues[i].min.percent < result.min.percent ) {
+                        result.min = humidityValues[i].min;
+                    }
+                    if ( humidityValues[i].max.percent > result.max.percent ) {
+                        result.max = humidityValues[i].max;
+                    }
+                }
+                return result;
+            }
+        };
+
+        config.model.mapReduce( maxConfig, function ( err, model, stats ) {
+
+            if ( err ) {
+                console.log( err );
+                return callback( err );
+            }
+
+            model.find( {}, function ( err, data ) {
+                if ( err ) {
+                    return callback( err );
+                }
+                if ( data.length > 0 ) {
+                    output.min.percent = data[0].value.min.percent;
+                    output.max.percent = data[0].value.max.percent;
+                } else {
+                    output.min.percent = "No data";
+                    output.max.percent = "No data";
+                }
+                callback();
+            } );
+        } );
+
+    };
+
+};
+
+
 exports.buildFahrenheitAverageCallback = function ( config, output ) {
 
     // performs fahrenheit average map reduce

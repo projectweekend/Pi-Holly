@@ -1,5 +1,6 @@
 var appModels = require( '../models' ),
- async = require( 'async' );
+	asyncCallbackHelpers = require( '../helpers/AsyncCallbacks' ),
+	async = require( 'async' );
 
 
 var errorHandler = function ( err, res ) {
@@ -9,6 +10,49 @@ var errorHandler = function ( err, res ) {
 
 
 exports.indoorHumidityStatsOverall = function ( req, res ) {
+    
+    var output = {
+        average: {
+            percent: 0
+        },
+        min: {
+			percent: 0
+        },
+        max: {
+			percent: 0
+        }
+    };
+
+    var getHumidityAverage = asyncCallbackHelpers.buildHumidityAverageCallback (
+		{
+			model: IndoorHumidityData,
+			collection: "AverageIndoorOverallHumidity",
+			query: {}
+		},
+		output
+    );
+
+    var getHumidityMinMax = asyncCallbackHelpers.buildHumidityMinMaxCallback (
+		{
+			model: IndoorHumidityData,
+			collection: "MinMaxIndoorOverallHumidity",
+			query: {}
+		},
+		output
+    );
+
+    // run all stat calculations async
+    async.parallel( [
+        getHumidityAverage,
+        getHumidityMinMax
+    ],
+    // callback function for processes running async
+    function( err ){
+        if ( err ) {
+            return errorHandler( err, res );
+        }
+        return res.json( output );
+    } );
 
 };
 

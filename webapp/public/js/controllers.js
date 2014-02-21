@@ -18,7 +18,7 @@ cMod.controller( 'AppCtrl', function ( $scope, $location ) {
 } );
 
 
-cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorTemperatureCurrent, IndoorTemperatureStats, IndoorHumidityReporting, HueLighting ) {
+cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, IndoorTemperatureCurrent, IndoorTemperatureStats, IndoorHumidityReporting, IndoorHumidityCurrent, IndoorHumidityStats, HueLighting ) {
 
     $scope.indoorTemperatureCurrent = IndoorTemperatureCurrent;
     $scope.indoorTemperatureCurrent.init();
@@ -28,6 +28,12 @@ cMod.controller( 'HomeCtrl', function ( $scope, socket, IndoorTempReporting, Ind
 
     $scope.indoorTemperatureReporting = IndoorTempReporting;
     $scope.indoorTemperatureReporting.init( 'F' );
+
+    $scope.indoorHumidityCurrent = IndoorHumidityCurrent;
+    $scope.indoorHumidityCurrent.init();
+
+    $scope.indoorHumidityStats = IndoorHumidityStats;
+    $scope.indoorHumidityStats.init();
 
     $scope.indoorHumidityReporting = IndoorHumidityReporting;
     $scope.indoorHumidityReporting.init();

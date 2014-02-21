@@ -223,6 +223,86 @@ svcMod.factory( "IndoorHumidityReporting", function ( $http, socket ) {
 
 } );
 
+// Indoor Humidity Current
+svcMod.factory( "IndoorHumidityCurrent", function ( $http, socket ) {
+    
+    return {
+        values: {
+            date: null,
+            percent: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/indoor/humidity";
+
+            $http.get( apiUrl ).
+                success( function ( data, status) {
+                    values.date = data.date;
+                    values.percent = data.percent;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+            socket.on( 'updates:indoor:humidity', function ( data ) {
+                if ( values.date != data.date ) {
+                    values.date = data.date;
+                    values.percent = data.percent;
+                }
+            } );
+        },
+        init: function () {
+            var IndoorHumidityCurrent = this;
+            var currentPercent = IndoorHumidityCurrent.values.percent;
+            if ( currentPercent === null ) {
+                IndoorHumidityCurrent.getValues();
+            }
+        }
+    };
+
+} );
+
+// Indoor Humidity Stats
+svcMod.factory( "IndoorHumidityStats", function ( $http, socket ) {
+
+    return {
+        values: {
+            average: null,
+            min: null,
+            max: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/indoor/humidity/stats";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.average = data.average.percent;
+                    values.min = data.min.percent;
+                    values.max = data.max.percent;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+
+        },
+        listenForUpdates: function () {
+            // TOOD: Make a socket and hook this up
+            var values = this.values;
+        },
+        init: function () {
+            var IndoorHumidityStats = this;
+            var values = this.values;
+            if ( values.average === null || values.min === null || values.max === null ) {
+                IndoorHumidityStats.getValues();
+            }
+        }
+    };
+
+} );
+
 // System Reporting
 svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
 
