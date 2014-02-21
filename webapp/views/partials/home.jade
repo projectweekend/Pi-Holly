@@ -1,41 +1,40 @@
 div(class="row")
-
+  div(class="page-header")
+    h1 Temperature
   div(class="col-md-8")
-    
-    div(class="page-header")
-      h1 Temperature
-    div
-      canvas(chart, id="temperatureChart", type="Line", options="indoorTemperatureReporting.chart.options", data="indoorTemperatureReporting.chart.data", width="700", height="350") 
-
-    div(class="page-header")
-      h1 Humidity
-    div
-      canvas(chart, id="humidityChart", type="Line", options="indoorHumidityReporting.chart.options", data="indoorHumidityReporting.chart.data", width="700", height="350")
-
+    div(class="chart-wrapper")
+      canvas(chart, id="temperatureChart", type="Line", options="indoorTemperatureReporting.chart.options", data="indoorTemperatureReporting.chart.data", width="700", height="350")
   div(class="col-md-4")
-    div(id="hue-lighting-control", class="panel panel-default")
+    div(class="panel panel-default")
       div(class="panel-heading")
-        h3(class="panel-title") HUE Lighting Controls
+        h3(class="panel-title") Stats
       div(class="panel-body")
-        div(ng-show="hueLighting.isLoading", class="alert alert-success")
-          strong Checking lights...
-        div(ng-hide="hueLighting.isLoading")
-          div(ng-hide="hueLighting.bridge.isAuthorized")
-            div(class="alert alert-danger")
-              strong Bridge is not authorized. 
-              | Go press the link button on the bridge, then try authorizing again.
-            div(class="btn-toolbar")
-              a(ng-click="hueLighting.authorizeBridge()", class="btn btn-primary btn-block") Authorize bridge
-          div(ng-show="hueLighting.bridge.isAuthorized")
-            ul(class="list-unstyled")
-              li(ng-repeat="l in hueLighting.lights")
-                h4 {{ l.name }}
-                div(ng-hide="l.data.state.on")
-                  div(class="btn-toolbar")
-                    a(ng-click="l.turnOn()", class="btn btn-success btn-block") Turn on
-                div(ng-show="l.data.state.on")
-                  div(class="btn-toolbar")
-                    a(ng-click="l.turnOff()", class="btn btn-danger btn-block") Turn off
-                  div(class="brightness-control")
-                    label Brightness
-                    input(ng-model="l.data.state.bri", ng-change="l.setBrightness()", class="brightness-slider", type="range", min="1", max="255", value="{{ l.data.state.bri }}", name="{{ l.name }}_brightness")
+        dl
+          dt Current:
+          dd
+            div(ng-if="indoorTemperatureCurrent.values.fahrenheit", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorTemperatureCurrent.values.fahrenheit | number:2}}&deg; F
+          dt Average:
+          dd
+            div(ng-if="indoorTemperatureStats.values.average", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorTemperatureStats.values.average.fahrenheit | number:2}}&deg; F
+          dt Max:
+          dd 
+            div(ng-if="indoorTemperatureStats.values.max", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorTemperatureStats.values.max.fahrenheit | number:2}}&deg; F
+          dt Min:
+          dd
+            div(ng-if="indoorTemperatureStats.values.min", class="temp-stat-wrapper")
+              span(class="text-primary temp-stat-value") {{indoorTemperatureStats.values.min.fahrenheit | number:2}}&deg; F        
+
+div(class="row")
+  div(class="page-header")
+    h1 Humidity
+  div(class="col-md-8")    
+    div(class="chart-wrapper")
+      canvas(chart, id="humidityChart", type="Line", options="indoorHumidityReporting.chart.options", data="indoorHumidityReporting.chart.data", width="700", height="350")
+  div(class="col-md-4")        
+    div(class="panel panel-default")
+      div(class="panel-heading")
+        h3(class="panel-title") Stats
+      div(class="panel-body")

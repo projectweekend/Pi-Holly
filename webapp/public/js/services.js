@@ -86,6 +86,89 @@ svcMod.factory( "IndoorTempReporting", function ( $http, socket ) {
 
 } );
 
+// Indoor Temperature Current
+svcMod.factory( "IndoorTemperatureCurrent", function ( $http, socket ) {
+
+    return {
+        values: {
+            date: null,
+            fahrenheit: null,
+            celsius: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/indoor/temperature";
+
+            $http.get( apiUrl ).
+                success( function ( data, status) {
+                    values.date = data.date;
+                    values.fahrenheit = data.fahrenheit;
+                    values.celsius = data.celsius;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        listenForUpdates: function () {
+            var values = this.values;
+            socket.on( 'updates:indoor:temp', function ( data ) {
+                if ( values.date != data.date ) {
+                    values.date = data.date;
+                    values.fahrenheit = data.fahrenheit;
+                    values.celsius = data.celsius;
+                }
+            } );
+        },
+        init: function () {
+            var IndoorTemperatureCurrent = this;
+            var currentFarenheit = IndoorTemperatureCurrent.values.fahrenheit;
+            var currentCelsius = IndoorTemperatureCurrent.values.celsius;
+            if ( currentFarenheit === null && currentCelsius === null ) {
+                IndoorTemperatureCurrent.getValues();
+            }
+        }
+    };
+
+} );
+
+
+svcMod.factory( "IndoorTemperatureStats", function ( $http, socket ) {
+    
+    return {
+        values: {
+            average: null,
+            min: null,
+            max: null
+        },
+        getValues: function () {
+            var values = this.values;
+            var apiUrl = "/api/indoor/temperature/stats";
+
+            $http.get( apiUrl ).
+                success( function ( data, status ) {
+                    values.average = data.average;
+                    values.min = data.min;
+                    values.max = data.max;
+                } ).
+                error( function ( data, status ) {
+                    logError( data );
+                } );
+        },
+        listenForUpdates: function () {
+            // TOOD: Make a socket and hook this up
+            var values = this.values;
+        },
+        init: function () {
+            var IndoorTemperatureStats = this;
+            var values = this.values;
+            if ( values.average === null || values.min === null || values.max === null ) {
+                IndoorTemperatureStats.getValues();
+            }
+        }
+    };
+
+} );
+
 // Indoor Humidity Reporting
 svcMod.factory( "IndoorHumidityReporting", function ( $http, socket ) {
 
