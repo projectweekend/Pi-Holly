@@ -11,10 +11,10 @@ div(class="row")
         h3(class="panel-title") Stats
       div(class="panel-body")
         div(class="stats-panel-options btn-group btn-group-justified")
-          a(class="btn btn-default") overall
-          a(class="btn btn-default") today
-          a(class="btn btn-default") 7 days
-          a(class="btn btn-default") 30 days
+          a( ng-click="indoorTemperatureStats.getValues('overall')", ng-class="{ active: indoorTemperatureStats.values.label == 'Overall' }", class="btn btn-default") Overall
+          a( ng-click="indoorTemperatureStats.getValues('today')", ng-class="{ active: indoorTemperatureStats.values.label == 'Today' }", class="btn btn-default") Today
+          a( ng-click="indoorTemperatureStats.getValues('week')", ng-class="{ active: indoorTemperatureStats.values.label == 'Last 7 Days' }", class="btn btn-default") 7 Days
+          a( ng-click="indoorTemperatureStats.getValues('month')", ng-class="{ active: indoorTemperatureStats.values.label == 'Last 30 Days' }", class="btn btn-default") 30 Days
         dl
           dt Average:
           dd
