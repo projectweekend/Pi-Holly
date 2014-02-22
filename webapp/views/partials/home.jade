@@ -1,6 +1,7 @@
 div(class="row")
   div(class="page-header")
-    h1 Temperature
+    h1 Temperature: 
+      span(class="text-primary") {{indoorTemperatureCurrent.values.fahrenheit | number:2}}&deg; F
   div(class="col-md-8")
     div(class="chart-wrapper")
       canvas(chart, id="temperatureChart", type="Line", options="indoorTemperatureReporting.chart.options", data="indoorTemperatureReporting.chart.data", width="700", height="350")
@@ -10,10 +11,6 @@ div(class="row")
         h3(class="panel-title") Stats
       div(class="panel-body")
         dl
-          dt Current:
-          dd
-            div(ng-if="indoorTemperatureCurrent.values.fahrenheit", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{indoorTemperatureCurrent.values.fahrenheit | number:2}}&deg; F
           dt Average:
           dd
             div(ng-if="indoorTemperatureStats.values.average", class="temp-stat-wrapper")
@@ -29,12 +26,12 @@ div(class="row")
 
 div(class="row")
   div(class="page-header")
-    h1 Humidity
+    h1 Humidity: 
+      span(class="text-primary") {{indoorHumidityCurrent.values.percent | number:2}}%
   div(class="col-md-8")    
     div(class="chart-wrapper")
       canvas(chart, id="humidityChart", type="Line", options="indoorHumidityReporting.chart.options", data="indoorHumidityReporting.chart.data", width="700", height="350")
   div(class="col-md-4")
-    div(class="current-value-label text-primary") {{indoorHumidityCurrent.values.percent | number:2}}%
     div(class="panel panel-default")
       div(class="panel-heading")
         h3(class="panel-title") Stats
