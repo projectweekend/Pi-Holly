@@ -78,8 +78,8 @@ app.post('/api/indoor/humidity', indoorEnvAPI.indoorHumidityData);
 app.post('/api/indoor/humidity/bulk', indoorEnvAPI.indoorHumidityDataBulk);
 app.get('/api/indoor/humidity/recent', indoorEnvAPI.indoorHumidityDataRecent);
 
-app.get('/api/indoor/humidity/stats', indoorHumidStatsAPI.indoorHumidityStatsOverall);
-app.get('/api/indoor/humidity/stats/day', indoorHumidStatsAPI.indoorHumidityStatsDay);
+app.get('/api/indoor/humidity/stats/overall', indoorHumidStatsAPI.indoorHumidityStatsOverall);
+app.get('/api/indoor/humidity/stats/today', indoorHumidStatsAPI.indoorHumidityStatsDay);
 app.get('/api/indoor/humidity/stats/week', indoorHumidStatsAPI.indoorHumidityStatsWeek);
 app.get('/api/indoor/humidity/stats/month', indoorHumidStatsAPI.indoorHumidityStatsMonth);
 
