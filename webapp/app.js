@@ -68,8 +68,8 @@ app.post('/api/indoor/temperature', indoorEnvAPI.indoorTemperatureData);
 app.post('/api/indoor/temperature/bulk', indoorEnvAPI.indoorTemperatureDataBulk);
 app.get('/api/indoor/temperature/recent', indoorEnvAPI.indoorTemperatureDataRecent);
 
-app.get('/api/indoor/temperature/stats', indoorTempStatsAPI.indoorTemperatureStatsOverall);
-app.get('/api/indoor/temperature/stats/day', indoorTempStatsAPI.indoorTemperatureStatsDay);
+app.get('/api/indoor/temperature/stats/overall', indoorTempStatsAPI.indoorTemperatureStatsOverall);
+app.get('/api/indoor/temperature/stats/today', indoorTempStatsAPI.indoorTemperatureStatsDay);
 app.get('/api/indoor/temperature/stats/week', indoorTempStatsAPI.indoorTemperatureStatsWeek);
 app.get('/api/indoor/temperature/stats/month', indoorTempStatsAPI.indoorTemperatureStatsMonth);
 
