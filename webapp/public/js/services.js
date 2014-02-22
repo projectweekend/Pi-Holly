@@ -141,28 +141,13 @@ svcMod.factory( "IndoorTemperatureStats", function ( $http, socket ) {
             min: null,
             max: null
         },
-        gatOverallValues: function () {
+        getValues: function ( breakdownType ) {
             var values = this.values;
-            var apiUrl = "/api/indoor/temperature/stats";
-            $http.get( apiUrl ).
-                success( function ( data, status ) {
-                    values.label = "Overall";
-                    values.average = data.average;
-                    values.min = data.min;
-                    values.max = data.max;
-                } ).
-                error( function ( data, status ) {
-                    logError( data );
-                } );
-
-        },
-        
-        getValues: function () {
-            var values = this.values;
-            var apiUrl = "/api/indoor/temperature/stats";
+            var apiUrl = "/api/indoor/temperature/stats/" + breakdownType;
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
+                    values.label = data.label;
                     values.average = data.average;
                     values.min = data.min;
                     values.max = data.max;
@@ -179,7 +164,7 @@ svcMod.factory( "IndoorTemperatureStats", function ( $http, socket ) {
             var IndoorTemperatureStats = this;
             var values = this.values;
             if ( values.average === null || values.min === null || values.max === null ) {
-                IndoorTemperatureStats.getValues();
+                IndoorTemperatureStats.getValues( "overall" );
             }
         }
     };
