@@ -12,6 +12,7 @@ var errorHandler = function ( err, res ) {
 exports.indoorTemperatureStatsOverall = function ( req, res ) {
 
     var output = {
+        label: "Overall",
         average: {
             celsius: 0,
             fahrenheit: 0
@@ -67,6 +68,7 @@ exports.indoorTemperatureStatsOverall = function ( req, res ) {
 exports.indoorTemperatureStatsDay = function ( req, res ) {
 
     var output = {
+        label: "Today",
         average: {
             celsius: 0,
             fahrenheit: 0
@@ -150,6 +152,7 @@ exports.indoorTemperatureStatsDay = function ( req, res ) {
 exports.indoorTemperatureStatsWeek = function ( req, res ) {
 
     var output = {
+        label: "Last 7 Days",
         average: {
             celsius: 0,
             fahrenheit: 0
@@ -233,6 +236,7 @@ exports.indoorTemperatureStatsWeek = function ( req, res ) {
 exports.indoorTemperatureStatsMonth = function ( req, res ) {
 
     var output = {
+        label: "Last 30 Days",
         average: {
             celsius: 0,
             fahrenheit: 0
