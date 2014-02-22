@@ -271,16 +271,18 @@ svcMod.factory( "IndoorHumidityStats", function ( $http, socket ) {
 
     return {
         values: {
+            label: "",
             average: null,
             min: null,
             max: null
         },
-        getValues: function () {
+        getValues: function ( breakdownType ) {
             var values = this.values;
-            var apiUrl = "/api/indoor/humidity/stats";
+            var apiUrl = "/api/indoor/humidity/stats/" + breakdownType;
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
+                    values.label = data.label;
                     values.average = data.average.percent;
                     values.min = data.min.percent;
                     values.max = data.max.percent;
