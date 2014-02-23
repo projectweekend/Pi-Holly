@@ -23,7 +23,7 @@ div(class="row")
       div(ng-if="!indoorTemperatureStats.loadingValues && indoorTemperatureStats.loadingError", class="alert alert-danger")
         strong Something went wrong...        
       
-      div(class="stat-wrapper")
+      div(ng-if="!indoorTemperatureStats.loadingValues && !indoorTemperatureStats.loadingError", class="stat-wrapper")
         div(class="stat-label") Average:
         div(class="stat-value")
           span(ng-hide="indoorTemperatureStats.values.average.fahrenheit == 'No data'", class="text-primary") {{indoorTemperatureStats.values.average.fahrenheit | number:2}}&deg; F
@@ -31,7 +31,7 @@ div(class="row")
       
       hr
       
-      div(class="stat-wrapper")
+      div(ng-if="!indoorTemperatureStats.loadingValues && !indoorTemperatureStats.loadingError", class="stat-wrapper")
         div(class="stat-label") High:
         div(class="stat-value") 
           span(ng-hide="indoorTemperatureStats.values.max.fahrenheit == 'No data'", class="text-primary") {{indoorTemperatureStats.values.max.fahrenheit | number:2}}&deg; F
@@ -39,7 +39,7 @@ div(class="row")
       
       hr
       
-      div(class="stat-wrapper")
+      div(ng-if="!indoorTemperatureStats.loadingValues && !indoorTemperatureStats.loadingError", class="stat-wrapper")
         div(class="stat-label") Low:
         div(class="stat-value")        
           span(ng-hide="indoorTemperatureStats.values.min.fahrenheit == 'No data'", class="text-primary") {{indoorTemperatureStats.values.min.fahrenheit | number:2}}&deg; F
@@ -70,7 +70,7 @@ div(class="row")
       div(ng-if="!indoorHumidityStats.loadingValues && indoorHumidityStats.loadingError", class="alert alert-danger")
         strong Something went wrong...        
     
-      div(class="stat-wrapper")
+      div(ng-if="!indoorHumidityStats.loadingValues && !indoorHumidityStats.loadingError", class="stat-wrapper")
         div(class="stat-label") Average:
         div(class="stat-value")
           span(ng-hide="indoorHumidityStats.values.average == 'No data'", class="text-primary") {{indoorHumidityStats.values.average | number:2}}%
@@ -78,7 +78,7 @@ div(class="row")
       
       hr
     
-      div(class="stat-wrapper")
+      div(ng-if="!indoorHumidityStats.loadingValues && !indoorHumidityStats.loadingError", class="stat-wrapper")
         div(class="stat-label") High:
         div(class="stat-value")
           span(ng-hide="indoorHumidityStats.values.max == 'No data'", class="text-primary") {{indoorHumidityStats.values.max | number:2}}%
@@ -86,7 +86,7 @@ div(class="row")
       
       hr
     
-      div(class="stat-wrapper")
+      div(ng-if="!indoorHumidityStats.loadingValues && !indoorHumidityStats.loadingError", class="stat-wrapper")
         div(class="stat-label") Low:
         div(class="stat-value")
           span(ng-hide="indoorHumidityStats.values.min == 'No data'", class="text-primary") {{indoorHumidityStats.values.min | number:2}}%
