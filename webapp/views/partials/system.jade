@@ -1,7 +1,7 @@
 div(class="row")
 
   div(class="page-header")
-    h1 System Temperature: 
+    h1 Holly Temperature: 
       span(class="text-primary") {{systemCurrentTemp.values.fahrenheit | number:2}}&deg; F
 
   div(class="col-md-8")
@@ -47,7 +47,55 @@ div(class="row")
 div(class="row")
 
   div(class="page-header")
-    h1 System Information
+    h1 Starbug Temperature: 
+      span(class="text-primary") {{starbugCurrentTemp.values.fahrenheit | number:2}}&deg; F
+
+  div(class="col-md-8")
+    canvas(chart, id="starbugTempChart", type="Line", options="starbugTempReporting.chart.options", data="starbugTempReporting.chart.data", width="700", height="350")
+
+  div(class="col-md-4")
+
+    div(class="stats-panel")
+      
+      div(class="stats-panel-options btn-group btn-group-justified")
+        a( ng-click="starbugTempStats.getValues('today')", ng-class="{ active: starbugTempStats.values.label == 'Today' }", class="btn btn-default") Today
+        a( ng-click="starbugTempStats.getValues('week')", ng-class="{ active: starbugTempStats.values.label == 'Last 7 Days' }", class="btn btn-default") 7 Days
+        a( ng-click="starbugTempStats.getValues('month')", ng-class="{ active: starbugTempStats.values.label == 'Last 30 Days' }", class="btn btn-default") 30 Days
+        a( ng-click="starbugTempStats.getValues('overall')", ng-class="{ active: starbugTempStats.values.label == 'Overall' }", class="btn btn-default") Overall
+
+      div(ng-if="starbugTempStats.loadingValues && !starbugTempStats.loadingError", class="alert alert-info")
+        strong Calculating stats...
+      
+      div(ng-if="!starbugTempStats.loadingValues && starbugTempStats.loadingError", class="alert alert-danger")
+        strong Something went wrong...
+
+      div(ng-if="!starbugTempStats.loadingValues && !starbugTempStats.loadingError", class="stat-wrapper")
+        div(class="stat-label") Average:
+        div(class="stat-value")
+          span(ng-hide="starbugTempStats.values.average.fahrenheit == 'No data'", class="text-primary") {{starbugTempStats.values.average.fahrenheit | number:2}}&deg; F
+          span(ng-show="starbugTempStats.values.average.fahrenheit == 'No data'", class="text-primary") No data
+      
+      hr
+      
+      div(ng-if="!starbugTempStats.loadingValues && !starbugTempStats.loadingError", class="stat-wrapper")
+        div(class="stat-label") High:
+        div(class="stat-value") 
+          span(ng-hide="starbugTempStats.values.max.fahrenheit == 'No data'", class="text-primary") {{starbugTempStats.values.max.fahrenheit | number:2}}&deg; F
+          span(ng-show="starbugTempStats.values.max.fahrenheit == 'No data'", class="text-primary") No data
+      
+      hr
+      
+      div(ng-if="!starbugTempStats.loadingValues && !starbugTempStats.loadingError", class="stat-wrapper")
+        div(class="stat-label") Low:
+        div(class="stat-value")        
+          span(ng-hide="starbugTempStats.values.min.fahrenheit == 'No data'", class="text-primary") {{starbugTempStats.values.min.fahrenheit | number:2}}&deg; F
+          span(ng-show="starbugTempStats.values.min.fahrenheit == 'No data'", class="text-primary") No data
+
+
+div(class="row")
+
+  div(class="page-header")
+    h1 Holly Information
 
   div(class="col-md-4")
     h3 Memory 
@@ -98,34 +146,3 @@ div(class="row")
       dd
         div(ng-if="systemCurrentConfig.values.sdram_freq", class="system-config-wrapper")
           span(class="text-primary system-config-value") {{systemCurrentConfig.values.sdram_freq}} MHz
-
-div(class="row")
-
-  div(class="page-header")
-    h1 Starbug Temperature
-
-  div(class="col-md-8")
-    canvas(chart, id="starbugTempChart", type="Line", options="starbugTempReporting.chart.options", data="starbugTempReporting.chart.data", width="700", height="350")
-
-  div(class="col-md-4")
-    div(class="panel panel-default")
-      div(class="panel-heading")
-        h3(class="panel-title") Stats
-      div(class="panel-body")
-        dl
-          dt Current:
-          dd
-            div(ng-if="starbugCurrentTemp.values.fahrenheit", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{starbugCurrentTemp.values.fahrenheit | number:2}}&deg; F
-          dt Average:
-          dd
-            div(ng-if="starbugTempStats.values.average", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{starbugTempStats.values.average.fahrenheit | number:2}}&deg; F
-          dt Max:
-          dd 
-            div(ng-if="starbugTempStats.values.max", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{starbugTempStats.values.max.fahrenheit | number:2}}&deg; F
-          dt Min:
-          dd
-            div(ng-if="starbugTempStats.values.min", class="temp-stat-wrapper")
-              span(class="text-primary temp-stat-value") {{starbugTempStats.values.min.fahrenheit | number:2}}&deg; F        
