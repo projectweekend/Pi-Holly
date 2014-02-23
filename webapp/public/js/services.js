@@ -284,7 +284,7 @@ svcMod.factory( "IndoorHumidityStats", function ( $http, socket ) {
         loadingValues: false,
         loadingError: false,
         getValues: function ( breakdownType ) {
-            var IndoorHumidityStats = this.values;
+            var IndoorHumidityStats = this;
             var apiUrl = "/api/indoor/humidity/stats/" + breakdownType;
             IndoorHumidityStats.loadingValues = true;
             $http.get( apiUrl ).
