@@ -13,6 +13,7 @@ exports.starbugTemperatureStatsOverall = function ( req, res ) {
 
     // The Temperature Stats output object
     var output = {
+    	label: "Overall",
         average: {
             celsius: null,
             fahrenheit: null
@@ -85,6 +86,7 @@ exports.starbugTemperatureStatsDay = function ( req, res ) {
 
     // The Temperature Stats output object
     var output = {
+		label: "Today",
         average: {
             celsius: null,
             fahrenheit: null
@@ -169,6 +171,7 @@ exports.starbugTemperatureStatsWeek = function ( req, res ) {
 
     // The Temperature Stats output object
     var output = {
+        label: "Last 7 Days",
         average: {
             celsius: null,
             fahrenheit: null
@@ -253,6 +256,7 @@ exports.starbugTemperatureStatsMonth = function ( req, res ) {
 
     // The Temperature Stats output object
     var output = {
+        label: "Last 30 Days",
         average: {
             celsius: null,
             fahrenheit: null

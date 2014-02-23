@@ -451,22 +451,29 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
 
     return {
         values: {
+            label: "",
             average: null,
             min: null,
             max: null
         },
-        getValues: function () {
-            var values = this.values;
-            var apiUrl = "/api/system/temperature/stats/overall";
-
+        loadingValues: false,
+        loadingError: false,
+        getValues: function ( breakdownType ) {
+            var SystemTempStats = this;
+            var apiUrl = "/api/system/temperature/stats/" + breakdownType;
+            SystemTempStats.loadingValues = true;
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    values.average = data.average;
-                    values.min = data.min;
-                    values.max = data.max;
+                    SystemTempStats.values.label = data.label;
+                    SystemTempStats.values.average = data.average;
+                    SystemTempStats.values.min = data.min;
+                    SystemTempStats.values.max = data.max;
+                    SystemTempStats.loadingValues = false;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
+                    SystemTempStats.loadingError = true;
+                    SystemTempStats.loadingValues = false;
                 } );
 
         },
@@ -478,7 +485,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
             var SystemTempStats = this;
             var values = this.values;
             if ( values.average === null || values.min === null || values.max === null ) {
-                SystemTempStats.getValues();
+                SystemTempStats.getValues( "today" );
             }
         }
     };
@@ -801,19 +808,21 @@ svcMod.factory( "StarbugTempStats", function ( $http, socket ) {
 
     return {
         values: {
+            label: "",
             average: null,
             min: null,
             max: null
         },
-        getValues: function () {
-            var values = this.values;
-            var apiUrl = "/api/starbug/temperature/stats";
+        getValues: function ( breakdownType ) {
+            var StarbugTempStats = this;
+            var apiUrl = "/api/starbug/temperature/stats/" + breakdownType;
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    values.average = data.average;
-                    values.min = data.min;
-                    values.max = data.max;
+                    StarbugTempStats.values.label = data.label;
+                    StarbugTempStats.values.average = data.average;
+                    StarbugTempStats.values.min = data.min;
+                    StarbugTempStats.values.max = data.max;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
@@ -828,7 +837,7 @@ svcMod.factory( "StarbugTempStats", function ( $http, socket ) {
             var StarbugTempStats = this;
             var values = this.values;
             if ( values.average === null || values.min === null || values.max === null ) {
-                StarbugTempStats.getValues();
+                StarbugTempStats.getValues( "today" );
             }
         }
     };
