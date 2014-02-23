@@ -11,6 +11,7 @@ var express = require('express'),
   systemDataAPI = require('./routes/systemDataAPI'),
   systemTempStatsAPI = require('./routes/systemTemperatureStatsAPI'),
   starbugDataAPI = require('./routes/starbugDataAPI'),
+  starbugTempStatsAPI = require('./routes/starbugTemperatureStatsAPI'),
   newsAPI = require('./routes/newsAPI'),
   ctaBusAPI = require('./routes/ctaBusAPI'),
   http = require('http'),
@@ -87,7 +88,11 @@ app.get('/api/indoor/humidity/stats/month', indoorHumidStatsAPI.indoorHumiditySt
 app.get('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
 app.post('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
 app.get('/api/starbug/temperature/recent', starbugDataAPI.starbugTemperatureDataRecent);
-app.get('/api/starbug/temperature/stats', starbugDataAPI.starbugTemperatureDataStats);
+
+app.get('/api/starbug/temperature/stats/overall', starbugTemperatureStatsAPI.starbugTemperatureStatsOverall);
+app.get('/api/starbug/temperature/stats/today', starbugTemperatureStatsAPI.starbugTemperatureStatsDay);
+app.get('/api/starbug/temperature/stats/week', starbugTemperatureStatsAPI.starbugTemperatureStatsWeek);
+app.get('/api/starbug/temperature/stats/month', starbugTemperatureStatsAPI.starbugTemperatureStatsMonth);
 
 app.get('/api/system/temperature', systemDataAPI.systemTemperatureData);
 app.get('/api/system/temperature/all', systemDataAPI.systemTemperatureDataReportingAll);
