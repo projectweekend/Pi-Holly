@@ -813,19 +813,24 @@ svcMod.factory( "StarbugTempStats", function ( $http, socket ) {
             min: null,
             max: null
         },
+        loadingValues: false,
+        loadingError: false,
         getValues: function ( breakdownType ) {
             var StarbugTempStats = this;
             var apiUrl = "/api/starbug/temperature/stats/" + breakdownType;
-
+            StarbugTempStats.loadingValues = true;
             $http.get( apiUrl ).
                 success( function ( data, status ) {
                     StarbugTempStats.values.label = data.label;
                     StarbugTempStats.values.average = data.average;
                     StarbugTempStats.values.min = data.min;
                     StarbugTempStats.values.max = data.max;
+                    StarbugTempStats.loadingValues = false;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
+                    StarbugTempStats.loadingError = true;
+                    StarbugTempStats.loadingValues = false;
                 } );
 
         },
