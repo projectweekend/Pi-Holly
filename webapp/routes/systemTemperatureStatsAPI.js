@@ -1,5 +1,6 @@
 var appModels = require( '../models' ),
- async = require( 'async' );
+    asyncCallbackHelpers = require( '../helpers/AsyncCallbacks' ),
+    async = require( 'async' );
 
 
 var errorHandler = function ( err, res ) {
