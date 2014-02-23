@@ -43,3 +43,20 @@
 .stats-panel-options {
     margin-bottom: 10px;
 }
+
+.stat-wrapper {
+    display: table;
+    width: 100%;
+    font-size: 2em;
+}
+
+.stat-wrapper > .stat-label,
+.stat-wrapper > .stat-value {
+    width: 50%;
+    float: left;
+    padding: 2.5%;
+}
+
+.stat-wrapper > .stat-value {
+    text-align: right
+}
