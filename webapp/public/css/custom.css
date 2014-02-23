@@ -40,8 +40,8 @@
 }
 
 
-.stats-panel-options {
-    margin-bottom: 10px;
+.stats-panel .stats-panel-options {
+    margin-bottom: 15px;
 }
 
 .stat-wrapper {
@@ -54,7 +54,7 @@
 .stat-wrapper > .stat-value {
     width: 50%;
     float: left;
-    padding: 2.5%;
+    padding: 2.33%;
 }
 
 .stat-wrapper > .stat-value {
