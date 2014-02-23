@@ -8,10 +8,10 @@ div(class="row")
   div(class="col-md-4")
     div(class="stats-panel")
       div(class="stats-panel-options btn-group btn-group-justified")
-        a( ng-click="indoorTemperatureStats.getValues('overall')", ng-class="{ active: indoorTemperatureStats.values.label == 'Overall' }", class="btn btn-default") Overall
         a( ng-click="indoorTemperatureStats.getValues('today')", ng-class="{ active: indoorTemperatureStats.values.label == 'Today' }", class="btn btn-default") Today
         a( ng-click="indoorTemperatureStats.getValues('week')", ng-class="{ active: indoorTemperatureStats.values.label == 'Last 7 Days' }", class="btn btn-default") 7 Days
         a( ng-click="indoorTemperatureStats.getValues('month')", ng-class="{ active: indoorTemperatureStats.values.label == 'Last 30 Days' }", class="btn btn-default") 30 Days
+        a( ng-click="indoorTemperatureStats.getValues('overall')", ng-class="{ active: indoorTemperatureStats.values.label == 'Overall' }", class="btn btn-default") Overall
       div(class="stat-wrapper")
         div(class="stat-label") Average:
         div(class="stat-value")
@@ -40,10 +40,10 @@ div(class="row")
   div(class="col-md-4")
     div(class="stats-panel")
       div(class="stats-panel-options btn-group btn-group-justified")
-        a( ng-click="indoorHumidityStats.getValues('overall')", ng-class="{ active: indoorHumidityStats.values.label == 'Overall' }", class="btn btn-default") Overall
         a( ng-click="indoorHumidityStats.getValues('today')", ng-class="{ active: indoorHumidityStats.values.label == 'Today' }", class="btn btn-default") Today
         a( ng-click="indoorHumidityStats.getValues('week')", ng-class="{ active: indoorHumidityStats.values.label == 'Last 7 Days' }", class="btn btn-default") 7 Days
         a( ng-click="indoorHumidityStats.getValues('month')", ng-class="{ active: indoorHumidityStats.values.label == 'Last 30 Days' }", class="btn btn-default") 30 Days
+        a( ng-click="indoorHumidityStats.getValues('overall')", ng-class="{ active: indoorHumidityStats.values.label == 'Overall' }", class="btn btn-default") Overall        
     div(class="stat-wrapper")
       div(class="stat-label") Average:
       div(class="stat-value")
