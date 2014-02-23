@@ -13,7 +13,7 @@ exports.starbugTemperatureStatsOverall = function ( req, res ) {
 
     // The Temperature Stats output object
     var output = {
-    	label: "Overall",
+		label: "Overall",
         average: {
             celsius: null,
             fahrenheit: null

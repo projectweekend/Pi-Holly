@@ -89,10 +89,10 @@ app.get('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
 app.post('/api/starbug/temperature', starbugDataAPI.starbugTemperatureData);
 app.get('/api/starbug/temperature/recent', starbugDataAPI.starbugTemperatureDataRecent);
 
-app.get('/api/starbug/temperature/stats/overall', starbugTemperatureStatsAPI.starbugTemperatureStatsOverall);
-app.get('/api/starbug/temperature/stats/today', starbugTemperatureStatsAPI.starbugTemperatureStatsDay);
-app.get('/api/starbug/temperature/stats/week', starbugTemperatureStatsAPI.starbugTemperatureStatsWeek);
-app.get('/api/starbug/temperature/stats/month', starbugTemperatureStatsAPI.starbugTemperatureStatsMonth);
+app.get('/api/starbug/temperature/stats/overall', starbugTempStatsAPI.starbugTemperatureStatsOverall);
+app.get('/api/starbug/temperature/stats/today', starbugTempStatsAPI.starbugTemperatureStatsDay);
+app.get('/api/starbug/temperature/stats/week', starbugTempStatsAPI.starbugTemperatureStatsWeek);
+app.get('/api/starbug/temperature/stats/month', starbugTempStatsAPI.starbugTemperatureStatsMonth);
 
 app.get('/api/system/temperature', systemDataAPI.systemTemperatureData);
 app.get('/api/system/temperature/all', systemDataAPI.systemTemperatureDataReportingAll);
