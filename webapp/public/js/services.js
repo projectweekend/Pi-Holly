@@ -447,7 +447,7 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
         },
         getValues: function () {
             var values = this.values;
-            var apiUrl = "/api/system/temperature/stats";
+            var apiUrl = "/api/system/temperature/stats/overall";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
