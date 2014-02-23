@@ -23,6 +23,10 @@ config( function ( $routeProvider, $locationProvider, $httpProvider ) {
         templateUrl: 'partials/home',
         controller: 'HomeCtrl'
     } ).
+    when( '/lights', {
+        templateUrl: 'partials/lights',
+        controller: 'LightsCtrl'
+    } ).
     when( '/system', {
         templateUrl: 'partials/system',
         controller: 'SystemCtrl'
