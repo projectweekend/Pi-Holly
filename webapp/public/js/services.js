@@ -141,19 +141,24 @@ svcMod.factory( "IndoorTemperatureStats", function ( $http, socket ) {
             min: null,
             max: null
         },
+        loadingValues: false,
+        loadingError: false,
         getValues: function ( breakdownType ) {
-            var values = this.values;
+            var IndoorTemperatureStats = this;
             var apiUrl = "/api/indoor/temperature/stats/" + breakdownType;
-
+            IndoorTemperatureStats.loadingValues = true;
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    values.label = data.label;
-                    values.average = data.average;
-                    values.min = data.min;
-                    values.max = data.max;
+                    IndoorTemperatureStats.values.label = data.label;
+                    IndoorTemperatureStats.values.average = data.average;
+                    IndoorTemperatureStats.values.min = data.min;
+                    IndoorTemperatureStats.values.max = data.max;
+                    IndoorTemperatureStats.loadingValues = false;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
+                    IndoorTemperatureStats.loadingValues = false;
+                    IndoorTemperatureStats.loadingError = true;
                 } );
         },
         listenForUpdates: function () {
@@ -276,19 +281,24 @@ svcMod.factory( "IndoorHumidityStats", function ( $http, socket ) {
             min: null,
             max: null
         },
+        loadingValues: false,
+        loadingError: false,
         getValues: function ( breakdownType ) {
-            var values = this.values;
+            var IndoorHumidityStats = this.values;
             var apiUrl = "/api/indoor/humidity/stats/" + breakdownType;
-
+            IndoorHumidityStats.loadingValues = true;
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    values.label = data.label;
-                    values.average = data.average.percent;
-                    values.min = data.min.percent;
-                    values.max = data.max.percent;
+                    IndoorHumidityStats.values.label = data.label;
+                    IndoorHumidityStats.values.average = data.average.percent;
+                    IndoorHumidityStats.values.min = data.min.percent;
+                    IndoorHumidityStats.values.max = data.max.percent;
+                    IndoorHumidityStats.loadingValues = false;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
+                    IndoorHumidityStats.loadingError = true;
+                    IndoorHumidityStats.loadingValues = false;
                 } );
 
         },
