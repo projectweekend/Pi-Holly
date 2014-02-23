@@ -300,7 +300,7 @@ svcMod.factory( "IndoorHumidityStats", function ( $http, socket ) {
             var IndoorHumidityStats = this;
             var values = this.values;
             if ( values.average === null || values.min === null || values.max === null ) {
-                IndoorHumidityStats.getValues();
+                IndoorHumidityStats.getValues( "overall" );
             }
         }
     };
