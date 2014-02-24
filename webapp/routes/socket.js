@@ -12,10 +12,6 @@ module.exports = function ( socket ) {
 
 	var handleError = ERRORSocket( socket, {route: 'app:error'} );
 
-	
-	// System Temperature CRUD operations can be performed on the 'system:temp' channel
-	CRUDSocket( socket, handleError, {route: 'system:temp', model: SystemTemperatureData} );
-
 	// The latest System Temperature reading is broadcast on a set interval
 	RepeatOneSocket( socket, handleError, {
 		route: 'updates:system:temp',
