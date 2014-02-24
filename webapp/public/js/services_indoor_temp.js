@@ -20,7 +20,7 @@ var makeHoursMinutesTimeString = function ( dateString ) {
 };
 
 
-var svcMod = angular.module('myApp.services', []);
+var svcMod = angular.module('myApp.services_indoor_temp', []);
 
 
 // Indoor Temperature Reporting
