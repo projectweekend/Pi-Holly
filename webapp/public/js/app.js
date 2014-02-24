@@ -7,6 +7,8 @@ angular.module('myApp', [
     'myApp.filters',
     'myApp.services',
     'myApp.services_indoor_temp',
+    'myApp.services_indoor_humidity',
+    'myApp.services_system_temp',
     'myApp.directives',
     'ngRoute',
 
