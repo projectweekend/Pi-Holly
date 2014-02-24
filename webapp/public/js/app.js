@@ -6,6 +6,7 @@ angular.module('myApp', [
     'myApp.controllers',
     'myApp.filters',
     'myApp.services',
+    'myApp.indoor_temp_services',
     'myApp.directives',
     'ngRoute',
 
