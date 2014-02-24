@@ -1,11 +1,10 @@
 'use strict';
 
-
-var logError = function ( data ) {
-    console.log( data );
-};
+/* Services */
 
 
+// Demonstrate how to register services
+// In this case it is a simple value service.
 var makeHoursMinutesTimeString = function ( dateString ) {
 
     var d = new Date( dateString );
@@ -19,15 +18,19 @@ var makeHoursMinutesTimeString = function ( dateString ) {
     return h + ":" + m;
 };
 
+var logError = function ( data ) {
+    console.log( data );
+};
 
-var svcMod = angular.module('myApp.services_system_temp', []);
+
+var svcMod = angular.module('myApp.services_starbug_temp', []);
 
 
-// System Reporting
-svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
+// Starbug Temperature Reporting
+svcMod.factory( "StarbugTempReporting", function ( $http, socket ) {
 
     return {
-        recentTempChart: {
+        chart: {
             options: {},
             data: {
                 labels: [],
@@ -42,21 +45,21 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                 ]
             }
         },
-        buildRecentTempChart: function ( display_units ) {
-            var recentTempChart = this.recentTempChart;
-            var apiUrl = "/api/system/temperature/recent?numberOfReadings=18";
+        buildChart: function ( display_units ) {
+            var chart = this.chart;
+            var apiUrl = "/api/starbug/temperature/recent?numberOfReadings=18";
 
             $http.get( apiUrl ).
                 success( function ( data, status ) {
                     data.forEach( function ( element, index, array ) {
 
                         var parsedTime = makeHoursMinutesTimeString( element.date );
-                        recentTempChart.data.labels.push( parsedTime );
+                        chart.data.labels.push( parsedTime );
 
                         if ( display_units == 'F' ) {
-                            recentTempChart.data.datasets[0].data.push( element.fahrenheit );
+                            chart.data.datasets[0].data.push( element.fahrenheit );
                         } else {
-                            recentTempChart.data.datasets[0].data.push( element.celsius );
+                            chart.data.datasets[0].data.push( element.celsius );
                         }
 
                     } );
@@ -65,30 +68,29 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
                     logError( data );
                 });
         },
-        clearRecentTempChart: function () {
-            var recentTempChart = this.recentTempChart;
-            recentTempChart.data.labels = [];
-            recentTempChart.data.datasets[0].data = [];
+        clearChart: function () {
+            var chart = this.chart;
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
         },
         listenForUpdates: function ( display_units ) {
+            var chart = this.chart;
             
-            var recentTempChart = this.recentTempChart;
-            
-            socket.on( 'updates:system:temp', function ( data ) {
+            socket.on( 'updates:starbug:temp', function ( data ) {
             
                 var newLabel = makeHoursMinutesTimeString( data.date );
-                var latestLabel = recentTempChart.data.labels[0];
+                var latestLabel = chart.data.labels[0];
 
                 if ( newLabel != latestLabel ) {
                     // remove oldest one
-                    recentTempChart.data.labels.pop();
-                    recentTempChart.data.datasets[0].data.pop();
+                    chart.data.labels.pop();
+                    chart.data.datasets[0].data.pop();
                     // add new one
-                    recentTempChart.data.labels.unshift( newLabel );
+                    chart.data.labels.unshift( newLabel );
                     if ( display_units == 'F' ) {
-                        recentTempChart.data.datasets[0].data.unshift( data.fahrenheit );
+                        chart.data.datasets[0].data.unshift( data.fahrenheit );
                     } else {
-                        recentTempChart.data.datasets[0].data.unshift( data.celsius );
+                        chart.data.datasets[0].data.unshift( data.celsius );
                     }
 
                 }
@@ -96,19 +98,18 @@ svcMod.factory( "SystemTempReporting", function ( $http, socket ) {
             } );
         },
         init: function ( display_units ) {
-            var SystemTempReporting = this;
-            var currentData = SystemTempReporting.recentTempChart.data.datasets[0].data;
+            var StarbugTempReporting = this;
+            var currentData = StarbugTempReporting.chart.data.datasets[0].data;
             if ( currentData.length === 0 ) {
-                SystemTempReporting.buildRecentTempChart( display_units );
+                StarbugTempReporting.buildChart( display_units );
             }
         }
-
     };
 
 } );
 
-// Current System Temp
-svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
+// Current Starbug Temp
+svcMod.factory( "StarbugTempCurrent", function ( $http, socket ) {
 
     return {
         values: {
@@ -118,7 +119,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
         },
         getValues: function () {
             var values = this.values;
-            var apiUrl = "/api/system/temperature";
+            var apiUrl = "/api/starbug/temperature";
 
             $http.get( apiUrl ).
                 success( function ( data, status) {
@@ -132,7 +133,7 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
         },
         listenForUpdates: function () {
             var values = this.values;
-            socket.on( 'updates:system:temp', function ( data ) {
+            socket.on( 'updates:starbug:temp', function ( data ) {
                 if ( values.date != data.date ) {
                     values.date = data.date;
                     values.fahrenheit = data.fahrenheit;
@@ -141,19 +142,19 @@ svcMod.factory( "SystemTempCurrent", function ( $http, socket ) {
             } );
         },
         init: function () {
-            var SystemTempCurrent = this;
-            var currentFarenheit = SystemTempCurrent.values.fahrenheit;
-            var currentCelsius = SystemTempCurrent.values.celsius;
+            var StarbugTempCurrent = this;
+            var currentFarenheit = StarbugTempCurrent.values.fahrenheit;
+            var currentCelsius = StarbugTempCurrent.values.celsius;
             if ( currentFarenheit === null && currentCelsius === null ) {
-                SystemTempCurrent.getValues();
+                StarbugTempCurrent.getValues();
             }
         }
     };
 
 } );
 
-// System Temp Stats
-svcMod.factory( "SystemTempStats", function ( $http, socket ) {
+// Starbug Temperature Stats
+svcMod.factory( "StarbugTempStats", function ( $http, socket ) {
 
     return {
         values: {
@@ -165,21 +166,21 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
         loadingValues: false,
         loadingError: false,
         getValues: function ( breakdownType ) {
-            var SystemTempStats = this;
-            var apiUrl = "/api/system/temperature/stats/" + breakdownType;
-            SystemTempStats.loadingValues = true;
+            var StarbugTempStats = this;
+            var apiUrl = "/api/starbug/temperature/stats/" + breakdownType;
+            StarbugTempStats.loadingValues = true;
             $http.get( apiUrl ).
                 success( function ( data, status ) {
-                    SystemTempStats.values.label = data.label;
-                    SystemTempStats.values.average = data.average;
-                    SystemTempStats.values.min = data.min;
-                    SystemTempStats.values.max = data.max;
-                    SystemTempStats.loadingValues = false;
+                    StarbugTempStats.values.label = data.label;
+                    StarbugTempStats.values.average = data.average;
+                    StarbugTempStats.values.min = data.min;
+                    StarbugTempStats.values.max = data.max;
+                    StarbugTempStats.loadingValues = false;
                 } ).
                 error( function ( data, status ) {
                     logError( data );
-                    SystemTempStats.loadingError = true;
-                    SystemTempStats.loadingValues = false;
+                    StarbugTempStats.loadingError = true;
+                    StarbugTempStats.loadingValues = false;
                 } );
 
         },
@@ -188,10 +189,10 @@ svcMod.factory( "SystemTempStats", function ( $http, socket ) {
             var values = this.values;
         },
         init: function () {
-            var SystemTempStats = this;
+            var StarbugTempStats = this;
             var values = this.values;
             if ( values.average === null || values.min === null || values.max === null ) {
-                SystemTempStats.getValues( "today" );
+                StarbugTempStats.getValues( "today" );
             }
         }
     };

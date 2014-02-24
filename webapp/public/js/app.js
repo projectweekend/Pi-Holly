@@ -5,10 +5,14 @@
 angular.module('myApp', [
     'myApp.controllers',
     'myApp.filters',
-    'myApp.services',
     'myApp.services_indoor_temp',
     'myApp.services_indoor_humidity',
     'myApp.services_system_temp',
+    'myApp.services_system_info',
+    'myApp.services_starbug_temp',
+    'myApp.services_news_articles',
+    'myApp.services_hue_lighting',
+    'myApp.services_bus_tracker',
     'myApp.directives',
     'ngRoute',
 
