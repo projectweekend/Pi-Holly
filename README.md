@@ -56,7 +56,8 @@ The following routes are used add/retreive data from the web server exposed on t
 **GET:** `/api/indoor/temperature`
 
 **Response:**
-```
+
+```json
  {
      _id: "5302c65d09838858dffd791d",
      date: "2014-01-29T23:30:04.658Z",
@@ -70,7 +71,8 @@ The following routes are used add/retreive data from the web server exposed on t
 **POST:** `/api/indoor/temperature`
 
 **Payload:**
-```
+
+```json
  {
      fahrenheit: 79.5199993133545,
      celsius: 26.399999618530273
@@ -82,7 +84,8 @@ The following routes are used add/retreive data from the web server exposed on t
 **POST:** `/api/indoor/temperature/bulk`
 
 **Payload:**
-```
+
+```json
  {
      temperature_data: [
          {
@@ -111,7 +114,8 @@ The following routes are used add/retreive data from the web server exposed on t
 * numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
 
 **Response:**
-```
+
+```json
  [
      {
          _id: "5302c65d09838858dffd791d",
@@ -140,7 +144,8 @@ The following routes are used add/retreive data from the web server exposed on t
 **GET:** `/api/indoor/humidity`
 
 **Response:**
-```
+
+```json
  {
      _id: "5302c65d09838858dffd7922",
      date: "2014-01-28T00:55:28.829Z",
@@ -153,7 +158,8 @@ The following routes are used add/retreive data from the web server exposed on t
 **POST:** `/api/indoor/humidity`
 
 **Payload:**
-```
+
+```json
  {
      percent: 12.800000190734863
  }
@@ -164,7 +170,8 @@ The following routes are used add/retreive data from the web server exposed on t
 **POST:** `/api/indoor/humidity/bulk`
 
 **Payload:**
-```
+
+```json
  {
      humidity_data: [
          {
@@ -189,7 +196,8 @@ The following routes are used add/retreive data from the web server exposed on t
 * numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
 
 **Response:**
-```
+
+```json
  [
      {
          _id: "5302c65d09838858dffd7922",
@@ -213,8 +221,9 @@ The following routes are used add/retreive data from the web server exposed on t
 
 **GET:** `/api/system-temperature-data`
 
-**Response:** 
-```
+**Response:**
+
+```json
  {
      date: "2014-01-10T23:22:24.150Z",
      celsius: 40,
@@ -234,7 +243,8 @@ Right now, this returns the last 18 temperature readings. That limit will be mov
 * numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
 
 **Response:**
-```
+
+```json
  [
      {
          date: "2014-01-10T23:22:24.150Z",
@@ -266,19 +276,20 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/system/temperature/stats`
 
 **Response:**
-```
+
+```json
  {
-     average: 
+     average:
      {
          celsius: 43,
          fahrenheit: 109.39999999999999
      },
-     min: 
+     min:
      {
          celsius: 40,
          fahrenheit: 104
      },
-     max: 
+     max:
      {
          celsius: 47,
          fahrenheit: 116.6
@@ -291,7 +302,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/system/memory`
 
 **Response:**
-```
+
+```json
  {
      date: "2014-01-14T02:00:06.058Z",
      total: 485,
@@ -310,7 +322,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/system/storage`
 
 **Response:**
-```
+
+```json
  {
      date: "2014-01-14T02:00:06.455Z",
      available: 3531,
@@ -326,7 +339,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/system/config`
 
 **Respoonse:**
-```
+
+```json
  {
      date: "2014-01-17T01:07:41.655Z",
      arm_freq: 800,
@@ -340,7 +354,7 @@ This returns an object with the current, average, min, and max temperatures.
      hdmi_ignore_edid: "0xa5000080",
      hdmi_mode: 4,
      hdmi_safe: 1,
-     disable_splash: 1,    
+     disable_splash: 1,
      disable_overscan: 1,
      overscan_bottom: 16,
      overscan_left: 24,
@@ -360,7 +374,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/starbug/temperature`
 
 **Response:**
-```
+
+```json
  {
      date: "2014-01-10T23:22:24.150Z",
      celsius: 40,
@@ -375,7 +390,8 @@ This returns an object with the current, average, min, and max temperatures.
 **POST:** `/api/starbug/temperature`
 
 **Response:**
-```
+
+```json
  {
      celsius: 40,
      fahrenheit: 104
@@ -391,7 +407,8 @@ This returns an object with the current, average, min, and max temperatures.
 * numberOfReadings - Optionally control the number of readings returned by this route. If not defined, the default number of records returned is 6.
 
 **Response:**
-```
+
+```json
  [
      {
          date: "2014-01-10T23:22:24.150Z",
@@ -422,19 +439,20 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/starbug/temperature/stats`
 
 **Response:**
-```
+
+```json
  {
-     average: 
+     average:
      {
          celsius: 43,
          fahrenheit: 109.39999999999999
      },
-     min: 
+     min:
      {
          celsius: 40,
          fahrenheit: 104
      },
-     max: 
+     max:
      {
          celsius: 47,
          fahrenheit: 116.6
@@ -447,7 +465,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/news-source/config`
 
 **Response:**
-```
+
+```json
  [
      {
          date: "2014-01-20T00:48:56.373Z",
@@ -476,7 +495,8 @@ This returns an object with the current, average, min, and max temperatures.
 **POST:** `/api/news-source/config`
 
 **Payload:**
-```
+
+```json
  {
      url: "http://www.theverge.com"
  }
@@ -487,7 +507,8 @@ This returns an object with the current, average, min, and max temperatures.
 **PUT:** `/api/news-source/config`
 
 **Payload:**
-```
+
+```json
  {
      _id: "52dc15afbe18ba0000000001",
      url: "http://www.theverge.com"
@@ -504,7 +525,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/news-articles`
 
 **Respoonse:**
-```
+
+```json
  [
      {
          _id: "52dde0d80983886bbae8b4e9",
@@ -512,7 +534,7 @@ This returns an object with the current, average, min, and max temperatures.
          url: "http://www.theverge.com/2014/1/20/5328766/microsoft-reportedly-paying-youtube-personalities-to-promote-xbox-one",
          summary: "In addition, a copy of the full legal agreement leaked recently, detailing the confidentiality rules partners must abide by when they sign up. Digital marketing campaign clearinghouse Poptent shows listings from January 10th inviting YouTube stars to sign up for the Machinima deal, and reports of the quiet promotion surfaced this past weekend. Poptent also lists $1 per CPM deals from back in November inviting Machinima's stars to promote the Xbox One — suggesting that this new mode of advertising has been going on since at least the console's launch. Microsoft has reportedly partnered with Machinima to quietly pay the YouTube channel's video partners to promote the Xbox One. According to Ars Technica, Machinima's affiliates could get a $3 per CPM (or $3 for every 1,000 views) bonus if they included at least 30 seconds of Xbox One footage and mentioned the console by name in their videos. We've reached out to Microsoft and Machinima for comment.",
          image_url: "http://cdn0.sbnation.com/entry_photo_images/9732109/IMG_5171-1024_large_verge_super_wide.jpg",
-         keywords: 
+         keywords:
          [
              "paying",
              "partners",
@@ -539,14 +561,15 @@ This returns an object with the current, average, min, and max temperatures.
 **POST:** `/api/news-articles/read`
 
 **Payload:**
-```
+
+```json
  {
      _id: "52dde0d80983886bbae8b4e9",
      title: "Microsoft reportedly paying YouTube personalities to promote Xbox One",
      url: "http://www.theverge.com/2014/1/20/5328766/microsoft-reportedly-paying-youtube-personalities-to-promote-xbox-one",
      summary: "In addition, a copy of the full legal agreement leaked recently, detailing the confidentiality rules partners must abide by when they sign up. Digital marketing campaign clearinghouse Poptent shows listings from January 10th inviting YouTube stars to sign up for the Machinima deal, and reports of the quiet promotion surfaced this past weekend. Poptent also lists $1 per CPM deals from back in November inviting Machinima's stars to promote the Xbox One — suggesting that this new mode of advertising has been going on since at least the console's launch. Microsoft has reportedly partnered with Machinima to quietly pay the YouTube channel's video partners to promote the Xbox One. According to Ars Technica, Machinima's affiliates could get a $3 per CPM (or $3 for every 1,000 views) bonus if they included at least 30 seconds of Xbox One footage and mentioned the console by name in their videos. We've reached out to Microsoft and Machinima for comment.",
      image_url: "http://cdn0.sbnation.com/entry_photo_images/9732109/IMG_5171-1024_large_verge_super_wide.jpg",
-     keywords: 
+     keywords:
      [
          "paying",
          "partners",
@@ -572,14 +595,15 @@ This returns an object with the current, average, min, and max temperatures.
 **POST:** `/api/news-articles/ignore`
 
 **Payload:**
-```
+
+```json
  {
      _id: "52dde0d80983886bbae8b4e9",
      title: "Microsoft reportedly paying YouTube personalities to promote Xbox One",
      url: "http://www.theverge.com/2014/1/20/5328766/microsoft-reportedly-paying-youtube-personalities-to-promote-xbox-one",
      summary: "In addition, a copy of the full legal agreement leaked recently, detailing the confidentiality rules partners must abide by when they sign up. Digital marketing campaign clearinghouse Poptent shows listings from January 10th inviting YouTube stars to sign up for the Machinima deal, and reports of the quiet promotion surfaced this past weekend. Poptent also lists $1 per CPM deals from back in November inviting Machinima's stars to promote the Xbox One — suggesting that this new mode of advertising has been going on since at least the console's launch. Microsoft has reportedly partnered with Machinima to quietly pay the YouTube channel's video partners to promote the Xbox One. According to Ars Technica, Machinima's affiliates could get a $3 per CPM (or $3 for every 1,000 views) bonus if they included at least 30 seconds of Xbox One footage and mentioned the console by name in their videos. We've reached out to Microsoft and Machinima for comment.",
      image_url: "http://cdn0.sbnation.com/entry_photo_images/9732109/IMG_5171-1024_large_verge_super_wide.jpg",
-     keywords: 
+     keywords:
      [
          "paying",
          "partners",
@@ -605,7 +629,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/article-keywords`
 
 **Response:**
-```
+
+```json
  [
      {
          word: "service",
@@ -645,7 +670,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/bustracker/routes`
 
 **Response:**
-```
+
+```json
  [
      {
          route: "1",
@@ -672,7 +698,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/bustracker/directions?route=<route>`
 
 **Response:**
-```
+
+```json
  [
      "Northbound",
      "Southbound"
@@ -684,7 +711,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/bustracker/stops?route=<route>&direction=<direction>`
 
 **Response:**
-```
+
+```json
  [
      {
          stopID: "17773",
@@ -713,7 +741,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/bustracker/predictions`
 
 **Response:**
-```
+
+```json
  [
      {
          title: "8 - Southbound",
@@ -752,7 +781,8 @@ This returns an object with the current, average, min, and max temperatures.
 **GET:** `/api/bustracker/favorites`
 
 **Response:**
-```
+
+```json
  [
      {
          stopID: "1100",
@@ -781,7 +811,8 @@ This returns an object with the current, average, min, and max temperatures.
 **POST:** `/api/bustracker/favorites`
 
 **Payload:**
-```
+
+```json
  {
      stopID: "1100",
      route: "10"
